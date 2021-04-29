@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './App.css'
 import Auth from './auth/Auth';
+import Sitebar from './home/Navbar';
 
 function App() {
   const [sessionToken, setSessionToken] = useState(''); 
@@ -29,8 +30,8 @@ function App() {
 
   return (
     <div className="App">
-<input />
-<Auth updateToken={updateToken}/>
+      <Sitebar clickLogout={clearToken}/>
+      <Auth updateToken={updateToken}/>
           </div>
   )
 }
