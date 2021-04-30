@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './App.css'
 import Auth from './auth/Auth';
 import Sitebar from './home/Navbar';
+import ProjectIndex from './projects/ProjectIndex';
 
 function App() {
   const [sessionToken, setSessionToken] = useState(''); 
@@ -23,15 +24,17 @@ function App() {
     setSessionToken('');
   }
   
-  // const protectedViews = () => {
-  //   return (sessionToken === localStorage.getItem('token') ? <WorkoutIndex token={sessionToken}/>
-  //   : <Auth updateToken={updateToken}/>)
-  // }
+  const protectedViews = () => {
+    return (sessionToken === localStorage.getItem('token') ? <ProjectIndex token={sessionToken}/>
+    : <Auth updateToken={updateToken}/>)
+  }
 
   return (
     <div className="App">
       <Sitebar clickLogout={clearToken}/>
-      <Auth updateToken={updateToken}/>
+      {protectedViews()}
+      {/* <Auth updateToken={updateToken}/> */}
+      
           </div>
   )
 }
