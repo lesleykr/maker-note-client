@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Container, Row, Col} from 'reactstrap';
+import ProjectCreate from './ProjectCreate';
 
 const ProjectIndex = (props) => {
     const [projects, setProjects] = useState([]);
@@ -26,7 +27,7 @@ const ProjectIndex = (props) => {
         <Container>
             <Row>
                 <Col md="3">
-
+                    <ProjectCreate fetchProjects={fetchProjects} token={props.token} />
                 </Col>
                 <Col md="9">
                     <h2>Enter a Project to see a table</h2>
