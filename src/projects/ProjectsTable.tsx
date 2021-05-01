@@ -4,7 +4,7 @@ import {Table, Button} from 'reactstrap';
 const ProjectsTable = (props) => {
 
     const deleteProject = (projects) => {
-        fetch('http://localhost:3000/projects/${projects.id}', {
+        fetch('http://localhost:3000/projects/delete/${projects.id}', {
             method: 'DELETE',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -23,7 +23,7 @@ const ProjectsTable = (props) => {
                     <td>{projects.medium}</td>
                     <td>{projects.totalMaterialCost}</td>
                     <td>
-                        <Button color="warning">Update</Button>
+                        <Button color="warning" onClick={() => {props.editUpdateProjects(projects); props.updateOn()}}>Update</Button>
                         <Button color="danger" onClick={() => {deleteProject(projects)}}>Delete</Button>
                     </td>
                 </tr>
