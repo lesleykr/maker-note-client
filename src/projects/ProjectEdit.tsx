@@ -8,7 +8,7 @@ const ProjectsEdit = (props) => {
 
     const ProjectsUpdate = (event, projects) => {
         event.preventDefault();
-        fetch('http://localhost:3000/projects/update/${props.projectsToUpdate.userId}', {
+        fetch(`http://localhost:3000/projects/update/${props.projectsToUpdate.userId}`, {
             method: 'PUT',
             body: JSON.stringify({projects: {projectName: editProjectName, medium: editMedium, editTotalMaterialCost: editTotalMaterialCost}}),
             headers: new Headers({

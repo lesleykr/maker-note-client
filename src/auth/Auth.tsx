@@ -1,17 +1,24 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Signup from './Signup';
 import Login from './Login';
 
+interface IProps {
+    updateToken: (newToken: string) => void
+}
+export default class Auth extends Component <IProps, {}>{
+    constructor(props: IProps) {
+        super(props)
 
-const Auth = (props) => {
+    }
+render() {
+
     return(
        <div>
-                    <Signup updateToken={props.updateToken}/>
+                    <Signup updateToken={this.props.updateToken}/>
                
-                   <Login updateToken={props.updateToken}/>
+                   <Login updateToken={this.props.updateToken}/>
                    </div>
         
     )
 }
-
-export default Auth;
+}

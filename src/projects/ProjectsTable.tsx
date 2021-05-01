@@ -4,7 +4,7 @@ import {Table, Button} from 'reactstrap';
 const ProjectsTable = (props) => {
 
     const deleteProject = (projects) => {
-        fetch('http://localhost:3000/projects/delete/${projects.id}', {
+        fetch(`http://localhost:3000/projects/delete/${projects.id}`, {
             method: 'DELETE',
             headers: new Headers({
                 'Content-Type': 'application/json',
