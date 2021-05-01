@@ -1,41 +1,67 @@
-import React, {useState} from 'react';
+import React, {useState, Component} from 'react';
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
+interface IProps {
+    updateToken: (newToken: string) => void
+}
 
-const Login = (props) => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+interface IState {
+    email: string,
+    password: string, 
+    errorMessage: string
+}
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
+export default class Login extends Component <IProps, IState>{
+    constructor(props: IProps) {
+        super(props)
+        this.state = {
+            email: '',
+            password: '',
+            errorMessage: ''
+        };
+    }
+
+    handleSubmit = (event: any) => {
+        event.preventDefault()
         fetch("http://localhost:3000/user/login", {
             method: 'POST',
-            body:JSON.stringify({user: {email: email, password: password}}),
+            body:JSON.stringify({user: this.state}),
             headers: new Headers({
                 'Content-Type': 'application/json'
             })
         }).then(
             (response) => response.json()
         ).then((data) => {
-            props.updateToken(data.sessionToken)
+            this.props.updateToken(data.sessionToken)
         })
         
     }
 
+    validateLogin = () => {
+        this.setState({
+            errorMessage: 'Incorrect Username or Password'
+        })
+        // event.preventDefault();
+    }
+
+    render() {
+        const submitHandler = !this.state.email ? this.validateLogin : this.handleSubmit
     return(
         <div>
             <h1>Login</h1>
-            <form onSubmit={handleSubmit}>
+            <Form onSubmit={this.handleSubmit}>
                 
                     <label htmlFor="email">Email</label>
-                    <input onChange={(e) => setEmail(e.target.value)} name="email" value={email}/>
+                    <input id="email" type="text" name="email" placeholder="enter email" onChange={(e) => this.setState({email: e.target.value})} />
+                    {this.state.errorMessage && <span className="error">Email is Required</span>}
               
                     <label htmlFor="password">Password</label>
-                    <input onChange={(e) => setPassword(e.target.value)} name="password" value={password}/>
+                    <input id="su_password" type="password" name="password" placeholder="enter password" onChange={(e) => this.setState({password: e.target.value})}/>
                
-                <button type="submit">Login</button>
-            </form>
+                <Button type="submit">Login</Button>
+            </Form>
         </div>
     )
 }
 
-export default Login;
+}

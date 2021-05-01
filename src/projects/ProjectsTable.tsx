@@ -1,10 +1,10 @@
 import React from 'react';
 import {Table, Button} from 'reactstrap';
 
-const ProjectsTable = (props) => {
+const ProjectsTable = (props: any) => {
 
-    const deleteProject = (projects) => {
-        fetch(`http://localhost:3000/projects/delete/${projects.id}`, {
+    const deleteProject = (project: any) => {
+        fetch(`http://localhost:3000/projects/delete/${project.id}`, {
             method: 'DELETE',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -15,16 +15,16 @@ const ProjectsTable = (props) => {
     }
 
     const projectsMapper = () => {
-        return props.projects.map((projects, index) => {
+        return props.projects.map((project, index) => {
             return(
                 <tr key={index}>
-                    <th scope="row">{projects.id}</th>
-                    <td>{projects.projectName}</td>
-                    <td>{projects.medium}</td>
-                    <td>{projects.totalMaterialCost}</td>
+                    <th scope="row">{project.id}</th>
+                    <td>{project.projectName}</td>
+                    <td>{project.medium}</td>
+                    <td>{project.totalMaterialCost}</td>
                     <td>
-                        <Button color="warning" onClick={() => {props.editUpdateProjects(projects); props.updateOn()}}>Update</Button>
-                        <Button color="danger" onClick={() => {deleteProject(projects)}}>Delete</Button>
+                        <Button color="warning" onClick={() => {props.editUpdateProjects(project); props.updateOn()}}>Update</Button>
+                        <Button color="danger" onClick={() => {deleteProject(project)}}>Delete</Button>
                     </td>
                 </tr>
             )
