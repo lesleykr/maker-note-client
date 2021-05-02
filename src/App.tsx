@@ -4,6 +4,7 @@ import Auth from './auth/Auth';
 import Sitebar from './home/Navbar';
 import ProjectsEdit from './projects/ProjectEdit';
 import ProjectIndex from './projects/ProjectIndex';
+import MaterialIndex from './materials/MaterialIndex'
 
 export default class App extends Component {  
     state = {
@@ -29,7 +30,7 @@ componentDidMount(){
     }
     
     protectedViews = () => {
-      return (this.state.sessionToken === localStorage.getItem('token') ? <ProjectIndex token={this.state.sessionToken}/>
+      return (this.state.sessionToken === localStorage.getItem('token') ? <ProjectIndex token={this.state.sessionToken}/> && <MaterialIndex token={this.state.sessionToken}/>
       : <Auth updateToken={this.updateToken.bind(this)}/>)
     }
    

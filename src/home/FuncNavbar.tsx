@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import {
   Button,
   Collapse,
@@ -15,43 +15,23 @@ import {
   NavbarText
 } from 'reactstrap';
 
+const Sitebar = (props) => {
+  const [isOpen, setIsOpen] = useState(false);
 
-interface IProps {
-  fetchProjects: (fetchProjects: string) => string,
-  
-}
+  const toggle = () => setIsOpen(!isOpen);
 
-interface IState {
-  projectName: string,
-  medium: string, 
-  totalMaterialCost: number
-}
-
-export default class Sitebar extends Component <IProps, IState>{
-  constructor(props: IProps) {
-      super(props)
-      this.state = {
-          isOpen: false
-                
-      };
-  }
-
-
-  toggle = () => this.setState({isOpen: !this.state.isOpen});
-
-  render() {
   return (
     <div>
       <Navbar color="light" light expand="md">
         <NavbarBrand href="/">MakerNote</NavbarBrand>
-        <NavbarToggler onClick={this.toggle} />
-        <Collapse isOpen={this.state.isOpen} navbar>
+        <NavbarToggler onClick={toggle} />
+        <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem>
               <NavLink href="/components/">Components</NavLink>
             </NavItem>
             <NavItem>
-              <Button onClick={this.props.clickLogout}>Logout</Button>
+              <Button onClick={props.clickLogout}>Logout</Button>
             </NavItem>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
@@ -77,4 +57,5 @@ export default class Sitebar extends Component <IProps, IState>{
     </div>
   );
 }
-}
+
+export default Sitebar;
