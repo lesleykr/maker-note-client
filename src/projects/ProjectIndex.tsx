@@ -1,59 +1,77 @@
-import React, {useState, useEffect} from 'react';
+import React, { Component } from 'react';
 import {Container, Row, Col} from 'reactstrap';
 import ProjectCreate from './ProjectCreate';
 import ProjectsTable from './ProjectsTable';
 import ProjectsEdit from './ProjectEdit';
 
-const ProjectIndex = (props) => {
-    const [projects, setProjects] = useState([]);
-    const [updateActive, setUpdateActive] = useState(false);
-    const [projectsToUpdate, setProjectsToUpdate] = useState({});
+interface IProps {
+    // token: (token: string) => string,
+    
+}
 
-    const fetchProjects = () => {
+interface IState {
+    projects: string,
+    updateActive: boolean, 
+    projectsToUpdate: object
+}
+
+export default class ProjectIndex extends Component <IProps, IState>{
+    constructor(props: IProps) {
+        super(props)
+        this.state = {
+            projects: [],
+            updateActive: false,
+            projectsToUpdate: {},            
+        };
+    }
+
+    fetchProjects = () => {
         fetch('http://localhost:3000/projects/mine', {
             method: 'GET',
             headers: new Headers ({
                 'Content-Type': 'application/json',
-                'Authorization': props.token
+                'Authorization': this.props.token
             })
         }) .then( (res) => res.json())
             .then((projectsData) => {
-                setProjects(projectsData)
+                this.setState({projects: projectsData})
                 console.log(projectsData);
             })
     }
 
-const editUpdateProjects = (projects) => {
-    setProjectsToUpdate(projects);
+editUpdateProjects = (projects) => {
+    this.setState({projectsToUpdate: projects});
     console.log(projects);
 }
 
-const updateOn = () => {
-    setUpdateActive(true);
+updateOn = () => {
+    this.setState({updateActive: true});
 }
 
-const updateOff = () => {
-    setUpdateActive(false);
+updateOff = () => {
+    this.setState({updateActive: false});
 }
 
-    useEffect(() => {
-        fetchProjects();
-    }, [])
+componentDidMount(){
+    console.log('mounted');
+    this.fetchProjects();
+}
 
+
+   render(){
     return(
         <Container>
             <Row>
                 <Col md="3">
-                    <ProjectCreate fetchProjects={fetchProjects} token={props.token} />
+                    <ProjectCreate fetchProjects={this.fetchProjects} token={this.props.token} />
                 </Col>
                 <Col md="9">
-                    <ProjectsTable projects={projects} editUpdateProjects={editUpdateProjects} updateOn={updateOn} fetchProjects={fetchProjects}
-                    token={props.token} />
+                    <ProjectsTable projects={this.state.projects} editUpdateProjects={this.editUpdateProjects} updateOn={this.updateOn} fetchProjects={this.fetchProjects}
+                    token={this.props.token} />
                 </Col>
-                {updateActive ? <ProjectsEdit projectsToUpdate={projectsToUpdate} updateOff={updateOff} token={props.token} fetchProjects={fetchProjects}/> : <></>}
+                {this.state.updateActive ? <ProjectsEdit projectsToUpdate={this.state.projectsToUpdate} updateOff={this.updateOff} token={this.props.token} fetchProjects={this.fetchProjects}/> : <></>}
             </Row>
         </Container>        
     )
 }
-
-export default ProjectIndex;
+}
