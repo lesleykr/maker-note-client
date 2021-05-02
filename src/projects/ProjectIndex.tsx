@@ -10,7 +10,7 @@ const ProjectIndex = (props) => {
     const [projectsToUpdate, setProjectsToUpdate] = useState({});
 
     const fetchProjects = () => {
-        fetch('http://localhost:3000/projects', {
+        fetch('http://localhost:3000/projects/mine', {
             method: 'GET',
             headers: new Headers ({
                 'Content-Type': 'application/json',

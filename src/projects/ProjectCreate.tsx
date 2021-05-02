@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 interface IProps {
-    fetchProjects: (fetchProjects: string) => void,
+    fetchProjects: (fetchProjects: string) => string,
     
 }
 
