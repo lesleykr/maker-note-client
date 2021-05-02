@@ -34,6 +34,8 @@ componentDidMount(){
       : <Auth updateToken={this.updateToken.bind(this)}/>)
     }
    
+  
+
 render() {
   return(
     <div>

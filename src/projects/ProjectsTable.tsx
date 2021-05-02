@@ -1,21 +1,32 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {Table, Button} from 'reactstrap';
 
-const ProjectsTable = (props: any) => {
+interface IProps {
+    projects: (projects: string) => string,
+    editUpdateProjects: (editUpdateProjects: string) => void,
+    updateOn: (updateOn: boolean) => boolean,
+    fetchProjects: (fetchProjects: string) => string
+}
 
-    const deleteProject = (project: any) => {
+export default class ProjectsTable extends Component <IProps, {}>{
+    constructor(props: IProps) {
+        super(props)
+
+    }
+
+   deleteProject = (project: any) => {
         fetch(`http://localhost:3000/projects/delete/${project.id}`, {
             method: 'DELETE',
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Authorization': props.token
+                'Authorization': this.props.token
             })
         })
-        .then(() => props.fetchProjects())
+        .then(() => this.props.fetchProjects())
     }
 
-    const projectsMapper = () => {
-        return props.projects.map((project, index) => {
+    projectsMapper() {
+        return this.props.projects.map((project, index) => {
             return(
                 <tr key={index}>
                     <th scope="row">{project.id}</th>
@@ -23,14 +34,18 @@ const ProjectsTable = (props: any) => {
                     <td>{project.medium}</td>
                     <td>{project.totalMaterialCost}</td>
                     <td>
-                        <Button color="warning" onClick={() => {props.editUpdateProjects(project); props.updateOn()}}>Update</Button>
-                        <Button color="danger" onClick={() => {deleteProject(project)}}>Delete</Button>
+                        
+                        <Button color="warning" onClick={() => {this.props.editUpdateProjects(project); this.props.updateOn()}}>Update</Button>
+
+                        <Button color="danger" onClick={() => {this.deleteProject(project)}}>Delete</Button>
+
                     </td>
                 </tr>
             )
         })
         
     }
+    render(){
         return(
         <>
         <h3>My Projects</h3>
@@ -45,87 +60,11 @@ const ProjectsTable = (props: any) => {
                 </tr>
             </thead>
             <tbody>
-            {projectsMapper()}
+            {this.projectsMapper()}
             </tbody>
         </Table>
 
         </>
     )
 }
-
-export default ProjectsTable
-
-
-
-//CLASS COMPONENTS VERSION - NOT WORKING!
-
-// import React, { Component } from 'react';
-// import {Table, Button} from 'reactstrap';
-
-// interface IProps {
-//     projects: (projects: string) => string,
-//     editUpdateProjects: (editUpdateProjects: string) => void,
-//     updateOn: (updateOn: boolean) => boolean,
-//     fetchProjects: (fetchProjects: string) => string
-// }
-
-// export default class ProjectsTable extends Component <IProps, {}>{
-//     constructor(props: IProps) {
-//         super(props)
-
-//     }
-
-//    deleteProject = (project: any) => {
-//         fetch(`http://localhost:3000/projects/delete/${project.id}`, {
-//             method: 'DELETE',
-//             headers: new Headers({
-//                 'Content-Type': 'application/json',
-//                 'Authorization': this.props.token
-//             })
-//         })
-//         .then(() => this.props.fetchProjects())
-//     }
-
-//     projectsMapper() {
-//         return this.props.projects.map((project, index) => {
-//             return(
-//                 <tr key={this.index}>
-//                     <th scope="row">{this.props.project.id}</th>
-//                     <td>{this.props.project.projectName}</td>
-//                     <td>{this.props.project.medium}</td>
-//                     <td>{this.props.project.totalMaterialCost}</td>
-//                     <td>
-                        
-//                         <Button color="warning" onClick={() => {this.props.editUpdateProjects(project); this.props.updateOn()}}>Update</Button>
-
-//                         <Button color="danger" onClick={() => {this.deleteProject(project)}}>Delete</Button>
-
-//                     </td>
-//                 </tr>
-//             )
-//         })
-        
-//     }
-//     render(){
-//         return(
-//         <>
-//         <h3>My Projects</h3>
-//         <hr/>
-//         <Table striped>
-//             <thead>
-//                 <tr>
-//                     <th>#</th>
-//                     <th>Project Name</th>
-//                     <th>Medium</th>
-//                     <th>Total Material Cost</th>
-//                 </tr>
-//             </thead>
-//             <tbody>
-//             {this.projectsMapper()}
-//             </tbody>
-//         </Table>
-
-//         </>
-//     )
-// }
-// }
+}
