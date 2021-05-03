@@ -30,11 +30,11 @@ componentDidMount(){
     }
     
     protectedViews = () => {
-      return (this.state.sessionToken === localStorage.getItem('token') ? <ProjectIndex token={this.state.sessionToken}/> && <MaterialIndex token={this.state.sessionToken}/>
+      return (this.state.sessionToken === localStorage.getItem('token') ? <ProjectIndex token={this.state.sessionToken}/> 
       : <Auth updateToken={this.updateToken.bind(this)}/>)
     }
    
-  
+    // && <MaterialIndex token={this.state.sessionToken}/>
 
 render() {
   return(

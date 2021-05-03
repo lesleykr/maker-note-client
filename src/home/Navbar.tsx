@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   Button,
   Collapse,
+  Modal,
   Navbar,
   NavbarToggler,
   NavbarBrand,
@@ -14,10 +15,19 @@ import {
   DropdownItem,
   NavbarText
 } from 'reactstrap';
-
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from 'react-router-dom';
+import ProjectIndex from '../projects/ProjectIndex';
+import MaterialIndex from '../materials/MaterialIndex';
+import Signup from '../auth/Signup';
 
 interface IProps {
-  fetchProjects: (fetchProjects: string) => string,
+  // fetchProjects: (fetchProjects: string) => string,
+  updateToken: (newToken: string) => void
   
 }
 
@@ -31,27 +41,37 @@ export default class Sitebar extends Component <IProps, IState>{
   constructor(props: IProps) {
       super(props)
       this.state = {
-          isOpen: false
-                
+          isOpen: false,
+         
+
+          
       };
   }
 
 
   toggle = () => this.setState({isOpen: !this.state.isOpen});
+ 
+ 
 
   render() {
   return (
     <div>
+      <Router>
       <Navbar color="light" light expand="md">
         <NavbarBrand href="/">MakerNote</NavbarBrand>
-        <NavbarToggler onClick={this.toggle} />
+        {/* <NavbarToggler onClick={this.toggle} /> */}
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="mr-auto" navbar>
+          <NavItem>
+           <Link to="/ProjectIndex">My Projects</Link>
+            </NavItem>            
             <NavItem>
-              <NavLink href="/components/">Components</NavLink>
+           <Link to="/MaterialIndex">My Materials</Link>
             </NavItem>
+            {/* <NavItem>{localStorage.getItem("token") != null ? <Button onClick={this.props.clickLogout}>Logout</Button> : <Button onClick={this.toggle_signup}>Sign Up</Button>}
+            </NavItem> */}
             <NavItem>
-              <Button onClick={this.props.clickLogout}>Logout</Button>
+              <Link to="/Signup" onClick={this.toggle}>Sign Up</Link>
             </NavItem>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
@@ -74,6 +94,16 @@ export default class Sitebar extends Component <IProps, IState>{
           <NavbarText>Simple Text</NavbarText>
         </Collapse>
       </Navbar>
+     
+      <div>
+        <Switch>
+         <Route exact path="/ProjectIndex"><ProjectIndex token={this.props.token} /></Route>
+         <Route exact path="/MaterialIndex"><MaterialIndex token={this.props.token} /></Route>
+         <Route exact path="/Signup"><Signup isOpen={this.state.isOpen} onClick={this.toggle}token={this.props.token} /></Route>
+         
+        </Switch>
+      </div>
+      </Router>
     </div>
   );
 }

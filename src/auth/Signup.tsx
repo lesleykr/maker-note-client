@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody } from 'reactstrap';
 
 interface IProps {
     updateToken: (newToken: string) => void
@@ -17,7 +17,10 @@ export default class Signup extends Component <IProps, IState>{
         this.state = {
             email: '',
             password: '',
-            errorMessage: ''
+            errorMessage: '',
+            mClose: true
+           
+           
         };
     }
 
@@ -51,13 +54,16 @@ export default class Signup extends Component <IProps, IState>{
         // event.preventDefault();
     }
 
+    toggle_close = () => this.setState({mClose: !this.state.mClose});
+
     render() {
         const submitHandler = !this.state.email ? this.validateSignUp : this.handleSubmit
     
     return(
-        <div>
-            <h1>Sign Up</h1>
-            <Form onSubmit={this.handleSubmit}>
+        <Modal isOpen={this.props.isOpen} >
+            <ModalHeader>Sign Up</ModalHeader>
+            <ModalBody>
+            <Form onSubmit={this.handleSubmit} >
                 <FormGroup>
                     <label htmlFor="email">Email</label>
                     <input id="email" type="text" name="email" placeholder="enter email" onChange={(e) => this.setState({email: e.target.value})}/>
@@ -67,9 +73,10 @@ export default class Signup extends Component <IProps, IState>{
                     <label htmlFor="password">Password</label>
                     <input id="su_password" type="password" name="password" placeholder="enter password" onChange={(e) => this.setState({password: e.target.value})}/>
                     </FormGroup>
-                <Button type="submit">Signup</Button>
+                <Button type="submit" onClick={this.props.onClick}>Signup</Button>
             </Form>
-        </div>
+            </ModalBody>
+        </Modal>
     )
 }
 }

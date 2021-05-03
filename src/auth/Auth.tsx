@@ -14,7 +14,7 @@ render() {
 
     return(
        <div>
-                    <Signup updateToken={this.props.updateToken}/>
+                    {/* <Signup updateToken={this.props.updateToken}/> */}
                
                    <Login updateToken={this.props.updateToken}/>
                    </div>

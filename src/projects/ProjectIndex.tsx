@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Container, Row, Col} from 'reactstrap';
+import {Container, Row, Col, Button} from 'reactstrap';
 import ProjectCreate from './ProjectCreate';
 import ProjectsTable from './ProjectsTable';
 import ProjectsEdit from './ProjectEdit';
@@ -16,12 +16,14 @@ interface IState {
 }
 
 export default class ProjectIndex extends Component <IProps, IState>{
+  static fetchProjects: (fetchProjects: string) => string;
     constructor(props: IProps) {
         super(props)
         this.state = {
             projects: [],
             updateActive: false,
-            projectsToUpdate: {},            
+            projectsToUpdate: {},   
+            isComponentVisible: false          
         };
     }
 
@@ -52,6 +54,12 @@ updateOff = () => {
     this.setState({updateActive: false});
 }
 
+toggleComponent = () => { 
+	this.setState({ 
+        isComponentVisible: !this.state.isComponentVisible 
+    }); 
+} 
+
 componentDidMount(){
     console.log('mounted');
     this.fetchProjects();
@@ -60,18 +68,20 @@ componentDidMount(){
 
    render(){
     return(
-        <Container>
-            <Row>
-                <Col md="3">
-                    <ProjectCreate fetchProjects={this.fetchProjects} token={this.props.token} />
-                </Col>
-                <Col md="9">
+        <div>
+            
+                    {/* <Button onClick={() =><ProjectCreate fetchProjects={this.fetchProjects} token={this.props.token}/>}> New Project</Button> */}
+                    
+     <Button onClick={this.toggleComponent}>  
+         New Project 
+      </Button> 
+     {this.state.isComponentVisible ? <ProjectCreate fetchProjects={this.fetchProjects} token={this.props.token}/> : 
                     <ProjectsTable projects={this.state.projects} editUpdateProjects={this.editUpdateProjects} updateOn={this.updateOn} fetchProjects={this.fetchProjects}
-                    token={this.props.token} />
-                </Col>
+                    token={this.props.token} />}
+               
                 {this.state.updateActive ? <ProjectsEdit projectsToUpdate={this.state.projectsToUpdate} updateOff={this.updateOff} token={this.props.token} fetchProjects={this.fetchProjects}/> : <></>}
-            </Row>
-        </Container>        
+           
+        </div>        
     )
 }
 }

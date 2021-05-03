@@ -16,7 +16,7 @@ interface IState {
     
 }
 
-export default class ProjectEdit extends Component <IProps, IState>{
+export default class ProjectsEdit extends Component <IProps, IState>{
     constructor(props: IProps) {
         super(props)
         this.state = {
