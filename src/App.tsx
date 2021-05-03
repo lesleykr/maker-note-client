@@ -30,7 +30,7 @@ componentDidMount(){
     }
     
     protectedViews = () => {
-      return (this.state.sessionToken === localStorage.getItem('token') ? <ProjectIndex token={this.state.sessionToken}/> 
+      return (this.state.sessionToken === localStorage.getItem('token') ? <Sitebar token={this.state.sessionToken} clickLogout={this.clearToken} /> 
       : <Auth updateToken={this.updateToken.bind(this)}/>)
     }
    
@@ -40,50 +40,10 @@ render() {
   return(
     <div>
     
-          <Sitebar clickLogout={this.clearToken} updateToken={this.updateToken.bind(this)}/>
+          {/* <Sitebar clickLogout={this.clearToken}  /> */}
           {this.protectedViews()}
         </div>
     
   );
 }
 }
-
-
-
-//ORIGINAL FUNCTIONAL COMPONENT CODE
-// function App() {
-//   const [sessionToken, setSessionToken] = useState(''); 
-
-//   useEffect(() => { 
-//   if(localStorage.getItem('token')){
-//     setSessionToken(localStorage.getItem('token'));
-//   };
-//   }, [])
-  
-//   const updateToken = (newToken) => { 
-//   localStorage.setItem('token', newToken);
-//   setSessionToken(newToken);
-//   console.log(sessionToken);
-//   }
-  
-//   const clearToken = () => {
-//     localStorage.clear();
-//     setSessionToken('');
-//   }
-  
-//   const protectedViews = () => {
-//     return (sessionToken === localStorage.getItem('token') ? <ProjectIndex token={sessionToken}/>
-//     : <Auth updateToken={updateToken}/>)
-//   }
-
-//   return (
-//     <div className="App">
-//       <Sitebar clickLogout={clearToken}/>
-//       {protectedViews()}
-//       {/* <Auth updateToken={updateToken}/> */}
-      
-//           </div>
-//   )
-// }
-
-// export default App

@@ -41,17 +41,11 @@ export default class Sitebar extends Component <IProps, IState>{
   constructor(props: IProps) {
       super(props)
       this.state = {
-          isOpen: false,
-         
-
-          
+          isOpen: false,        
       };
   }
-
-
+  
   toggle = () => this.setState({isOpen: !this.state.isOpen});
- 
- 
 
   render() {
   return (

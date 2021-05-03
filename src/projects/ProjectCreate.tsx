@@ -40,9 +40,12 @@ export default class ProjectCreate extends Component <IProps, IState>{
             projectName: '',
             medium: '',
             totalMaterialCost: 0,
+            isOpen: false,  
             })
         })    
     }
+
+    close = () => this.setState({isOpen: !this.state.isOpen});
 
     render() {
 
@@ -62,7 +65,7 @@ export default class ProjectCreate extends Component <IProps, IState>{
                 <Label htmlFor="totalMaterialCost" />   
                 <Input id="totalMaterialCost" type="number" name="totalMaterialCost" value={this.state.totalMaterialCost} onChange={(e) => this.setState({totalMaterialCost: e.target.value})}/>
             </FormGroup>
-            <Button type="submit">Save</Button>
+            <Button type="submit" onClick={this.props.onClick}>Save</Button>
         </Form>
        </>
     )
