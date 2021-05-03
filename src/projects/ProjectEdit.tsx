@@ -45,9 +45,11 @@ export default class ProjectsEdit extends Component <IProps, IState>{
 
     render(){
     return(
-        <Modal isOpen={true}>
-            <ModalHeader>Edit A Project</ModalHeader>
-            <ModalBody>
+        // <Modal isOpen={true}>
+        //     <ModalHeader>Edit A Project</ModalHeader>
+        //     <ModalBody>
+        <>
+        <h3>Edit Project</h3>
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup>
                         <Label htmlFor="projectName">Project Name:</Label>
@@ -63,8 +65,9 @@ export default class ProjectsEdit extends Component <IProps, IState>{
                     </FormGroup>
                     <Button type="submit">Update Project</Button>
                 </Form>
-            </ModalBody>
-        </Modal>
+        {/* //     </ModalBody>
+        </Modal> */}
+        </>
     )
 }
 }

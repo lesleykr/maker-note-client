@@ -75,11 +75,12 @@ componentDidMount(){
      <Button onClick={this.toggleComponent}>  
          New Project 
       </Button> 
-     {this.state.isComponentVisible ? <ProjectCreate fetchProjects={this.fetchProjects} token={this.props.token}/> : 
+     {this.state.isComponentVisible ? <ProjectCreate onClick={this.toggleComponent} fetchProjects={this.fetchProjects} token={this.props.token}/>  : 
+                    this.state.updateActive ? <ProjectsEdit projectsToUpdate={this.state.projectsToUpdate} updateOff={this.updateOff} token={this.props.token} fetchProjects={this.fetchProjects}/> : 
                     <ProjectsTable projects={this.state.projects} editUpdateProjects={this.editUpdateProjects} updateOn={this.updateOn} fetchProjects={this.fetchProjects}
                     token={this.props.token} />}
                
-                {this.state.updateActive ? <ProjectsEdit projectsToUpdate={this.state.projectsToUpdate} updateOff={this.updateOff} token={this.props.token} fetchProjects={this.fetchProjects}/> : <></>}
+                
            
         </div>        
     )

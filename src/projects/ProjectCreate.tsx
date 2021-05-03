@@ -19,7 +19,8 @@ export default class ProjectCreate extends Component <IProps, IState>{
         this.state = {
             projectName: '',
             medium: '',
-            totalMaterialCost: 0,            
+            totalMaterialCost: 0,
+            isOpen: true       
         };
     }
 
@@ -40,9 +41,9 @@ export default class ProjectCreate extends Component <IProps, IState>{
             projectName: '',
             medium: '',
             totalMaterialCost: 0,
-            isOpen: false,  
+            // isOpen: false,  
             })
-        })    
+        })  
     }
 
     close = () => this.setState({isOpen: !this.state.isOpen});
@@ -52,7 +53,7 @@ export default class ProjectCreate extends Component <IProps, IState>{
     return(
        <>
         <h3>Enter a New Project</h3>
-        <Form onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.handleSubmit} >
             <FormGroup>
                 <Label htmlFor="projectName"/>
                 <Input id="projectName" type="text" name="projectName" value={this.state.projectName} placeholder="Project Name" onChange={(e) => this.setState({projectName: e.target.value})}/>
