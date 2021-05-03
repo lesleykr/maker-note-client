@@ -68,8 +68,8 @@ export default class Sitebar extends Component <IProps, IState>{
             <NavItem>
            <Link to="/MaterialIndex">My Materials</Link>
             </NavItem>
-            {/* <NavItem>{localStorage.getItem("token") != null ? <Button onClick={this.props.clickLogout}>Logout</Button> : <Button onClick={this.toggle_signup}>Sign Up</Button>}
-            </NavItem> */}
+            <NavItem><Button onClick={this.props.clickLogout}>Logout</Button>
+            </NavItem>
             <NavItem>
               <Link to="/Signup" onClick={this.toggle}>Sign Up</Link>
             </NavItem>
@@ -99,7 +99,7 @@ export default class Sitebar extends Component <IProps, IState>{
         <Switch>
          <Route exact path="/ProjectIndex"><ProjectIndex token={this.props.token} /></Route>
          <Route exact path="/MaterialIndex"><MaterialIndex token={this.props.token} /></Route>
-         <Route exact path="/Signup"><Signup isOpen={this.state.isOpen} onClick={this.toggle}token={this.props.token} /></Route>
+         <Route exact path="/Signup"><Signup isOpen={this.state.isOpen} onClick={this.toggle}updateToken={this.props.updateToken} /></Route>
          
         </Switch>
       </div>

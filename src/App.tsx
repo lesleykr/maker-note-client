@@ -40,7 +40,7 @@ render() {
   return(
     <div>
     
-          <Sitebar clickLogout={this.clearToken} />
+          <Sitebar clickLogout={this.clearToken} updateToken={this.updateToken.bind(this)}/>
           {this.protectedViews()}
         </div>
     
