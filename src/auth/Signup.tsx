@@ -60,9 +60,8 @@ export default class Signup extends Component <IProps, IState>{
         const submitHandler = !this.state.email ? this.validateSignUp : this.handleSubmit
     
     return(
-        <Modal isOpen={this.props.isOpen} >
-            <ModalHeader>Sign Up</ModalHeader>
-            <ModalBody>
+        <div>
+            <h1>Sign Up</h1>
             <Form onSubmit={this.handleSubmit} >
                 <FormGroup>
                     <label htmlFor="email">Email</label>
@@ -75,12 +74,32 @@ export default class Signup extends Component <IProps, IState>{
                     </FormGroup>
                 <Button type="submit" onClick={this.props.onClick}>Signup</Button>
             </Form>
-            </ModalBody>
-        </Modal>
+            </div>        
     )
 }
 }
 
+
+//RETURN WITH MODAL
+// return(
+//     <Modal isOpen={this.props.isOpen} >
+//         <ModalHeader>Sign Up</ModalHeader>
+//         <ModalBody>
+//         <Form onSubmit={this.handleSubmit} >
+//             <FormGroup>
+//                 <label htmlFor="email">Email</label>
+//                 <input id="email" type="text" name="email" placeholder="enter email" onChange={(e) => this.setState({email: e.target.value})}/>
+//                 {this.state.errorMessage && <span className="error">Email is Required</span>}
+//             </FormGroup>
+//             <FormGroup>
+//                 <label htmlFor="password">Password</label>
+//                 <input id="su_password" type="password" name="password" placeholder="enter password" onChange={(e) => this.setState({password: e.target.value})}/>
+//                 </FormGroup>
+//             <Button type="submit" onClick={this.props.onClick}>Signup</Button>
+//         </Form>
+//         </ModalBody>
+//     </Modal>
+// )
 
 
 //ORIGINAL FUNCTION COMPONENT CODE
@@ -123,3 +142,5 @@ export default class Signup extends Component <IProps, IState>{
 // }
 
 // export default Signup;
+
+

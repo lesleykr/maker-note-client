@@ -29,10 +29,13 @@ export default class ProjectsTable extends Component <IProps, {}>{
         return this.props.projects.map((project, index) => {
             return(
                 <tr key={index}>
-                    <th scope="row">{project.id}</th>
+                    <th scope="row">{project.id}</th>                    
+                    <td>{project.dateStarted}</td>
+                    <td>{project.dateFinished}</td>                    
                     <td>{project.projectName}</td>
                     <td>{project.medium}</td>
-                    <td>{project.totalMaterialCost}</td>
+                    
+                    
                     <td>
                         
                         <Button color="warning" onClick={() => {this.props.editUpdateProjects(project); this.props.updateOn()}}>Update</Button>
@@ -56,9 +59,10 @@ export default class ProjectsTable extends Component <IProps, {}>{
             <thead>
                 <tr>
                     <th>#</th>
+                    <th>Date Started</th>
+                    <th>Date Finished</th>
                     <th>Project Name</th>
-                    <th>Medium</th>
-                    <th>Total Material Cost</th>
+                    <th>Medium</th>                    
                 </tr>
             </thead>
             <tbody>

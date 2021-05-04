@@ -64,9 +64,9 @@ export default class Sitebar extends Component <IProps, IState>{
             </NavItem>
             <NavItem><Button onClick={this.props.clickLogout}>Logout</Button>
             </NavItem>
-            <NavItem>
+            {/* <NavItem>
               <Link to="/Signup" onClick={this.toggle}>Sign Up</Link>
-            </NavItem>
+            </NavItem> */}
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
                 Options
@@ -93,7 +93,7 @@ export default class Sitebar extends Component <IProps, IState>{
         <Switch>
          <Route exact path="/ProjectIndex"><ProjectIndex token={this.props.token} /></Route>
          <Route exact path="/MaterialIndex"><MaterialIndex token={this.props.token} /></Route>
-         <Route exact path="/Signup"><Signup isOpen={this.state.isOpen} onClick={this.toggle}updateToken={this.props.updateToken} /></Route>
+         {/* <Route exact path="/Signup"><Signup isOpen={this.state.isOpen} onClick={this.toggle}updateToken={this.props.updateToken} /></Route> */}
          
         </Switch>
       </div>

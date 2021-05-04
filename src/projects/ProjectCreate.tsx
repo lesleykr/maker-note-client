@@ -8,9 +8,17 @@ interface IProps {
 }
 
 interface IState {
-    projectName: string,
-    medium: string, 
-    totalMaterialCost: number
+   projectName: string,
+   dateStarted: number,
+   dateFinished: number,
+   medium: string, 
+   totalMaterialCost: number,
+   forSale: boolean,
+   dateSold: number,
+   price: number,
+   storeSoldAt: string,
+   notes: string,
+   isOpen: boolean
 }
 
 export default class ProjectCreate extends Component <IProps, IState>{
@@ -18,10 +26,16 @@ export default class ProjectCreate extends Component <IProps, IState>{
         super(props)
         this.state = {
             projectName: '',
+            dateStarted: 0,
+            dateFinished: 0,
             medium: '',
-            totalMaterialCost: null,
-            isOpen: true,     
-            forSale: true  
+            totalMaterialCost: 0,
+            forSale: false,
+            dateSold: 0,
+            price: 0,
+            storeSoldAt: '',
+            notes: '',
+            isOpen: true,
         };
     }
 
@@ -40,9 +54,15 @@ export default class ProjectCreate extends Component <IProps, IState>{
             this.props.fetchProjects();
             this.setState({
             projectName: '',
+            dateStarted: 0,
+            dateFinished: 0,
             medium: '',
-            totalMaterialCost: null,
-            // isOpen: false,  
+            totalMaterialCost: 0,
+            forSale: false,
+            dateSold: 0,
+            price: 0,
+            storeSoldAt: '',
+            notes: '',             
             })
         })  
     }
@@ -109,7 +129,7 @@ export default class ProjectCreate extends Component <IProps, IState>{
             <Col md={1}>
       <FormGroup check>
         <Label check>
-          <Input type="checkbox" name="forSale" id="forSale" value={this.state.forSale} onChange={(e) => this.setState({forSale: e.target.value})}/> For Sale?
+          <Input type="checkbox" name="forSale" id="forSale" onChange={(e) => this.setState({forSale: e.target.value})}/> For Sale?
         </Label>
       </FormGroup>
       </Col>
