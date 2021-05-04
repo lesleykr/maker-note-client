@@ -55,6 +55,7 @@ updateOff = () => {
 }
 
 toggleComponent = () => { 
+    console.log("component toggled");
 	this.setState({ 
         isComponentVisible: !this.state.isComponentVisible 
     }); 
@@ -70,14 +71,16 @@ render(){
         <div>
             
                     {/* <Button onClick={() =><ProjectCreate fetchProjects={this.fetchProjects} token={this.props.token}/>}> New Project</Button> */}
-                    
+       {/* <>             
      <Button onClick={this.toggleComponent}>  
          New Project 
       </Button> 
-     {this.state.isComponentVisible ? <ProjectCreate onClick={this.toggleComponent} fetchProjects={this.fetchProjects} token={this.props.token}/>  : 
-                    this.state.updateActive ? <ProjectsEdit projectsToUpdate={this.state.projectsToUpdate} updateOff={this.updateOff} token={this.props.token} fetchProjects={this.fetchProjects}/> : 
-                    <ProjectsTable projects={this.state.projects} editUpdateProjects={this.editUpdateProjects} updateOn={this.updateOn} fetchProjects={this.fetchProjects}
-                    token={this.props.token} />}
+      </> */}
+     {this.state.isComponentVisible ? <ProjectCreate toggleComponent={this.toggleComponent} fetchProjects={this.fetchProjects} token={this.props.token}/>  : 
+                    this.state.updateActive ? <ProjectsEdit projectsToUpdate={this.state.projectsToUpdate} updateOff={this.updateOff} token={this.props.token} fetchProjects={this.fetchProjects}/> : <div>  <Button onClick={this.toggleComponent}>
+                    New Project 
+                 </Button>                  <ProjectsTable projects={this.state.projects} editUpdateProjects={this.editUpdateProjects} updateOn={this.updateOn} fetchProjects={this.fetchProjects}
+                    token={this.props.token} /> </div> }
                
                 
            

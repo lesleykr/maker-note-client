@@ -64,6 +64,8 @@ export default class ProjectCreate extends Component <IProps, IState>{
             storeSoldAt: '',
             notes: '',             
             })
+            this.props.toggleComponent()
+        
         })  
     }
 
