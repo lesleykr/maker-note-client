@@ -29,8 +29,7 @@ export default class ProjectsTable extends Component <IProps, {}>{
         return this.props.projects.map((project, index) => {
             return(
                 <tr key={index}>
-                    <th scope="row">{project.id}</th>                    
-                    <td>{project.dateStarted}</td>
+                    <th scope="row">{project.dateStarted}</th>                    
                     <td>{project.dateFinished}</td>                    
                     <td>{project.projectName}</td>
                     <td>{project.medium}</td>
@@ -58,7 +57,6 @@ export default class ProjectsTable extends Component <IProps, {}>{
         <Table striped>
             <thead>
                 <tr>
-                    <th>#</th>
                     <th>Date Started</th>
                     <th>Date Finished</th>
                     <th>Project Name</th>
