@@ -3,7 +3,7 @@ import {Container, Row, Col, Button} from 'reactstrap';
 import ProjectCreate from './ProjectCreate';
 import ProjectsTable from './ProjectsTable';
 import ProjectsEdit from './ProjectEdit';
-
+import ProjectView from './ProjectView';
 interface IProps {
     // token: (token: string) => string,
     
@@ -65,8 +65,7 @@ componentDidMount(){
     this.fetchProjects();
 }
 
-
-   render(){
+render(){
     return(
         <div>
             
@@ -86,3 +85,25 @@ componentDidMount(){
     )
 }
 }
+
+//PROJECT VIEW RENDER - DIDN'T COMPLETELY WORK
+// render(){
+//     return(
+//         <div>
+            
+//                     {/* <Button onClick={() =><ProjectCreate fetchProjects={this.fetchProjects} token={this.props.token}/>}> New Project</Button> */}
+                    
+//      <Button onClick={this.toggleComponent}>  
+//          New Project 
+//       </Button> 
+//      {this.state.isComponentVisible ? <ProjectCreate onClick={this.toggleComponent} fetchProjects={this.fetchProjects} token={this.props.token}/>  : 
+//                     this.state.updateActive ? <ProjectView onClick={this.toggleComponent} projectsToUpdate={this.state.projectsToUpdate} updateOff={this.updateOff} token={this.props.token} fetchProjects={this.fetchProjects}/> : 
+//                     <ProjectsTable projects={this.state.projects} editUpdateProjects={this.editUpdateProjects} updateOn={this.updateOn} fetchProjects={this.fetchProjects}
+//                     token={this.props.token} />}
+               
+                
+           
+//         </div>        
+//     )
+// }
+// }

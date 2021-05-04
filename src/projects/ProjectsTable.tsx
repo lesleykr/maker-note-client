@@ -37,6 +37,8 @@ export default class ProjectsTable extends Component <IProps, {}>{
                         
                         <Button color="warning" onClick={() => {this.props.editUpdateProjects(project); this.props.updateOn()}}>Update</Button>
 
+                        {/* <Button color="warning" onClick={() => {this.props.editUpdateProjects(project); this.props.updateOn()}}>View</Button> */}
+
                         <Button color="danger" onClick={() => {this.deleteProject(project)}}>Delete</Button>
 
                     </td>
