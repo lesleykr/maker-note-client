@@ -33,8 +33,11 @@ export default class ProjectFirst extends Component<IProps, IState>{
 
                 <Button>
 
-                    <ProjectCreate onClick={this.toggleComponent} fetchProjects={this.props.fetchProjects} token={this.props.token} />
+                <ProjectCreate toggleComponent={this.toggleComponent} fetchProjects={this.fetchProjects} token={this.props.token}/> 
                 </Button>
+
+
+                <Button onClick={this.toggleComponent}>New Project</Button>
 
 
             </div>

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input, Col, Row } from 'reactstrap';
 import ProjectsTable from './ProjectsTable';
+import {Link} from 'react-router-dom';
+import ProjectIndex from './ProjectIndex';
 
 interface IProps {
     fetchProjects: (fetchProjects: string) => string,
@@ -51,7 +53,7 @@ export default class ProjectCreate extends Component <IProps, IState>{
         }) .then((res) => res.json())
         .then((projectsData) => {
             console.log(projectsData);               
-            this.props.fetchProjects();
+            // this.props.fetchProjects();
             this.setState({
             projectName: '',
             dateStarted: 0,
@@ -64,9 +66,11 @@ export default class ProjectCreate extends Component <IProps, IState>{
             storeSoldAt: '',
             notes: '',             
             })
-            this.props.toggleComponent()
+            // this.props.toggleComponent()
+                    
         
-        })  
+        }) 
+        
     }
 
     close = () => this.setState({isOpen: !this.state.isOpen});
@@ -164,7 +168,9 @@ export default class ProjectCreate extends Component <IProps, IState>{
                 <Input id="notes" type="text"name="notes" value={this.state.notes} placeholder="Notes" onChange={(e) => this.setState({notes: e.target.value})}/>
             </FormGroup>
 
-            <Button type="submit" >Save</Button>
+            <Button type="submit">Save</Button>
+            {/* <Button onClick={this.props.toggleComponent}>Cancel</Button> */}
+            <Link to="/ProjectIndex"><Button>Cancel</Button></Link>
         </Form>
        </>
     )

@@ -24,6 +24,9 @@ import {
 import ProjectIndex from '../projects/ProjectIndex';
 import MaterialIndex from '../materials/MaterialIndex';
 import Signup from '../auth/Signup';
+import ProjectCreate from '../projects/ProjectCreate';
+import ProjectsEdit from '../projects/ProjectEdit';
+
 
 interface IProps {
   // fetchProjects: (fetchProjects: string) => string,
@@ -93,6 +96,8 @@ export default class Sitebar extends Component <IProps, IState>{
         <Switch>
          <Route exact path="/ProjectIndex"><ProjectIndex token={this.props.token} /></Route>
          <Route exact path="/MaterialIndex"><MaterialIndex token={this.props.token} /></Route>
+         <Route exact path="/ProjectCreate"><ProjectCreate toggleComponent={this.toggleComponent} fetchProjects={this.fetchProjects} token={this.props.token}/></Route>
+        
          {/* <Route exact path="/Signup"><Signup isOpen={this.state.isOpen} onClick={this.toggle}updateToken={this.props.updateToken} /></Route> */}
          
         </Switch>

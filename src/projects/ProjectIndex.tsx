@@ -4,6 +4,8 @@ import ProjectCreate from './ProjectCreate';
 import ProjectsTable from './ProjectsTable';
 import ProjectsEdit from './ProjectEdit';
 import ProjectView from './ProjectView';
+import {Link, Switch, Route} from 'react-router-dom';
+
 interface IProps {
     // token: (token: string) => string,
     
@@ -70,12 +72,17 @@ render(){
     return(
         <div>
     
-    {this.state.projects == 0 ? (<ProjectCreate toggleComponent={this.toggleComponent} fetchProjects={this.fetchProjects} token={this.props.token}/>) : (this.state.isComponentVisible ? (<ProjectCreate toggleComponent={this.toggleComponent} fetchProjects={this.fetchProjects} token={this.props.token}/>)  : 
-                    (this.state.updateActive ? (<ProjectsEdit projectsToUpdate={this.state.projectsToUpdate} updateOff={this.updateOff} token={this.props.token} fetchProjects={this.fetchProjects}/>) : (<div>  <Button onClick={this.toggleComponent}>New Project</Button> <ProjectsTable projects={this.state.projects} editUpdateProjects={this.editUpdateProjects} updateOn={this.updateOn} fetchProjects={this.fetchProjects} token={this.props.token} /> </div> )))}
-               
+    {/* {this.state.projects == 0 ? (<ProjectCreate toggleComponent={this.toggleComponent} fetchProjects={this.fetchProjects} token={this.props.token}/>) : (this.state.isComponentVisible ? (<ProjectCreate toggleComponent={this.toggleComponent} fetchProjects={this.fetchProjects} token={this.props.token}/>)  : 
+                    (this.state.updateActive ? (<ProjectsEdit toggleComponent={this.toggleComponent}projectsToUpdate={this.state.projectsToUpdate} updateOff={this.updateOff} token={this.props.token} fetchProjects={this.fetchProjects}/>) : (<div>  <Button onClick={this.toggleComponent}>New Project</Button> <ProjectsTable projects={this.state.projects} editUpdateProjects={this.editUpdateProjects} updateOn={this.updateOn} fetchProjects={this.fetchProjects} token={this.props.token} /> </div> )))} */}
+
+                    <Link to="/ProjectCreate">New Project</Link>
+             
+               {this.state.updateActive ? (<ProjectsEdit toggleComponent={this.toggleComponent} projectsToUpdate={this.state.projectsToUpdate} updateOff={this.updateOff} token={this.props.token} fetchProjects={this.fetchProjects}/>) : (<ProjectsTable projects={this.state.projects} editUpdateProjects={this.editUpdateProjects} updateOn={this.updateOn} fetchProjects={this.fetchProjects} token={this.props.token} />) }
                 
-           
-        </div>        
+{/* 
+               {this.state.updateActive ? <Link to="/ProjectsEdit"><ProjectsEdit projectsToUpdate={this.state.projectsToUpdate}
+               updateOff={this.updateOff} token={this.props.token} fetchProjects={this.fetchProjects}/></Link> : <></>} */}
+                 </div>        
     )
 }
 }

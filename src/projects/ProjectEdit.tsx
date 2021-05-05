@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Row, Col, Form, FormGroup, Label, Input, Button} from 'reactstrap';
+import {Link} from "react-router-dom";
 
 interface IProps {
     fetchProjects: (fetchProjects: string) => string,
@@ -61,7 +62,7 @@ export default class ProjectsEdit extends Component <IProps, IState>{
     render(){
     return(
        <>
-        <h3>Enter a New Project</h3>
+        <h3>Edit Project</h3>
         <Form onSubmit={this.handleSubmit} >       
        
             <FormGroup>
@@ -147,6 +148,7 @@ export default class ProjectsEdit extends Component <IProps, IState>{
             </FormGroup>
 
             <Button type="submit" >Save</Button>
+            <Button toggleComponent={this.props.toggleComponent}>Cancel</Button>
         </Form>
        </>    
     )

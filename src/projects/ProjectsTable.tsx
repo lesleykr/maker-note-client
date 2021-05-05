@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Table, Button} from 'reactstrap';
+import {Link} from "react-router-dom";
 
 interface IProps {
     projects: (projects: string) => string,
@@ -38,9 +39,7 @@ export default class ProjectsTable extends Component <IProps, {}>{
                     <td>
                         
                         <Button color="warning" onClick={() => {this.props.editUpdateProjects(project); this.props.updateOn()}}>Update</Button>
-
-                        {/* <Button color="warning" onClick={() => {this.props.editUpdateProjects(project); this.props.updateOn()}}>View</Button> */}
-
+                      
                         <Button color="danger" onClick={() => {this.deleteProject(project)}}>Delete</Button>
 
                     </td>
