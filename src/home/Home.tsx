@@ -15,6 +15,7 @@ import Auth from '../auth/Auth'
 import { Button } from 'reactstrap';
 import Sitebar from './Navbar';
 import MaterialCreate from '../materials/MaterialCreate';
+import UserIndex from "../users/UserIndex";
 
 
 interface IProps {
@@ -50,6 +51,7 @@ export default class Home extends Component <IProps, IState>{
 <Link to="/ProjectCreate"><Button>New Project</Button></Link>
 <Link to="/MaterialIndex"><Button>My Materials</Button></Link>
 <Link to="/MaterialCreate"><Button>New Material</Button></Link>
+<Link to="/UserIndex"><Button>User Info</Button></Link>
 
      
       <div>
@@ -59,6 +61,7 @@ export default class Home extends Component <IProps, IState>{
          <Route exact path="/MaterialIndex"><MaterialIndex token={this.props.token} /></Route>
          <Route exact path="/ProjectCreate"><ProjectCreate toggleComponent={this.toggleComponent} fetchProjects={this.fetchProjects} token={this.props.token}/></Route>
          <Route exact path="/MaterialCreate"><MaterialCreate toggleComponent={this.toggleComponent} fetchMaterials={this.fetchMaterials} token={this.props.token}/></Route>
+         <Route exact path="/UserIndex"><UserIndex token={this.props.token} /></Route>
               
         </Switch>
       </div>

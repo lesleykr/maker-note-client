@@ -22,7 +22,7 @@ export default class MaterialIndex extends Component <IProps, IState>{
         this.state = {
             materials: [],
             updateActive: false,
-            materialsToUpdate: {},            
+            materialsToUpdate: {}           
         };
     }
 
@@ -63,15 +63,18 @@ componentDidMount(){
     return(
         <Container>
             <Row>
-                <Col md="3">
+                {/* <Col md="3">
                 <MaterialCreate fetchMaterials={this.fetchMaterials} token={this.props.token} />
                 </Col>
                 <Col md="9">
                     <MaterialsTable materials={this.state.materials} editUpdateMaterials={this.editUpdateMaterials} updateOn={this.updateOn} fetchMaterials={this.fetchMaterials}
                     token={this.props.token} />
                 </Col>
-                {this.state.updateActive ? <MaterialsEdit materialsToUpdate={this.state.materialsToUpdate} updateOff={this.updateOff} token={this.props.token} fetchMaterials={this.fetchMaterials}/> : <></>}
+                {this.state.updateActive ? <MaterialsEdit materialsToUpdate={this.state.materialsToUpdate} updateOff={this.updateOff} token={this.props.token} fetchMaterials={this.fetchMaterials}/> : <></>} */}
                 
+                {(this.state.updateActive ? (<MaterialsEdit toggleComponent={this.toggleComponent} materialsToUpdate={this.state.materialsToUpdate} updateOff={this.updateOff} token={this.props.token} fetchMaterials={this.fetchMaterials}/>) : <MaterialsTable materials={this.state.materials} editUpdateMaterials={this.editUpdateMaterials} updateOn={this.updateOn} fetchMaterials={this.fetchMaterials} token={this.props.token} />) }
+
+
             </Row>
         </Container>        
     )
