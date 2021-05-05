@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input, Col, Row } from 'reactstrap';
 import ProjectsTable from './ProjectsTable';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import ProjectIndex from './ProjectIndex';
 
 interface IProps {
@@ -38,6 +38,7 @@ export default class ProjectCreate extends Component <IProps, IState>{
             storeSoldAt: '',
             notes: '',
             isOpen: true,
+            redirectPI: false,
         };
     }
 
@@ -64,7 +65,8 @@ export default class ProjectCreate extends Component <IProps, IState>{
             dateSold: 0,
             price: 0,
             storeSoldAt: '',
-            notes: '',             
+            notes: '', 
+            redirectPI: true            
             })
             // this.props.toggleComponent()
                     
@@ -76,7 +78,10 @@ export default class ProjectCreate extends Component <IProps, IState>{
     close = () => this.setState({isOpen: !this.state.isOpen});
 
     render() {
-
+        
+             if (this.state.redirectPI) {
+            return <Redirect to="/ProjectIndex" />
+        }
     return(
        <>
         <h3>Enter a New Project</h3>

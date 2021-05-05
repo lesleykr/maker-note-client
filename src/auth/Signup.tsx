@@ -49,7 +49,7 @@ export default class Signup extends Component <IProps, IState>{
 
     validateSignUp = () => {
         this.setState({
-            errorMessage: 'Please enter a value'
+            errorMessage: 'Please enter a valid email'
         })
         // event.preventDefault();
     }

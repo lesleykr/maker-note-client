@@ -30,7 +30,7 @@ componentDidMount(){
     }
     
     protectedViews = () => {
-      return (this.state.sessionToken === localStorage.getItem('token') ? <Sitebar token={this.state.sessionToken} clickLogout={this.clearToken} /> 
+      return (this.state.sessionToken === localStorage.getItem('token') ? <Sitebar token={this.state.sessionToken} clickLogout={this.clearToken}  /> 
       : <Auth updateToken={this.updateToken.bind(this)}/>)
     }
    
