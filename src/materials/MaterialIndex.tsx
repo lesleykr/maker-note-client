@@ -71,6 +71,7 @@ componentDidMount(){
                     token={this.props.token} />
                 </Col>
                 {this.state.updateActive ? <MaterialsEdit materialsToUpdate={this.state.materialsToUpdate} updateOff={this.updateOff} token={this.props.token} fetchMaterials={this.fetchMaterials}/> : <></>}
+                
             </Row>
         </Container>        
     )

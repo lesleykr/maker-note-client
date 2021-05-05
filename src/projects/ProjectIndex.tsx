@@ -75,9 +75,9 @@ render(){
     {/* {this.state.projects == 0 ? (<ProjectCreate toggleComponent={this.toggleComponent} fetchProjects={this.fetchProjects} token={this.props.token}/>) : (this.state.isComponentVisible ? (<ProjectCreate toggleComponent={this.toggleComponent} fetchProjects={this.fetchProjects} token={this.props.token}/>)  : 
                     (this.state.updateActive ? (<ProjectsEdit toggleComponent={this.toggleComponent}projectsToUpdate={this.state.projectsToUpdate} updateOff={this.updateOff} token={this.props.token} fetchProjects={this.fetchProjects}/>) : (<div>  <Button onClick={this.toggleComponent}>New Project</Button> <ProjectsTable projects={this.state.projects} editUpdateProjects={this.editUpdateProjects} updateOn={this.updateOn} fetchProjects={this.fetchProjects} token={this.props.token} /> </div> )))} */}
 
-                    <Link to="/ProjectCreate">New Project</Link>
+                   
              
-               {this.state.updateActive ? (<ProjectsEdit toggleComponent={this.toggleComponent} projectsToUpdate={this.state.projectsToUpdate} updateOff={this.updateOff} token={this.props.token} fetchProjects={this.fetchProjects}/>) : (<ProjectsTable projects={this.state.projects} editUpdateProjects={this.editUpdateProjects} updateOn={this.updateOn} fetchProjects={this.fetchProjects} token={this.props.token} />) }
+               {this.state.projects == 0 ? (<Link to="/ProjectCreate"><Button>New Project</Button></Link>) : (this.state.updateActive ? (<ProjectsEdit toggleComponent={this.toggleComponent} projectsToUpdate={this.state.projectsToUpdate} updateOff={this.updateOff} token={this.props.token} fetchProjects={this.fetchProjects}/>) : <ProjectsTable projects={this.state.projects} editUpdateProjects={this.editUpdateProjects} updateOn={this.updateOn} fetchProjects={this.fetchProjects} token={this.props.token} />) }
                 
 {/* 
                {this.state.updateActive ? <Link to="/ProjectsEdit"><ProjectsEdit projectsToUpdate={this.state.projectsToUpdate}
