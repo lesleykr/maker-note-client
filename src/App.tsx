@@ -5,6 +5,8 @@ import Sitebar from './home/Navbar';
 import ProjectsEdit from './projects/ProjectEdit';
 import ProjectIndex from './projects/ProjectIndex';
 import MaterialIndex from './materials/MaterialIndex'
+import {Redirect, Switch, Route} from 'react-router-dom';
+import Home from './home/Home';
 
 export default class App extends Component {  
     state = {
@@ -27,6 +29,7 @@ componentDidMount(){
     clearToken = () => {
       localStorage.clear();
       this.setState({sessionToken: ""});
+      window.location.href = "/"
     }
     
     protectedViews = () => {
@@ -39,6 +42,7 @@ componentDidMount(){
 render() {
   return(
     <div>
+     
     
           {/* <Sitebar clickLogout={this.clearToken}  /> */}
           {this.protectedViews()}

@@ -27,6 +27,7 @@ import Signup from '../auth/Signup';
 import ProjectCreate from '../projects/ProjectCreate';
 import ProjectsEdit from '../projects/ProjectEdit';
 import Auth from '../auth/Auth'
+import Home from '../home/Home';
 
 
 interface IProps {
@@ -95,7 +96,7 @@ export default class Sitebar extends Component <IProps, IState>{
      
       <div>
         <Switch>
-        {/* <Route exact path="/"><Auth token={this.props.token} /></Route> */}
+        
          <Route exact path="/ProjectIndex"><ProjectIndex token={this.props.token} /></Route>
          <Route exact path="/MaterialIndex"><MaterialIndex token={this.props.token} /></Route>
          <Route exact path="/ProjectCreate"><ProjectCreate toggleComponent={this.toggleComponent} fetchProjects={this.fetchProjects} token={this.props.token}/></Route>
@@ -105,6 +106,9 @@ export default class Sitebar extends Component <IProps, IState>{
         </Switch>
       </div>
       </Router>
+      <div>
+      <Home token={this.props.token} />
+      </div>
     </div>
   );
 }
