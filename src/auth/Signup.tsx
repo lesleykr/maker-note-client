@@ -42,7 +42,7 @@ export default class Signup extends Component <IProps, IState>{
             (response) => response.json()
         ).then((data) => {
             console.log(data);
-            this.props.updateToken(data.sessionToken)
+            this.props.updateToken(data.sessionToken)           
         })
        
     }
@@ -61,6 +61,7 @@ export default class Signup extends Component <IProps, IState>{
     
     return(
         <div>
+            <div>
             <h1>Sign Up</h1>
             <Form onSubmit={this.handleSubmit} >
                 <FormGroup>
@@ -74,6 +75,8 @@ export default class Signup extends Component <IProps, IState>{
                     </FormGroup>
                 <Button type="submit" onClick={this.props.onClick}>Signup</Button>
             </Form>
+            </div>
+          
             </div>        
     )
 }

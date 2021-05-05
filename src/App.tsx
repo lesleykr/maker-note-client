@@ -42,7 +42,7 @@ componentDidMount(){
 render() {
   return(
     <div>
-     
+      
     
           {/* <Sitebar clickLogout={this.clearToken}  /> */}
           {this.protectedViews()}

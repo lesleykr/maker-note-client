@@ -51,7 +51,7 @@ export default class ProjectsTable extends Component <IProps, {}>{
     render(){
         return(
         <>
-        <Link to="/ProjectCreate"><Button>New Project</Button></Link>
+        {/* <Link to="/ProjectCreate"><Button>New Project</Button></Link> */}
         <h3>My Projects</h3>
         <hr/>
         <Table striped>
