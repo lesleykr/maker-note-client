@@ -56,6 +56,7 @@ export default class UserTable extends Component <IProps, {}>{
                     <th>Email</th>
                     <th>First Name</th>
                     <th>Last Name</th>
+                    <th>About Me</th>
                 </tr>
             </thead>
             <tbody>

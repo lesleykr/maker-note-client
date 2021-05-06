@@ -3,6 +3,7 @@ import { Button, Form, FormGroup, Label, Input, Col, Row } from 'reactstrap';
 import ProjectsTable from './ProjectsTable';
 import {Link, Redirect} from 'react-router-dom';
 import ProjectIndex from './ProjectIndex';
+import MaterialIndex from '../materials/MaterialIndex'
 
 interface IProps {
     fetchProjects: (fetchProjects: string) => string,
@@ -20,7 +21,8 @@ interface IState {
    price: number,
    storeSoldAt: string,
    notes: string,
-   isOpen: boolean
+   isOpen: boolean,
+   materials: string,
 }
 
 export default class ProjectCreate extends Component <IProps, IState>{
@@ -39,6 +41,7 @@ export default class ProjectCreate extends Component <IProps, IState>{
             notes: '',
             isOpen: true,
             redirectPI: false,
+            materials: [],
         };
     }
 
@@ -75,9 +78,56 @@ export default class ProjectCreate extends Component <IProps, IState>{
         
     }
 
+
+    fetchMaterials = () => {
+        fetch('http://localhost:3000/materials/mine', {
+            method: 'GET',
+            headers: new Headers ({
+                'Content-Type': 'application/json',
+                'Authorization': this.props.token
+            })
+        }) .then( (res) => res.json())
+            .then((materialsData) => {
+                this.setState({materials: materialsData})
+                console.log(materialsData);
+            })
+    }
+
     close = () => this.setState({isOpen: !this.state.isOpen});
 
+    componentDidMount(){
+        console.log('mounted');
+        this.fetchMaterials();
+    }
+
+    // materialsMapper() {
+    //     return this.state.materials.map((material, index) => {
+    //         return(
+    //             <tr key={index}>
+    //                 <th scope="row">{material.id}</th>
+    //                 <td>{material.materialName}</td>
+    //                 <td>{material.color}</td>
+    //                 <td>{material.quantity}</td>
+    //                 <td>
+                        
+                       
+
+    //                 </td>
+    //             </tr>
+    //         )
+    //     })
+    // }
     render() {
+
+        const { materials } = this.state;
+
+        let materialsList = materials.length > 0
+            && materials.map((item, i) => {
+          return (
+            <option key={i} value={item.id}>{item.materialName}</option>
+          )
+        }, this);
+
         
              if (this.state.redirectPI) {
             return <Redirect to="/ProjectIndex" />
@@ -124,7 +174,24 @@ export default class ProjectCreate extends Component <IProps, IState>{
           placeholder="Date Finished"
           value={this.state.dateFinished} onChange={(e) => this.setState({dateFinished: e.target.value})}/>
       </FormGroup>
-      </Col>
+      </Col>     
+      </Row>
+      <Row form>
+      <Col md={6}>
+<FormGroup>
+  <Label for="exampleSelectMulti">Select Materials</Label>
+
+  <Input type="select" name="selectMulti" id="exampleSelectMulti" multiple>
+
+  </Input>
+
+  <div>
+      <select>{materialsList}</select>
+  </div>
+</FormGroup>
+</Col>
+</Row>
+<Row form>
       <Col md={2}>
       
       <FormGroup>
@@ -132,11 +199,10 @@ export default class ProjectCreate extends Component <IProps, IState>{
                 {<span>$</span>}<Input id="totalMaterialCost" type="number" placeholder="Total Material Cost" name="totalMaterialCost" value={this.state.totalMaterialCost} onChange={(e) => this.setState({totalMaterialCost: e.target.value})}/>
             </FormGroup>
             </Col>
-            </Row>
 
 
             
-            <Row form>
+            
             <Col md={1}>
       <FormGroup check>
         <Label check>

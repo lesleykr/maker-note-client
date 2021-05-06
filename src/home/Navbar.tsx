@@ -54,25 +54,25 @@ export default class Sitebar extends Component <IProps, IState>{
   
   toggle = () => this.setState({isOpen: !this.state.isOpen});
 
-  buttonVisMM = () => {
-    this.setState({buttonInvisible: true});
-    // window.location.href = "/MaterialIndex"
-  }
-  buttonVisMP = () => {
-    this.setState({buttonInvisible: true});
-    // window.location.href = "/MaterialIndex"
-  }
-  buttonVisNM = () => {
-    this.setState({buttonInvisible: true});
-    // window.location.href = "/MaterialIndex"
-  }
-  buttonVisNP = () => {
-    this.setState({buttonInvisible: true});
-    // window.location.href = "/MaterialIndex"
-  }
-  buttonInVis = () => {
-    this.setState({buttonInVisible: false});
-  }
+  // buttonVisMM = () => {
+  //   this.setState({buttonInvisible: true});
+  //   // window.location.href = "/MaterialIndex"
+  // }
+  // buttonVisMP = () => {
+  //   this.setState({buttonInvisible: true});
+  //   // window.location.href = "/MaterialIndex"
+  // }
+  // buttonVisNM = () => {
+  //   this.setState({buttonInvisible: true});
+  //   // window.location.href = "/MaterialIndex"
+  // }
+  // buttonVisNP = () => {
+  //   this.setState({buttonInvisible: true});
+  //   // window.location.href = "/MaterialIndex"
+  // }
+  // buttonInVis = () => {
+  //   this.setState({buttonInVisible: false});
+  // }
 
   render() {
   return (
