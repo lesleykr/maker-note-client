@@ -10,8 +10,7 @@ interface IState {
     lastName: string,
     email: string,
     password: string, 
-    errorMessage: string,
-    mClose: boolean
+    errorMessage: string,   
 }
 
 export default class Signup extends Component <IProps, IState>{
@@ -22,20 +21,12 @@ export default class Signup extends Component <IProps, IState>{
             lastName: '',
             email: '',
             password: '',
-            errorMessage: '',
-            mClose: true
-           
+            errorMessage: '',            
            
         };
     }
 
-    // handleChange = (event) => {
-    //     this.setState({
-    //         [event.target.name]: event.target.value,
-    //     });
-    // }
-
-    handleSubmit = (event: any) => {
+      handleSubmit = (event: any) => {
         event.preventDefault()
         if (!this.state.email || !this.state.password) {
             alert("Please enter a valid email address and password");
@@ -56,18 +47,7 @@ export default class Signup extends Component <IProps, IState>{
        
     }
 
-    // validateSignUp = () => {
-    //     this.setState({
-    //         errorMessage: 'Please enter a valid email'
-    //     })
-    //     // event.preventDefault();
-    // }
-
-    toggle_close = () => this.setState({mClose: !this.state.mClose});
-
-    render() {
-        // const submitHandler = !this.state.email ? this.validateSignUp : this.handleSubmit
-    
+   render() {            
     return(
         <div>
             <div>
@@ -88,7 +68,7 @@ export default class Signup extends Component <IProps, IState>{
                 </FormGroup>
                 <FormGroup>
                     <label htmlFor="password">Password</label>
-                    <input id="su_password" type="password" name="password" placeholder="Enter Password" onChange={(e) => this.setState({password: e.target.value})} pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z].{5,})" title="Must contain at least one number and one uppercase and lowercase letter, and at least 5 or more characters." />
+                    <input id="su_password" type="password" name="password" placeholder="Enter Password" onChange={(e) => this.setState({password: e.target.value})} pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$" title="Must contain at least 6 characters, including one number, one uppercase, and one lowercase letter." />
                     </FormGroup>
                 <Button type="submit">Signup</Button>
             </Form>
