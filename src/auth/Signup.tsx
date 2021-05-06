@@ -10,7 +10,8 @@ interface IState {
     lastName: string,
     email: string,
     password: string, 
-    errorMessage: string
+    errorMessage: string,
+    mClose: boolean
 }
 
 export default class Signup extends Component <IProps, IState>{
@@ -36,6 +37,9 @@ export default class Signup extends Component <IProps, IState>{
 
     handleSubmit = (event: any) => {
         event.preventDefault()
+        if (!this.state.email || !this.state.password) {
+            alert("Please enter a valid email address and password");
+          } else {
         fetch("http://localhost:3000/user/create", {
             method: 'POST',
             body:JSON.stringify({user: this.state}),
@@ -48,20 +52,21 @@ export default class Signup extends Component <IProps, IState>{
             console.log(data);
             this.props.updateToken(data.sessionToken)           
         })
+    }
        
     }
 
-    validateSignUp = () => {
-        this.setState({
-            errorMessage: 'Please enter a valid email'
-        })
-        // event.preventDefault();
-    }
+    // validateSignUp = () => {
+    //     this.setState({
+    //         errorMessage: 'Please enter a valid email'
+    //     })
+    //     // event.preventDefault();
+    // }
 
     toggle_close = () => this.setState({mClose: !this.state.mClose});
 
     render() {
-        const submitHandler = !this.state.email ? this.validateSignUp : this.handleSubmit
+        // const submitHandler = !this.state.email ? this.validateSignUp : this.handleSubmit
     
     return(
         <div>
@@ -83,9 +88,9 @@ export default class Signup extends Component <IProps, IState>{
                 </FormGroup>
                 <FormGroup>
                     <label htmlFor="password">Password</label>
-                    <input id="su_password" type="password" name="password" placeholder="Enter Password" onChange={(e) => this.setState({password: e.target.value})}/>
+                    <input id="su_password" type="password" name="password" placeholder="Enter Password" onChange={(e) => this.setState({password: e.target.value})} pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z].{5,})" title="Must contain at least one number and one uppercase and lowercase letter, and at least 5 or more characters." />
                     </FormGroup>
-                <Button type="submit" onClick={this.props.onClick}>Signup</Button>
+                <Button type="submit">Signup</Button>
             </Form>
             </div>
           

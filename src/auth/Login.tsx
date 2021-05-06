@@ -23,6 +23,9 @@ export default class Login extends Component <IProps, IState>{
 
     handleSubmit = (event: any) => {
         event.preventDefault()
+        if (!this.state.email || !this.state.password) {
+            alert("Please enter a valid email address and password");
+          } else {
         fetch("http://localhost:3000/user/login", {
             method: 'POST',
             body:JSON.stringify({user: this.state}),
@@ -34,6 +37,7 @@ export default class Login extends Component <IProps, IState>{
         ).then((data) => {
             this.props.updateToken(data.sessionToken)
         })
+    }
         
     }
 

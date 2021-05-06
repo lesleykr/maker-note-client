@@ -3,8 +3,8 @@ import {Row, Col, Form, FormGroup, Label, Input, Button} from 'reactstrap';
 import {Link} from "react-router-dom";
 
 interface IProps {
-    fetchProjects: (fetchProjects: string) => string,
-    projectsToUpdate: (projectsToUpdate: string) => string,
+    fetchProjects: (fetchProjects: string) => void,
+    projectsToUpdate: (projectsToUpdate: string) => void,
     updateOff: (updateOff: boolean) => boolean,
     // token: (token: string) => void
       
