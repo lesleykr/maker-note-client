@@ -19,7 +19,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link, 
+  Redirect
 } from 'react-router-dom';
 import ProjectIndex from '../projects/ProjectIndex';
 import MaterialIndex from '../materials/MaterialIndex';
@@ -29,18 +30,23 @@ import ProjectsEdit from '../projects/ProjectEdit';
 import Auth from '../auth/Auth'
 import Home from '../home/Home';
 import MaterialCreate from '../materials/MaterialCreate';
+import UserIndex from '../users/UserIndex';
 
 
 interface IProps {
   // fetchProjects: (fetchProjects: string) => string,
-  updateToken: (newToken: string) => void
+  updateToken: (newToken: string) => void,
+  token: string,
+  clickLogout: () => void,
+  isAdmin: string | null
   
 }
 
-interface IState {
-  projectName: string,
-  medium: string, 
-  totalMaterialCost: number
+interface IState { 
+  isActive: boolean,
+  isOpen: boolean,
+  buttonsInvisible: boolean
+  
 }
 
 export default class Sitebar extends Component <IProps, IState>{
@@ -48,11 +54,16 @@ export default class Sitebar extends Component <IProps, IState>{
       super(props)
       this.state = {
           isOpen: false,  
-          buttonsInvisible: false
+          buttonsInvisible: false,
+          isActive: false
       };
   }
+
+  handleHide = () => {
+    this.setState({isActive: true})
+  }
   
-  toggle = () => this.setState({isOpen: !this.state.isOpen});
+  // toggle = () => this.setState({isOpen: !this.state.isOpen});
 
   // buttonVisMM = () => {
   //   this.setState({buttonInvisible: true});
@@ -77,7 +88,7 @@ export default class Sitebar extends Component <IProps, IState>{
   render() {
   return (
     <div>
-      <Router>
+       <Router>
       <Navbar color="light" light expand="md">
         <NavbarBrand href="/">MakerNote</NavbarBrand>
         {/* <NavbarToggler onClick={this.toggle} /> */}
@@ -104,14 +115,13 @@ export default class Sitebar extends Component <IProps, IState>{
 {this.state.buttonInvisible ? <Home token={this.props.token} buttonVisMP={this.buttonVisMP}/> : null}
 {this.state.buttonInvisible ? <Home token={this.props.token} buttonVisNM={this.buttonVisNM}/> : null}
 {this.state.buttonInvisible ? null : <Home token={this.props.token} buttonVisNP={this.buttonVisNP}/> } */}
-
+{this.props.isAdmin === "true" ? <Button>Admin</Button> : null}
 <div>
       <Home token={this.props.token} />
       </div>
 
 
       </Router>
-    
     </div>
   );
 }

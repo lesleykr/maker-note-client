@@ -18,7 +18,7 @@ interface IState {
     editDateFinished: string,
     editMedium: string, 
     editTotalMaterialCost: string,
-    editForSale: string,
+    editForSale: boolean,
     editDateSold: string,
     editPrice: string,
     editStoreSoldAt: string,

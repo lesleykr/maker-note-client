@@ -9,8 +9,15 @@ interface IProps {
 
 interface IState {
     materialName: string,
-    quantity: number, 
-    color: string
+    quantity: string,
+    costPerItem: string, 
+    color: string,
+    size: string,
+    source: string,
+    storageLocation: string,
+    description: string,
+    notes: string,
+    redirectMI: boolean
 }
 
 export default class MaterialCreate extends Component <IProps, IState>{
@@ -18,8 +25,14 @@ export default class MaterialCreate extends Component <IProps, IState>{
         super(props)
         this.state = {
             materialName: '',
-            quantity: 0,
+            quantity: "",
+            costPerItem: "",
             color: '' ,
+            size: "",
+            source: "",
+            storageLocation: "",
+            description: "",
+            notes: "",
             redirectMI: false,           
         };
     }
@@ -42,8 +55,14 @@ export default class MaterialCreate extends Component <IProps, IState>{
             // this.props.fetchMaterials();
             this.setState({
                 materialName: '',
-                quantity: 0,
-                color: '',
+                quantity: "",
+                costPerItem: "",
+                color: '' ,
+                size: "",
+                source: "",
+                storageLocation: "",
+                description: "",
+                notes: "",
                 redirectMI: true
             })
         })  

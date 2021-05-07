@@ -9,7 +9,7 @@ interface IState {
     email: string,
     password: string, 
     errorMessage: string,
-    isAdmin: boolean
+    admin: boolean
 }
 
 export default class Login extends Component <IProps, IState>{
@@ -18,7 +18,7 @@ export default class Login extends Component <IProps, IState>{
         this.state = {
             email: '',
             password: '',
-            isAdmin: false,
+            admin: false,
             errorMessage: ''
         };
     }
@@ -41,6 +41,8 @@ export default class Login extends Component <IProps, IState>{
             (response) => response.json()
         ).then((data) => {
             this.props.updateToken(data.sessionToken)
+            console.log(data)
+            localStorage.setItem("admin", data.user.admin)
         })
     }
     }

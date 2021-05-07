@@ -16,7 +16,8 @@ interface IProps {
 
 export default class App extends Component {  
     state = {
-      sessionToken: ''      
+      sessionToken: ''   ,
+      sessionAdmin: ""   
     }
   
 componentDidMount(){
@@ -26,10 +27,12 @@ componentDidMount(){
   };
 }
 
-  updateToken = (newToken: string) => { 
+  updateToken = (newToken: string, newAdmin: string) => { 
     localStorage.setItem('token', newToken);
+    localStorage.setItem('admin', newAdmin)
     this.setState({sessionToken: newToken});
-    console.log(this.state.sessionToken);
+    this.setState({sessionAdmin: newAdmin});
+    console.log(this.state.sessionToken);  
     }
     
     clearToken = () => {
@@ -39,13 +42,13 @@ componentDidMount(){
     }
     
     protectedViews = () => {
-      return (this.state.sessionToken === localStorage.getItem('token') ? <Sitebar token={this.state.sessionToken} clickLogout={this.clearToken}  /> 
+      return (this.state.sessionToken === localStorage.getItem('token') ? <Sitebar token={this.state.sessionToken}  isAdmin={localStorage.getItem('admin')} clickLogout={this.clearToken}  /> 
       : <Auth updateToken={this.updateToken.bind(this)}/>)
     }
 
     // protectedViews = () => {
-    //   return ((localStorage.getItem("isAdmin" == true)) ? <Admin /> 
-    //   : <Auth updateToken={this.updateToken.bind(this)}/>)
+    //   return ((localStorage.getItem("admin" === true)) ? <Admin token={this.state.sessionToken} isAdmin={localStorage.getItem('admin')}/> 
+    //   : <Sitebar token={this.state.sessionToken} clickLogout={this.clearToken}  /> )
     // }
 
 
@@ -72,6 +75,8 @@ render() {
     
           {/* <Sitebar clickLogout={this.clearToken}  /> */}
           {this.protectedViews()}
+    
+
  
         </div>
     

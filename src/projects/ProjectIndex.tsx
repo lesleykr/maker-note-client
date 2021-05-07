@@ -1,94 +1,104 @@
 import React, { Component } from 'react';
-import {Container, Row, Col, Button} from 'reactstrap';
+import { Container, Row, Col, Button } from 'reactstrap';
 import ProjectCreate from './ProjectCreate';
 import ProjectsTable from './ProjectsTable';
 import ProjectsEdit from './ProjectEdit';
 import ProjectView from './ProjectView';
-import {Link, Switch, Route} from 'react-router-dom';
+import { Link, Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 
 interface IProps {
     token: string,
-    
+    toggleComponent: () => void,
+    projectsToUpdate: () => void
+
 }
 
 interface IState {
     projects: [],
-    updateActive: boolean, 
-    projectsToUpdate: string,
+    updateActive: boolean,
+    projectsToUpdate: {},
     projectsToView: object,
     isComponentVisible: boolean,
+    isActive: boolean
 
-        
+
 }
 
-export default class ProjectIndex extends Component <IProps, IState>{
+export default class ProjectIndex extends Component<IProps, IState>{
     constructor(props: IProps) {
         super(props)
         this.state = {
             projects: [],
             updateActive: false,
-            projectsToUpdate: "",   
+            projectsToUpdate: "",
             isComponentVisible: false,
             projectsToView: {},
-                                
+            isActive: false
+
         };
     }
 
     fetchProjects = () => {
         fetch('http://localhost:3000/projects/mine', {
             method: 'GET',
-            headers: new Headers ({
-                'Content-Type': 'application/json',                
+            headers: new Headers({
+                'Content-Type': 'application/json',
                 'Authorization': this.props.token
             })
-        }) .then( (res) => res.json())
-            .then((projectsData) => {
-                this.setState({projects: projectsData})
-                console.log(projectsData);
+        }).then((res) => res.json())
+        .then((projectsData) => {
+            this.setState({ projects: projectsData })           
+            console.log(projectsData);
             })
+           
     }
 
-editUpdateProjects = (projects: string) => {
-    this.setState({projectsToUpdate: projects});
-    console.log(projects);
-}
 
-viewProjects = (projects: object) => {
-    this.setState({projectsToView: projects});
-    console.log(projects);
-}
+    editUpdateProjects = (projects: string) => {
+        this.setState({ projectsToUpdate: projects });
+        console.log(projects);
+    }
 
-updateOn = () => {
-    this.setState({updateActive: true});
-}
+    viewProjects = (projects: object) => {
+        this.setState({ projectsToView: projects });
+        console.log(projects);
+    }
 
-updateOff = () => {
-    this.setState({updateActive: false});
-}
+    updateOn = () => {
+        this.setState({ updateActive: true });
+    }
 
-toggleComponent = () => { 
-    console.log("component toggled");
-	this.setState({ 
-        isComponentVisible: !this.state.isComponentVisible 
-    }); 
-} 
+    updateOff = () => {
+        this.setState({ updateActive: false });
+    }
 
-componentDidMount(){
-    console.log('mounted');
-    this.fetchProjects();
-}
+    handleHide = () => {
+        this.setState({ isActive: true })
+    }
 
-render(){
-    return(
-        <div>
+    // toggleComponent = () => { 
+    //     console.log("component toggled");
+    // 	this.setState({ 
+    //         isComponentVisible: !this.state.isComponentVisible 
+    //     }); 
+    // } 
+
+    componentDidMount() {
+        console.log('mounted');
+        this.fetchProjects();
+    }
+
+    render() {
+        return (
+            <div>
 
                   
              
-               {this.state.projects == null ? (<Link to="/ProjectCreate"><Button>New Project</Button></Link>) : (this.state.updateActive ? <ProjectsEdit toggleComponent={this.toggleComponent} projectsToUpdate={this.state.projectsToUpdate} updateOff={this.updateOff} token={this.props.token} fetchProjects={this.fetchProjects}/> : <ProjectsTable projects={this.state.projects} editUpdateProjects={this.editUpdateProjects} updateOn={this.updateOn} fetchProjects={this.fetchProjects} token={this.props.token} />) }
+            {this.state.projects == null ? (<Link to="/ProjectCreate"><Button>New Project</Button></Link>) : (this.state.updateActive ? <ProjectsEdit toggleComponent={this.toggleComponent} projectsToUpdate={this.state.projectsToUpdate} updateOff={this.updateOff} token={this.props.token} fetchProjects={this.fetchProjects}/> : <ProjectsTable projects={this.state.projects} editUpdateProjects={this.editUpdateProjects} updateOn={this.updateOn} fetchProjects={this.fetchProjects} token={this.props.token} />) }
 
 </div>        
-    )
-}
+        )
+    }
 }
 
 //PROJECT VIEW TERNARY (NOT WORKING):
@@ -99,7 +109,7 @@ render(){
 //  MAPPING FOR PROJECT VIEW (NOT WORKING):
 
 
-              {/* {this.state.projects.map((project, index) => (
+{/* {this.state.projects.map((project, index) => (
           <ProjectView key={index} projectName={project.projectName} />
         ))} */}
 
@@ -107,21 +117,21 @@ render(){
 {options.map((option) => (
               <option value={option.value}>{option.label}</option>
             ))} */}
-                
-                {/* <ProjectsEdit toggleComponent={this.toggleComponent} projectsToUpdate={this.state.projectsToUpdate} updateOff={this.updateOff} token={this.props.token} fetchProjects={this.fetchProjects}/> */}
+
+{/* <ProjectsEdit toggleComponent={this.toggleComponent} projectsToUpdate={this.state.projectsToUpdate} updateOff={this.updateOff} token={this.props.token} fetchProjects={this.fetchProjects}/> */ }
 
 
 {/* 
                {this.state.updateActive ? <Link to="/ProjectsEdit"><ProjectsEdit projectsToUpdate={this.state.projectsToUpdate}
                updateOff={this.updateOff} token={this.props.token} fetchProjects={this.fetchProjects}/></Link> : <></>} */}
- 
+
 //PROJECT VIEW RENDER - DIDN'T COMPLETELY WORK
 // render(){
 //     return(
 //         <div>
-            
+
 //                     {/* <Button onClick={() =><ProjectCreate fetchProjects={this.fetchProjects} token={this.props.token}/>}> New Project</Button> */}
-                    
+
 //      <Button onClick={this.toggleComponent}>  
 //          New Project 
 //       </Button> 
@@ -129,9 +139,9 @@ render(){
 //                     this.state.updateActive ? <ProjectView onClick={this.toggleComponent} projectsToUpdate={this.state.projectsToUpdate} updateOff={this.updateOff} token={this.props.token} fetchProjects={this.fetchProjects}/> : 
 //                     <ProjectsTable projects={this.state.projects} editUpdateProjects={this.editUpdateProjects} updateOn={this.updateOn} fetchProjects={this.fetchProjects}
 //                     token={this.props.token} />}
-               
-                
-           
+
+
+
 //         </div>        
 //     )
 // }
@@ -139,5 +149,5 @@ render(){
 
 //ORIGINAL CRAZY LONG TERNARY
 
-   {/* {this.state.projects == 0 ? (<ProjectCreate toggleComponent={this.toggleComponent} fetchProjects={this.fetchProjects} token={this.props.token}/>) : (this.state.isComponentVisible ? (<ProjectCreate toggleComponent={this.toggleComponent} fetchProjects={this.fetchProjects} token={this.props.token}/>)  : 
+{/* {this.state.projects == 0 ? (<ProjectCreate toggleComponent={this.toggleComponent} fetchProjects={this.fetchProjects} token={this.props.token}/>) : (this.state.isComponentVisible ? (<ProjectCreate toggleComponent={this.toggleComponent} fetchProjects={this.fetchProjects} token={this.props.token}/>)  : 
                     (this.state.updateActive ? (<ProjectsEdit toggleComponent={this.toggleComponent}projectsToUpdate={this.state.projectsToUpdate} updateOff={this.updateOff} token={this.props.token} fetchProjects={this.fetchProjects}/>) : (<div>  <Button onClick={this.toggleComponent}>New Project</Button> <ProjectsTable projects={this.state.projects} editUpdateProjects={this.editUpdateProjects} updateOn={this.updateOn} fetchProjects={this.fetchProjects} token={this.props.token} /> </div> )))} */}

@@ -21,27 +21,33 @@ import ProjectView from "../projects/ProjectView";
 
 interface IProps {
   token: string,
-toggleComponent: () => void
+toggleComponent: () => void,
+fetchProjects: {},
+fetchMaterials: {}
   
 }
 
-export default class Home extends Component <IProps,{}>{
-  constructor(props: IProps) {
-      super(props)
-    
-  }
-  
+interface IState {
+  isActive: boolean
+}
 
-  render() {
-  return (
-    <div>
-        <Router>
-      {/* <Button onClick={() => {this.props.buttonVisMM()}}>My Materials T</Button>
-      <Button onClick={() => {this.props.buttonVisMP()}}>MyProjects T</Button>
-      <Button onClick={() => {this.props.buttonVisNM()}}>New Material T</Button>
-      <Link to="/ProjectCreate"><Button onClick={() => {this.props.buttonVisNP()}}>New Project T</Button></Link> */}
+export default class Home extends Component <IProps,IState>{
+  constructor(props: IProps) {
+    super(props)
+  
+}
+
+
+render() {
+return (
+  <div>
+      <Router>
+    {/* <Button onClick={() => {this.props.buttonVisMM()}}>My Materials T</Button>
+    <Button onClick={() => {this.props.buttonVisMP()}}>MyProjects T</Button>
+    <Button onClick={() => {this.props.buttonVisNM()}}>New Material T</Button>
+    <Link to="/ProjectCreate"><Button onClick={() => {this.props.buttonVisNP()}}>New Project T</Button></Link> */}
+  
     
-      
 <Link to="/ProjectIndex"><Button>My Projects</Button></Link>
 <Link to="/ProjectCreate"><Button>New Project</Button></Link>
 <Link to="/MaterialIndex"><Button>My Materials</Button></Link>
@@ -49,22 +55,22 @@ export default class Home extends Component <IProps,{}>{
 <Link to="/UserIndex"><Button>User Info</Button></Link>
 <Link to="/ProjectView"><Button>Project View</Button></Link>
 
-     
-      <div>
-        <Switch>
-        
-         <Route exact path="/ProjectIndex"><ProjectIndex token={this.props.token} /></Route>
-         <Route exact path="/MaterialIndex"><MaterialIndex token={this.props.token} /></Route>
-         <Route exact path="/ProjectCreate"><ProjectCreate toggleComponent={this.props.toggleComponent} fetchProjects={this.props.fetchProjects} token={this.props.token}/></Route>
-         <Route exact path="/MaterialCreate"><MaterialCreate toggleComponent={this.props.toggleComponent} fetchMaterials={this.props.fetchMaterials} token={this.props.token}/></Route>
-         <Route exact path="/UserIndex"><UserIndex token={this.props.token} /></Route>
-         <Route exact path="/ProjectView"><ProjectView token={this.props.token} /></Route>
-              
-        </Switch>
-      </div>
-      </Router>
-    
+   
+    <div>
+      <Switch>
+      
+       <Route exact path="/ProjectIndex"><ProjectIndex token={this.props.token} /></Route>
+       <Route exact path="/MaterialIndex"><MaterialIndex token={this.props.token} /></Route>
+       <Route exact path="/ProjectCreate"><ProjectCreate toggleComponent={this.props.toggleComponent} fetchProjects={this.props.fetchProjects} token={this.props.token}/></Route>
+       <Route exact path="/MaterialCreate"><MaterialCreate toggleComponent={this.props.toggleComponent} fetchMaterials={this.props.fetchMaterials} token={this.props.token}/></Route>
+       <Route exact path="/UserIndex"><UserIndex token={this.props.token} /></Route>
+       <Route exact path="/ProjectView"><ProjectView token={this.props.token} /></Route>
+            
+      </Switch>
     </div>
-  );
+    </Router>
+  
+  </div>
+);
 }
 }
