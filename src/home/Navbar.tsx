@@ -31,6 +31,7 @@ import Auth from '../auth/Auth'
 import Home from '../home/Home';
 import MaterialCreate from '../materials/MaterialCreate';
 import UserIndex from '../users/UserIndex';
+import AdUserIndex from '../users/admin/AdUserIndex';
 
 
 interface IProps {
@@ -63,28 +64,6 @@ export default class Sitebar extends Component <IProps, IState>{
     this.setState({isActive: true})
   }
   
-  // toggle = () => this.setState({isOpen: !this.state.isOpen});
-
-  // buttonVisMM = () => {
-  //   this.setState({buttonInvisible: true});
-  //   // window.location.href = "/MaterialIndex"
-  // }
-  // buttonVisMP = () => {
-  //   this.setState({buttonInvisible: true});
-  //   // window.location.href = "/MaterialIndex"
-  // }
-  // buttonVisNM = () => {
-  //   this.setState({buttonInvisible: true});
-  //   // window.location.href = "/MaterialIndex"
-  // }
-  // buttonVisNP = () => {
-  //   this.setState({buttonInvisible: true});
-  //   // window.location.href = "/MaterialIndex"
-  // }
-  // buttonInVis = () => {
-  //   this.setState({buttonInVisible: false});
-  // }
-
   render() {
   return (
     <div>
@@ -94,12 +73,24 @@ export default class Sitebar extends Component <IProps, IState>{
         {/* <NavbarToggler onClick={this.toggle} /> */}
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="mr-auto" navbar>
-          {/* <NavItem>
+          <NavItem>
            <Link to="/ProjectIndex">My Projects</Link>
-            </NavItem>            
+            </NavItem>  
+            <NavItem>
+            <Link to="/ProjectCreate">New Project</Link>
+            </NavItem>          
             <NavItem>
            <Link to="/MaterialIndex">My Materials</Link>
-            </NavItem> */}
+            </NavItem>
+            <NavItem>
+           <Link to="/MaterialCreate">New Material</Link>
+            </NavItem>
+            <NavItem>
+           <Link to="/UserIndex">My Account</Link>
+            </NavItem>
+            <NavItem>
+            {this.props.isAdmin === "true" ? <Link to="/AdUserIndex">All Users</Link> : null}
+            </NavItem>
             <NavItem><Button onClick={this.props.clickLogout}>Logout</Button>
             </NavItem>
             {/* <NavItem>
@@ -107,18 +98,23 @@ export default class Sitebar extends Component <IProps, IState>{
             </NavItem> */}
 
           </Nav>
-    
+       
         </Collapse>
       </Navbar>
-     
-{/* {this.state.buttonInvisible ? <Home token={this.props.token} buttonVisMM={this.buttonVisMM}/> : null}
-{this.state.buttonInvisible ? <Home token={this.props.token} buttonVisMP={this.buttonVisMP}/> : null}
-{this.state.buttonInvisible ? <Home token={this.props.token} buttonVisNM={this.buttonVisNM}/> : null}
-{this.state.buttonInvisible ? null : <Home token={this.props.token} buttonVisNP={this.buttonVisNP}/> } */}
-{this.props.isAdmin === "true" ? <Button>Admin</Button> : null}
-<div>
-      <Home token={this.props.token} />
-      </div>
+      <div>
+<Switch>
+
+ <Route exact path="/ProjectIndex"><ProjectIndex token={this.props.token} /></Route>
+ <Route exact path="/MaterialIndex"><MaterialIndex token={this.props.token} /></Route>
+ <Route exact path="/ProjectCreate"><ProjectCreate toggleComponent={this.toggleComponent} fetchProjects={this.fetchProjects} token={this.props.token}/></Route>
+ <Route exact path="/Home"><Home /></Route>
+ <Route exact path="/MaterialCreate"><MaterialCreate toggleComponent={this.props.toggleComponent} fetchMaterials={this.props.fetchMaterials} token={this.props.token}/></Route>
+       <Route exact path="/UserIndex"><UserIndex token={this.props.token} /></Route>
+       <Route exact path="/AdUserIndex"><AdUserIndex token={this.props.token} /></Route>
+ {/* <Route exact path="/Signup"><Signup isOpen={this.state.isOpen} onClick={this.toggle}updateToken={this.props.updateToken} /></Route> */}
+ 
+</Switch>
+</div>
 
 
       </Router>
@@ -129,15 +125,3 @@ export default class Sitebar extends Component <IProps, IState>{
 
 
 
-// <div>
-// <Switch>
-
-//  <Route exact path="/ProjectIndex"><ProjectIndex token={this.props.token} /></Route>
-//  <Route exact path="/MaterialIndex"><MaterialIndex token={this.props.token} /></Route>
-//  <Route exact path="/ProjectCreate"><ProjectCreate toggleComponent={this.toggleComponent} fetchProjects={this.fetchProjects} token={this.props.token}/></Route>
-//  <Route exact path="/Home"><Home /></Route>
-//  <Route exact path="/MaterialCreate"><MaterialCreate fetchMaterial={this.fetchMaterials}token={this.props.token} /></Route>
-//  {/* <Route exact path="/Signup"><Signup isOpen={this.state.isOpen} onClick={this.toggle}updateToken={this.props.updateToken} /></Route> */}
- 
-// </Switch>
-// </div>

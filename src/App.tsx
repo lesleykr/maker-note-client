@@ -7,7 +7,7 @@ import ProjectIndex from './projects/ProjectIndex';
 import MaterialIndex from './materials/MaterialIndex'
 import {Redirect, Switch, BrowserRouter as Router, Route} from 'react-router-dom';
 import Home from './home/Home';
-import Admin from "./users/Admin";
+import Admin from "./users/admin/Admin";
 
 
 interface IProps {
