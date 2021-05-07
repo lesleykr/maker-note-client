@@ -3,23 +3,24 @@ import {Row, Col, Form, FormGroup, Label, Input, Button} from 'reactstrap';
 import {Link} from "react-router-dom";
 
 interface IProps {
-    fetchProjects: (fetchProjects: string) => void,
-    projectsToUpdate: (projectsToUpdate: string) => void,
-    updateOff: (updateOff: boolean) => boolean,
-    // token: (token: string) => void
+    fetchProjects: any,
+    projectsToUpdate: (projectsToUpdate: {}) => {}
+    updateOff: () => void,
+    token: string,
+    toggleComponent: () => void
       
 }
 
 interface IState {
     
     editProjectName: string,
-    editDateStarted: number,
-    editDateFinished: number,
+    editDateStarted: string,
+    editDateFinished: string,
     editMedium: string, 
-    editTotalMaterialCost: number,
-    editForSale: boolean,
-    editDateSold: number,
-    editPrice: number,
+    editTotalMaterialCost: string,
+    editForSale: string,
+    editDateSold: string,
+    editPrice: string,
     editStoreSoldAt: string,
     editNotes: string
     
@@ -33,7 +34,7 @@ export default class ProjectsEdit extends Component <IProps, IState>{
             editDateStarted: this.props.projectsToUpdate.dateStarted,
             editDateFinished: this.props.projectsToUpdate.dateFinished,
             editMedium: this.props.projectsToUpdate.medium,
-            editTotalMaterialCost: this.props.projectsToUpdate.totalMaterialCost,            
+            editTotalMaterialCost: this.props.projectsToUpdate.totalMaterialCost,
             editForSale: this.props.projectsToUpdate.forSale,
             editDateSold: this.props.projectsToUpdate.dateSold,
             editPrice: this.props.projectsToUpdate.price,
@@ -155,20 +156,3 @@ export default class ProjectsEdit extends Component <IProps, IState>{
 }
 }
 
-
-{/* <h3>Edit Project</h3>
-                <Form onSubmit={this.handleSubmit}>
-                    <FormGroup>
-                        <Label htmlFor="projectName">Project Name:</Label>
-                        <Input name="projectName" value={this.state.editProjectName} onChange={(e) => this.setState({editProjectName: e.target.value})}/>
-                    </FormGroup>
-                    <FormGroup>
-                        <Label htmlFor="medium">Medium:</Label>
-                        <Input name="medium" value={this.state.editMedium} onChange={(e) => this.setState({editMedium: e.target.value})}/>
-                    </FormGroup>
-                    <FormGroup>
-                        <Label htmlFor="totalMaterialCost">Total Material Cost:</Label>
-                        <Input name="totalMaterialCost" value={this.state.editTotalMaterialCost} onChange={(e) => this.setState({editTotalMaterialCost: e.target.value})}/>
-                    </FormGroup>
-                    <Button type="submit">Update Project</Button>
-                </Form> */}

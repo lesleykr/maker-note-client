@@ -3,11 +3,12 @@ import {Table, Button} from 'reactstrap';
 import {Link} from "react-router-dom";
 
 interface IProps {
-    projects: (projects: string) => string,
-    editUpdateProjects: (editUpdateProjects: string) => void,
-    updateOn: (updateOn: boolean) => boolean,
-    fetchProjects: (fetchProjects: string) => string
-    viewProjects: (viewProjects: string) => void,
+    projects: [],
+    editUpdateProjects: any,
+    updateOn: () => void,
+    fetchProjects: () => void,
+    // viewProjects: (viewProjects: string) => void,
+    token: string
    
 }
 
@@ -17,7 +18,7 @@ export default class ProjectsTable extends Component <IProps, {}>{
 
     }
 
-   deleteProject = (project: any) => {
+   deleteProject = (project: object) => {
         fetch(`http://localhost:3000/projects/delete/${project.id}`, {
             method: 'DELETE',
             headers: new Headers({
@@ -29,7 +30,7 @@ export default class ProjectsTable extends Component <IProps, {}>{
     }
 
     projectsMapper() {
-        return this.props.projects.map((project, index) => {
+        return this.props.projects.map((project: any, index: number) => {
             return(
                 <tr key={index}>
                     <th scope="row">{project.dateStarted}</th>                    

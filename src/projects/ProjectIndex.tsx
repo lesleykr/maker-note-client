@@ -7,14 +7,14 @@ import ProjectView from './ProjectView';
 import {Link, Switch, Route} from 'react-router-dom';
 
 interface IProps {
-    // token: (token: string) => string,
+    token: string,
     
 }
 
 interface IState {
-    projects: object,
+    projects: [],
     updateActive: boolean, 
-    projectsToUpdate: object,
+    projectsToUpdate: string,
     projectsToView: object,
     isComponentVisible: boolean,
 
@@ -22,13 +22,12 @@ interface IState {
 }
 
 export default class ProjectIndex extends Component <IProps, IState>{
-  static fetchProjects: (fetchProjects: string) => string;
     constructor(props: IProps) {
         super(props)
         this.state = {
             projects: [],
             updateActive: false,
-            projectsToUpdate: {},   
+            projectsToUpdate: "",   
             isComponentVisible: false,
             projectsToView: {},
                                 
@@ -39,8 +38,7 @@ export default class ProjectIndex extends Component <IProps, IState>{
         fetch('http://localhost:3000/projects/mine', {
             method: 'GET',
             headers: new Headers ({
-                'Content-Type': 'application/json',
-                //dont have a props named token
+                'Content-Type': 'application/json',                
                 'Authorization': this.props.token
             })
         }) .then( (res) => res.json())
@@ -50,12 +48,12 @@ export default class ProjectIndex extends Component <IProps, IState>{
             })
     }
 
-editUpdateProjects = (projects: any) => {
+editUpdateProjects = (projects: string) => {
     this.setState({projectsToUpdate: projects});
     console.log(projects);
 }
 
-viewProjects = (projects: any) => {
+viewProjects = (projects: object) => {
     this.setState({projectsToView: projects});
     console.log(projects);
 }

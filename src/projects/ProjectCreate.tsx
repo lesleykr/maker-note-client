@@ -6,23 +6,25 @@ import ProjectIndex from './ProjectIndex';
 import MaterialIndex from '../materials/MaterialIndex'
 
 interface IProps {
-    fetchProjects: (fetchProjects: string) => string,
+    fetchProjects: (fetchProjects: object) => object,
+    token: string,
     
 }
 
 interface IState {
    projectName: string,
-   dateStarted: number,
-   dateFinished: number,
+   dateStarted: string,
+   dateFinished: string,
    medium: string, 
-   totalMaterialCost: number,
+   totalMaterialCost: string,
    forSale: boolean,
-   dateSold: number,
-   price: number,
+   dateSold: string,
+   price: string,
    storeSoldAt: string,
    notes: string,
    isOpen: boolean,
-   materials: string,
+   materials: object,
+   redirectPI: boolean
 }
 
 export default class ProjectCreate extends Component <IProps, IState>{
@@ -30,13 +32,13 @@ export default class ProjectCreate extends Component <IProps, IState>{
         super(props)
         this.state = {
             projectName: '',
-            dateStarted: 0,
-            dateFinished: 0,
+            dateStarted: "",
+            dateFinished: "",
             medium: '',
-            totalMaterialCost: 0,
+            totalMaterialCost: "",
             forSale: false,
-            dateSold: 0,
-            price: 0,
+            dateSold: "",
+            price: "",
             storeSoldAt: '',
             notes: '',
             isOpen: true,
@@ -47,6 +49,9 @@ export default class ProjectCreate extends Component <IProps, IState>{
 
     handleSubmit = (event: any) => {
         event.preventDefault();
+        if (!this.state.projectName) {
+            alert("Please enter a name for your project.");
+          } else {
         fetch('http://localhost:3000/projects/create', {
             method: 'POST',
             body: JSON.stringify({projects: this.state}),
@@ -60,13 +65,13 @@ export default class ProjectCreate extends Component <IProps, IState>{
             // this.props.fetchProjects();
             this.setState({
             projectName: '',
-            dateStarted: 0,
-            dateFinished: 0,
+            dateStarted: "",
+            dateFinished: "",
             medium: '',
-            totalMaterialCost: 0,
+            totalMaterialCost: "",
             forSale: false,
-            dateSold: 0,
-            price: 0,
+            dateSold: "",
+            price: "",
             storeSoldAt: '',
             notes: '', 
             redirectPI: true            
@@ -75,7 +80,7 @@ export default class ProjectCreate extends Component <IProps, IState>{
                     
         
         }) 
-        
+    } 
     }
 
 
@@ -122,7 +127,7 @@ export default class ProjectCreate extends Component <IProps, IState>{
         const { materials } = this.state;
 
         let materialsList = materials.length > 0
-            && materials.map((item, i) => {
+            && materials.map((item: any, i: number) => {
           return (
             <option key={i} value={item.id}>{item.materialName}</option>
           )

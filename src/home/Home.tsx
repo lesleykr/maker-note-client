@@ -20,21 +20,15 @@ import ProjectView from "../projects/ProjectView";
 
 
 interface IProps {
-  // fetchProjects: (fetchProjects: string) => string,
-//   updateToken: (newToken: string) => void
+  token: string,
+toggleComponent: () => void
   
 }
 
-interface IState {
-  
-}
-
-export default class Home extends Component <IProps, IState>{
+export default class Home extends Component <IProps,{}>{
   constructor(props: IProps) {
       super(props)
-      this.state = {
-               
-      };
+    
   }
   
 
@@ -61,8 +55,8 @@ export default class Home extends Component <IProps, IState>{
         
          <Route exact path="/ProjectIndex"><ProjectIndex token={this.props.token} /></Route>
          <Route exact path="/MaterialIndex"><MaterialIndex token={this.props.token} /></Route>
-         <Route exact path="/ProjectCreate"><ProjectCreate toggleComponent={this.toggleComponent} fetchProjects={this.fetchProjects} token={this.props.token}/></Route>
-         <Route exact path="/MaterialCreate"><MaterialCreate toggleComponent={this.toggleComponent} fetchMaterials={this.fetchMaterials} token={this.props.token}/></Route>
+         <Route exact path="/ProjectCreate"><ProjectCreate toggleComponent={this.props.toggleComponent} fetchProjects={this.props.fetchProjects} token={this.props.token}/></Route>
+         <Route exact path="/MaterialCreate"><MaterialCreate toggleComponent={this.props.toggleComponent} fetchMaterials={this.props.fetchMaterials} token={this.props.token}/></Route>
          <Route exact path="/UserIndex"><UserIndex token={this.props.token} /></Route>
          <Route exact path="/ProjectView"><ProjectView token={this.props.token} /></Route>
               

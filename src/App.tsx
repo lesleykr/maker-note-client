@@ -5,8 +5,14 @@ import Sitebar from './home/Navbar';
 import ProjectsEdit from './projects/ProjectEdit';
 import ProjectIndex from './projects/ProjectIndex';
 import MaterialIndex from './materials/MaterialIndex'
-import {Redirect, Switch, Route} from 'react-router-dom';
+import {Redirect, Switch, BrowserRouter as Router, Route} from 'react-router-dom';
 import Home from './home/Home';
+import Admin from "./users/Admin";
+
+
+interface IProps {
+  
+}
 
 export default class App extends Component {  
     state = {
@@ -36,16 +42,37 @@ componentDidMount(){
       return (this.state.sessionToken === localStorage.getItem('token') ? <Sitebar token={this.state.sessionToken} clickLogout={this.clearToken}  /> 
       : <Auth updateToken={this.updateToken.bind(this)}/>)
     }
+
+    // protectedViews = () => {
+    //   return ((localStorage.getItem("isAdmin" == true)) ? <Admin /> 
+    //   : <Auth updateToken={this.updateToken.bind(this)}/>)
+    // }
+
+
+
+    // protectedViews = () => {
+    //   if(localStorage.getItem("isAdmin") != null){
+    //     return <Redirect to="/Admin"></Redirect>;
+    //   } else {
+    //     <Redirect to="/Auth"></Redirect>
+    //   }
+    // }
    
     // && <MaterialIndex token={this.state.sessionToken}/>
 
 render() {
   return(
     <div>
-      
+           {/* <Router>
+          <Switch>
+<Route exact path="/Auth"><Auth updateToken={this.updateToken.bind(this)}/></Route>
+<Route exact path="/Admin"><Admin /></Route>
+          </Switch>
+          </Router> */}
     
           {/* <Sitebar clickLogout={this.clearToken}  /> */}
           {this.protectedViews()}
+ 
         </div>
     
   );

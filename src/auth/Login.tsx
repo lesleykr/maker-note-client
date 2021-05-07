@@ -8,7 +8,8 @@ interface IProps {
 interface IState {
     email: string,
     password: string, 
-    errorMessage: string
+    errorMessage: string,
+    isAdmin: boolean
 }
 
 export default class Login extends Component <IProps, IState>{
@@ -17,12 +18,16 @@ export default class Login extends Component <IProps, IState>{
         this.state = {
             email: '',
             password: '',
+            isAdmin: false,
             errorMessage: ''
         };
     }
 
     handleSubmit = (event: any) => {
         event.preventDefault()
+        if (!this.state.email || !this.state.password) {
+            alert("Please enter a valid email address and password");
+          } else {
         if (!this.state.email || !this.state.password) {
             alert("Please enter a valid email address and password");
           } else {
@@ -37,6 +42,7 @@ export default class Login extends Component <IProps, IState>{
         ).then((data) => {
             this.props.updateToken(data.sessionToken)
         })
+    }
     }
         
     }

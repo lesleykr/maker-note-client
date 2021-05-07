@@ -46,7 +46,7 @@ export default class MaterialsEdit extends Component <IProps, IState>{
         fetch(`http://localhost:3000/materials/update/${this.props.materialsToUpdate.id}`, {
             method: 'PUT',
             body: JSON.stringify({materials: {materialName: this.state.editMaterialName,
-                 editQuantity: this.state.editQuantity,
+                 quantity: this.state.editQuantity,
                   costPerItem: this.state.editCostPerItem,
                    color: this.state.editColor,
                     size: this.state.editSize,

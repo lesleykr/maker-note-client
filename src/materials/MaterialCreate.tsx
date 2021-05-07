@@ -26,6 +26,9 @@ export default class MaterialCreate extends Component <IProps, IState>{
 
     handleSubmit = (event: any) => {
         event.preventDefault();
+        if (!this.state.materialName) {
+            alert("Please enter the name of your material.");
+          } else {
         fetch('http://localhost:3000/materials/create', {
             method: 'POST',
             body: JSON.stringify({materials: this.state}),
@@ -43,7 +46,8 @@ export default class MaterialCreate extends Component <IProps, IState>{
                 color: '',
                 redirectMI: true
             })
-        })    
+        })  
+    }  
     }
 
     render() {

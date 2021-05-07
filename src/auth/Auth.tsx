@@ -1,24 +1,43 @@
 import React, {Component} from 'react';
 import Signup from './Signup';
 import Login from './Login';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    Redirect
+  } from 'react-router-dom';
+import {Button} from 'reactstrap';
 
 interface IProps {
     updateToken: (newToken: string) => void
 }
+
+
 export default class Auth extends Component <IProps, {}>{
     constructor(props: IProps) {
         super(props)
-
+       
     }
+
+    
 render() {
 
     return(
        <div>
-                    <Signup updateToken={this.props.updateToken}/> 
-               
-                   <Login updateToken={this.props.updateToken}/>
+           <Router>
+           <Link to="/Signup"><Button>Sign Up</Button></Link>
+           <Link to="/Login"><Button>Login</Button></Link>
+<div>
+          <Switch> 
+                 <Route exact path="/Signup"><Signup updateToken={this.props.updateToken}/></Route>               
+                 <Route exact path="/Login"><Login updateToken={this.props.updateToken}/></Route>
+                   </Switch> 
                    </div>
-        
+                   </Router>
+                   
+        </div>
     )
 }
 }
