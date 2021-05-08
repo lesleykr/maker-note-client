@@ -5,23 +5,10 @@ import ProjectsTable from './ProjectsTable';
 import ProjectsEdit from './ProjectEdit';
 import ProjectView from './ProjectView';
 import { Link, Switch, Route, BrowserRouter as Router } from 'react-router-dom';
+import {Project} from "../Types";
 
 interface IProps {
     token: string
-}
-
-interface Project{
-        projectName: string,
-        dateStarted: string,
-        dateFinished: string,
-        medium: string,
-        totalMaterialCost: string,
-        forSale: boolean,
-        dateSold: string,
-        price: string,
-        storeSoldAt: string,
-        notes: string,
-        id: number
 }
 
 interface IState {
@@ -41,11 +28,8 @@ interface IState {
         price: string,
         storeSoldAt: string,
         notes: string,
-        id: number
-        
+        id: number        
     }
-
-
 }
 
 export default class ProjectIndex extends Component<IProps, IState>{
@@ -70,7 +54,6 @@ export default class ProjectIndex extends Component<IProps, IState>{
             isComponentVisible: false,
             projectsToView: {},
             isActive: false
-
         };
     }
 

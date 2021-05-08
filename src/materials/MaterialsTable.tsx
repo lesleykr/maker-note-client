@@ -1,18 +1,6 @@
 import React, { Component } from 'react';
 import {Table, Button} from 'reactstrap';
-
-interface Material{
-    materialName: string,
-    quantity: string,
-    costPerItem: string,
-    color: string,
-    size: string,
-    source: string,
-    storageLocation: string,
-    description: string,
-    notes: string,
-    id: number    
-}
+import {Material} from '../Types';
 
 interface IProps {
     materials: Material[],

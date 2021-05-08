@@ -2,17 +2,10 @@ import React, { Component } from 'react';
 import {Container, Row, Col} from 'reactstrap';
 import AdUserTable from './AdUserTable';
 import AdUserEdit from './AdUserEdit';
+import {User} from '../../Types'
 
 interface IProps {
     token: string
-}
-
-interface User {
-    email: string,
-    firstName: string,
-    lastName: string,
-    aboutMe: string,
-    id: number
 }
 
 interface IState {

@@ -1,21 +1,7 @@
 import React, { Component } from 'react';
 import {Table, Button} from 'reactstrap';
 import {Link} from "react-router-dom";
-
-interface Project{
-    projectName: string,
-        dateStarted: string,
-        dateFinished: string,
-        medium: string,
-        totalMaterialCost: string,
-        forSale: boolean,
-        dateSold: string,
-        price: string,
-        storeSoldAt: string,
-        notes: string,
-        id: number
-        
-}
+import {Project} from "../Types";
 
 interface IProps {
     projects: Project[],
@@ -36,7 +22,6 @@ export default class ProjectsTable extends Component <IProps, IState>{
         this.state = {
             sortType: ""            
         }
-
     }
 
    deleteProject = (project: Project) => {

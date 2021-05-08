@@ -46,7 +46,7 @@ export default class ProjectCreate extends Component <IProps, IState>{
             notes: '',
             isOpen: true,
             redirectPI: false,
-            materials: []            
+            materials: []           
         };
     }
 

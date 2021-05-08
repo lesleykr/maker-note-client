@@ -1,21 +1,13 @@
 import React, { Component } from 'react';
 import {Table, Button} from 'reactstrap';
-
-interface User {
-    email: string,
-    firstName: string,
-    lastName: string,
-    aboutMe: string,
-    id: number
-}
+import {User} from '../Types'
 
 interface IProps {
     user: User[],
     editUpdateUser: any,
     updateOn: () => void,
     fetchUser: () => void,
-    token: string  
-    
+    token: string      
 }
 
 export default class UserTable extends Component <IProps, {}>{

@@ -3,22 +3,10 @@ import {Container, Row, Col} from 'reactstrap';
 import MaterialCreate from './MaterialCreate';
 import MaterialsTable from './MaterialsTable';
 import MaterialsEdit from './MaterialEdit';
+import {Material} from '../Types';
 
 interface IProps {
     token: string
-}
-
-interface Material{
-    materialName: string,
-    quantity: string,
-    costPerItem: string,
-    color: string,
-    size: string,
-    source: string,
-    storageLocation: string,
-    description: string,
-    notes: string,
-    id: number    
 }
 
 interface IState {
