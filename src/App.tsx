@@ -14,10 +14,17 @@ interface IProps {
   
 }
 
+interface IState{
+  sessionToken: string,
+  sessionAdmin: string,
+  sessionFirstName: string,  
+}
+
 export default class App extends Component {  
     state = {
       sessionToken: ''   ,
-      sessionAdmin: ""   
+      sessionAdmin: "",
+      sessionFirstName: "",  
     }
   
 componentDidMount(){
@@ -27,11 +34,13 @@ componentDidMount(){
   };
 }
 
-  updateToken = (newToken: string, newAdmin: string) => { 
+  updateToken = (newToken: string, newAdmin: string, newFirstName: string) => { 
     localStorage.setItem('token', newToken);
     localStorage.setItem('admin', newAdmin)
+    localStorage.setItem('firstName', newFirstName)
     this.setState({sessionToken: newToken});
     this.setState({sessionAdmin: newAdmin});
+    this.setState({sessionName: newFirstName})
     console.log(this.state.sessionToken);  
     }
     
@@ -42,7 +51,7 @@ componentDidMount(){
     }
     
     protectedViews = () => {
-      return (this.state.sessionToken === localStorage.getItem('token') ? <Sitebar token={this.state.sessionToken}  isAdmin={localStorage.getItem('admin')} clickLogout={this.clearToken}  /> 
+      return (this.state.sessionToken === localStorage.getItem('token') ? <Sitebar token={this.state.sessionToken}  isAdmin={localStorage.getItem('admin')} firstName={localStorage.getItem('firstName')}clickLogout={this.clearToken}  /> 
       : <Auth updateToken={this.updateToken.bind(this)}/>)
     }
 

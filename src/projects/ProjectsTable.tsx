@@ -8,13 +8,21 @@ interface IProps {
     updateOn: () => void,
     fetchProjects: () => void,
     // viewProjects: (viewProjects: string) => void,
-    token: string
-   
+    token: string   
 }
 
-export default class ProjectsTable extends Component <IProps, {}>{
+interface IState {
+    sortType: string,
+    
+}
+
+export default class ProjectsTable extends Component <IProps, IState>{
     constructor(props: IProps) {
         super(props)
+        this.state = {
+            sortType: "",
+            
+        }
 
     }
 
@@ -59,6 +67,7 @@ export default class ProjectsTable extends Component <IProps, {}>{
         {/* <Link to="/ProjectCreate"><Button>New Project</Button></Link> */}
         <h3>My Projects</h3>
         <hr/>
+
         <Table striped>
             <thead>
                 <tr>

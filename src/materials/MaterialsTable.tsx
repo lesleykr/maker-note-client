@@ -8,9 +8,18 @@ interface IProps {
     fetchMaterials: (fetchMaterials: string) => string
 }
 
+interface IState {
+    sortType: string,
+    
+}
 export default class MaterialsTable extends Component <IProps, {}>{
     constructor(props: IProps) {
         super(props)
+        this.state = {
+            sortType: "",
+            
+        }
+
 
     }
 
@@ -25,9 +34,28 @@ export default class MaterialsTable extends Component <IProps, {}>{
         .then(() => this.props.fetchMaterials())
     }
 
-    materialsMapper() {
-        return this.props.materials.map((material, index) => {
-            return(
+
+// materials.sort(function (a,b) {
+//     let nameA = a.material.materialName.toUpperCase();
+//     var nameB = b.material.materialName.toUpperCase();
+//     if (nameA < nameB) {
+//         return -1;
+//     }
+//     if (nameA > nameB) {
+//         return 1;
+//     }
+//     return 0;
+// })
+
+
+
+// materialsMapper() {
+//     return this.props.materials.sort((a, b) => {a[this.state.sortType].localeCompare(b[this.state.sortType])}).map((material, index) => {
+
+
+materialsMapper() {
+    return this.props.materials.sort((a, b) => a.materialName.localeCompare(b.materialName)).map((material, index) => {
+               return(
                 <tr key={index}>
                     <th scope="row">{material.id}</th>
                     <td>{material.materialName}</td>
@@ -50,6 +78,13 @@ export default class MaterialsTable extends Component <IProps, {}>{
         <>
         <h3>My Materials</h3>
         <hr/>
+
+        <select onChange={(e) => this.setState({sortType: e.target.value})}> 
+        <option value="materialName">Material Name</option>
+        <option value="color">color</option>
+        <option value="quantity">quantity</option>
+      </select>
+
         <Table striped>
             <thead>
                 <tr>

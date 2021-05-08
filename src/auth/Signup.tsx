@@ -10,7 +10,7 @@ interface IState {
     lastName: string,
     email: string,
     password: string, 
-    errorMessage: string,   
+    errorMessage: string    
 }
 
 export default class Signup extends Component <IProps, IState>{
@@ -21,7 +21,7 @@ export default class Signup extends Component <IProps, IState>{
             lastName: '',
             email: '',
             password: '',
-            errorMessage: '',            
+            errorMessage: ''                  
            
         };
     }
@@ -41,7 +41,8 @@ export default class Signup extends Component <IProps, IState>{
             (response) => response.json()
         ).then((data) => {
             console.log(data);
-            this.props.updateToken(data.sessionToken)           
+            this.props.updateToken(data.sessionToken)
+            localStorage.setItem("firstName", data.user.firstName)           
         })
     }
        

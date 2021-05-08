@@ -9,7 +9,8 @@ interface IState {
     email: string,
     password: string, 
     errorMessage: string,
-    admin: boolean
+    admin: boolean,
+    firstName: string
 }
 
 export default class Login extends Component <IProps, IState>{
@@ -19,6 +20,7 @@ export default class Login extends Component <IProps, IState>{
             email: '',
             password: '',
             admin: false,
+            firstName: '',
             errorMessage: ''
         };
     }
@@ -43,6 +45,7 @@ export default class Login extends Component <IProps, IState>{
             this.props.updateToken(data.sessionToken)
             console.log(data)
             localStorage.setItem("admin", data.user.admin)
+            localStorage.setItem("firstName", data.user.firstName)
         })
     }
     }
@@ -53,7 +56,7 @@ export default class Login extends Component <IProps, IState>{
         this.setState({
             errorMessage: 'Incorrect Username or Password'
         })
-        // event.preventDefault();
+        
     }
 
     render() {

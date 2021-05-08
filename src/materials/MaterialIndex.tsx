@@ -26,6 +26,11 @@ export default class MaterialIndex extends Component <IProps, IState>{
         };
     }
 
+    componentDidMount(){
+        console.log('mounted');
+        this.fetchMaterials();
+    }
+
     fetchMaterials = () => {
         fetch('http://localhost:3000/materials/mine', {
             method: 'GET',
@@ -53,10 +58,7 @@ updateOff = () => {
     this.setState({updateActive: false});
 }
 
-componentDidMount(){
-    console.log('mounted');
-    this.fetchMaterials();
-}
+
 
 
    render(){
