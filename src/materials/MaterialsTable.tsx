@@ -1,29 +1,43 @@
 import React, { Component } from 'react';
 import {Table, Button} from 'reactstrap';
 
+interface Material{
+    materialName: string,
+    quantity: string,
+    costPerItem: string,
+    color: string,
+    size: string,
+    source: string,
+    storageLocation: string,
+    description: string,
+    notes: string,
+    id: number    
+}
+
 interface IProps {
-    materials: (materials: string) => string,
-    editUpdateMaterials: (editUpdateMaterials: string) => void,
-    updateOn: (updateOn: boolean) => boolean,
-    fetchMaterials: (fetchMaterials: string) => string
+    materials: Material[],
+    editUpdateMaterials: any,
+    updateOn: () => void,
+    fetchMaterials: () => void,
+    token: string
+      
 }
 
 interface IState {
-    sortType: string,
-    
+    sortType: string  
 }
-export default class MaterialsTable extends Component <IProps, {}>{
+
+export default class MaterialsTable extends Component <IProps, IState>{
     constructor(props: IProps) {
         super(props)
         this.state = {
-            sortType: "",
-            
+            sortType: ""            
         }
 
 
     }
 
-   deleteMaterial = (material: any) => {
+   deleteMaterial = (material: Material) => {
         fetch(`http://localhost:3000/materials/delete/${material.id}`, {
             method: 'DELETE',
             headers: new Headers({
@@ -54,7 +68,7 @@ export default class MaterialsTable extends Component <IProps, {}>{
 
 
 materialsMapper() {
-    return this.props.materials.sort((a, b) => a.materialName.localeCompare(b.materialName)).map((material, index) => {
+    return this.props.materials.sort((a, b) => a.materialName.localeCompare(b.materialName)).map((material: Material, index: number) => {
                return(
                 <tr key={index}>
                     <th scope="row">{material.id}</th>

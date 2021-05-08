@@ -74,6 +74,8 @@ componentDidMount(){
 
 render() {
   return(
+    
+    
     <div>
            {/* <Router>
           <Switch>
@@ -86,8 +88,8 @@ render() {
           {this.protectedViews()}
     
 
- 
-        </div>
+ </div>
+       
     
   );
 }

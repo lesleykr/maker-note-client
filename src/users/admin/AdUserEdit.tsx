@@ -3,19 +3,23 @@ import {Row, Col, Form, FormGroup, Label, Input, Button} from 'reactstrap';
 
 
 interface IProps {
-    fetchUser: (fetchUser: string) => string,
-    userToUpdate: (userToUpdate: string) => string,
-    updateOff: (updateOff: boolean) => boolean
-    // token: (token: string) => void
-    
+    fetchUser: Function,
+    updateOff: () => void,
+    token: string,
+    userToUpdate: {
+        email: string,
+        firstName: string,
+        lastName: string,
+        aboutMe: string,
+        id: number
+    }       
 }
 
 interface IState {
     editEmail: string,
     editFirstName: string,
     editLastName: string,
-    editAboutMe: string
-      
+    editAboutMe: string      
 }
 
 export default class UserEdit extends Component <IProps, IState>{
@@ -31,7 +35,7 @@ export default class UserEdit extends Component <IProps, IState>{
     }
 
 
-    handleSubmit = (event, user) => {
+    handleSubmit = (event: any) => {
         event.preventDefault();
         fetch(`http://localhost:3000/user/update/${this.props.userToUpdate.id}`, {
             method: 'PUT',
@@ -90,8 +94,8 @@ export default class UserEdit extends Component <IProps, IState>{
            
            
             <Button type="submit">Save</Button>
-            {/* <Button onClick={this.props.toggleComponent}>Cancel</Button> */}
-            <Button toggleComponent={this.props.toggleComponent}>Cancel</Button>
+           
+            <Button onClick={(e) => this.props.updateOff()}>Cancel</Button>
             
             </Form>
        </>    

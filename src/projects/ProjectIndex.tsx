@@ -11,7 +11,7 @@ interface IProps {
 }
 
 interface Project{
-    projectName: string,
+        projectName: string,
         dateStarted: string,
         dateFinished: string,
         medium: string,

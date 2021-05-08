@@ -3,19 +3,23 @@ import {Row, Col, Form, FormGroup, Label, Input, Button} from 'reactstrap';
 
 
 interface IProps {
-    fetchUser: (fetchUser: string) => string,
-    userToUpdate: (userToUpdate: string) => string,
-    updateOff: (updateOff: boolean) => boolean
-    // token: (token: string) => void
-    
+    fetchUser: Function,
+    updateOff: () => void,
+    token: string,
+    userToUpdate: {
+        email: string,
+        firstName: string,
+        lastName: string,
+        aboutMe: string,
+        id: number
+    }       
 }
 
 interface IState {
     editEmail: string,
     editFirstName: string,
     editLastName: string,
-    editAboutMe: string
-      
+    editAboutMe: string      
 }
 
 export default class UserEdit extends Component <IProps, IState>{
@@ -25,20 +29,21 @@ export default class UserEdit extends Component <IProps, IState>{
             editEmail: this.props.userToUpdate.email,
             editFirstName: this.props.userToUpdate.firstName,
             editLastName: this.props.userToUpdate.lastName,
-            editAboutMe: this.props.userToUpdate.aboutMe
-                      
+            editAboutMe: this.props.userToUpdate.aboutMe                      
         };
     }
 
 
-    handleSubmit = (event, user) => {
+    handleSubmit = (event: any) => {
         event.preventDefault();
         fetch(`http://localhost:3000/user/update/${this.props.userToUpdate.id}`, {
             method: 'PUT',
-            body: JSON.stringify({user: {email: this.state.editEmail,
-                 firstName: this.state.editFirstName, 
-                 lastName: this.state.editLastName, 
-                 aboutMe: this.state.editAboutMe}}),
+            body: JSON.stringify({
+                user: {
+                email: this.state.editEmail,
+                firstName: this.state.editFirstName, 
+                lastName: this.state.editLastName, 
+                aboutMe: this.state.editAboutMe}}),
             headers: new Headers({
                 'Content-Type': 'application/json',
                 'Authorization': this.props.token
@@ -90,8 +95,8 @@ export default class UserEdit extends Component <IProps, IState>{
            
            
             <Button type="submit">Save</Button>
-            {/* <Button onClick={this.props.toggleComponent}>Cancel</Button> */}
-            <Button toggleComponent={this.props.toggleComponent}>Cancel</Button>
+       
+            <Button onClick={(e) => this.props.updateOff()}>Cancel</Button>
             
             </Form>
        </>    

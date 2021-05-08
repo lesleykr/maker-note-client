@@ -3,8 +3,7 @@ import {Button} from 'reactstrap';
 import ProjectCreate from './ProjectCreate';
 
 interface IProps {
-    token: (token: string) => void
-
+    token: string
 }
 
 interface IState {

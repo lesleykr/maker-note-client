@@ -12,7 +12,8 @@ interface Project{
         dateSold: string,
         price: string,
         storeSoldAt: string,
-        notes: string
+        notes: string,
+        id: number
         
 }
 
@@ -20,8 +21,7 @@ interface IProps {
     projects: Project[],
     editUpdateProjects: any,
     updateOn: () => void,
-    fetchProjects: () => void,
-    // viewProjects: (viewProjects: string) => void,
+    fetchProjects: () => void,    
     token: string   
 }
 
@@ -34,13 +34,12 @@ export default class ProjectsTable extends Component <IProps, IState>{
     constructor(props: IProps) {
         super(props)
         this.state = {
-            sortType: ""
-            
+            sortType: ""            
         }
 
     }
 
-   deleteProject = (project: any) => {
+   deleteProject = (project: Project) => {
         fetch(`http://localhost:3000/projects/delete/${project.id}`, {
             method: 'DELETE',
             headers: new Headers({
@@ -52,7 +51,7 @@ export default class ProjectsTable extends Component <IProps, IState>{
     }
 
     projectsMapper() {
-        return this.props.projects.map((project: any, index: number) => {
+        return this.props.projects.map((project: Project, index: number) => {
             return(
                 <tr key={index}>
                     <th scope="row">{project.dateStarted}</th>                    

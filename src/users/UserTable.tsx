@@ -1,20 +1,29 @@
 import React, { Component } from 'react';
 import {Table, Button} from 'reactstrap';
 
+interface User {
+    email: string,
+    firstName: string,
+    lastName: string,
+    aboutMe: string,
+    id: number
+}
+
 interface IProps {
-   
-    updateOn: (updateOn: boolean) => boolean,
+    user: User[],
+    editUpdateUser: any,
+    updateOn: () => void,
+    fetchUser: () => void,
+    token: string  
     
-    user: (user: string) => string
 }
 
 export default class UserTable extends Component <IProps, {}>{
     constructor(props: IProps) {
         super(props)
-
     }
 
-   deleteUser = (user: any) => {
+   deleteUser = (user: User) => {
         fetch(`http://localhost:3000/user/delete/${user.id}`, {
             method: 'DELETE',
             headers: new Headers({
@@ -26,7 +35,7 @@ export default class UserTable extends Component <IProps, {}>{
     }
 
     userMapper() {
-        return this.props.user.map((user, index) => {
+        return this.props.user.map((user: User, index: number) => {
             return(
                 <tr key={index}>
                     <td>{user.email}</td>

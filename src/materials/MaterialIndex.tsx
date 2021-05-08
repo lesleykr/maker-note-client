@@ -4,16 +4,40 @@ import MaterialCreate from './MaterialCreate';
 import MaterialsTable from './MaterialsTable';
 import MaterialsEdit from './MaterialEdit';
 
-
 interface IProps {
-    // token: (token: string) => string,
     token: string
 }
 
+interface Material{
+    materialName: string,
+    quantity: string,
+    costPerItem: string,
+    color: string,
+    size: string,
+    source: string,
+    storageLocation: string,
+    description: string,
+    notes: string,
+    id: number    
+}
+
 interface IState {
-    materials: string,
+    materials: [],
     updateActive: boolean, 
-    materialsToUpdate: object
+    isComponentVisible: boolean,
+    isActive: boolean
+    materialsToUpdate: {
+        materialName: string,
+        quantity: string,
+        costPerItem: string,
+        color: string,
+        size: string,
+        source: string,
+        storageLocation: string,
+        description: string,
+        notes: string,
+        id: number
+    }
 }
 
 export default class MaterialIndex extends Component <IProps, IState>{
@@ -22,7 +46,20 @@ export default class MaterialIndex extends Component <IProps, IState>{
         this.state = {
             materials: [],
             updateActive: false,
-            materialsToUpdate: {}           
+            isComponentVisible: false,            
+            isActive: false,
+            materialsToUpdate: {
+                materialName: "",
+                quantity: "",
+                costPerItem: "",
+                color: "",
+                size: "",
+                source: "",
+                storageLocation: "",
+                description: "",
+                notes: "",
+                id: Infinity
+            }           
         };
     }
 
@@ -45,7 +82,7 @@ export default class MaterialIndex extends Component <IProps, IState>{
             })
     }
 
-editUpdateMaterials = (materials) => {
+editUpdateMaterials = (materials: Material) => {
     this.setState({materialsToUpdate: materials});
     console.log(materials);
 }

@@ -9,9 +9,10 @@ import {
     Redirect
   } from 'react-router-dom';
 import {Button} from 'reactstrap';
+import './Auth.css'
 
 interface IProps {
-    updateToken: string,
+    updateToken: Function
 }
 
 
@@ -25,7 +26,8 @@ export default class Auth extends Component <IProps, {}>{
 render() {
 
     return(
-       <div>
+       <div className="auth">
+           <div>
            <Router>
            <Link to="/Signup"><Button>Sign Up</Button></Link>
            <Link to="/Login"><Button>Login</Button></Link>
@@ -36,7 +38,7 @@ render() {
                    </Switch> 
                    </div>
                    </Router>
-                   
+                   </div>
         </div>
     )
 }

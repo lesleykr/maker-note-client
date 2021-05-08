@@ -3,7 +3,6 @@ import { Button, Form, FormGroup, Label, Input, Col, Row, } from 'reactstrap';
 import {Link, Redirect} from 'react-router-dom';
 
 interface IProps {
-    fetchMaterials: Function,
     token: string
     
 }

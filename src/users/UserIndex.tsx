@@ -4,15 +4,29 @@ import UserTable from './UserTable';
 import UserEdit from './UserEdit';
 
 interface IProps {
-    // token: (token: string) => string,
     token: string
 }
 
-interface IState {
+interface User {
     email: string,
     firstName: string,
     lastName: string,
-    aboutMe: string
+    aboutMe: string,
+    id: number
+}
+
+interface IState {
+    user: [],
+    updateActive: boolean,
+    isComponentVisible: boolean,
+    isActive: boolean,
+    userToUpdate: {
+        email: string,
+        firstName: string,
+        lastName: string,
+        aboutMe: string,
+        id: number
+    }
 }
 
 export default class UserIndex extends Component <IProps, IState>{
@@ -21,7 +35,15 @@ export default class UserIndex extends Component <IProps, IState>{
         this.state = {
       user: [],
       updateActive: false,
-      userToUpdate: {}
+      isComponentVisible: false,            
+    isActive: false,
+      userToUpdate: {
+        email: "",
+        firstName: "",
+        lastName: "",
+        aboutMe: "",
+        id: Infinity
+      }
         };
     }
 
@@ -39,7 +61,7 @@ export default class UserIndex extends Component <IProps, IState>{
             })
     }
 
-editUpdateUser = (user) => {
+editUpdateUser = (user: User) => {
     this.setState({userToUpdate: user});
     console.log(user);
 }
@@ -64,7 +86,7 @@ componentDidMount(){
             <Row>
                
                 
-                {(this.state.updateActive ? (<UserEdit toggleComponent={this.toggleComponent} userToUpdate={this.state.userToUpdate} updateOff={this.updateOff} token={this.props.token} fetchUser={this.fetchUser}/>) :  <UserTable user={this.state.user} editUpdateUser={this.editUpdateUser} updateOn={this.updateOn} fetchUser={this.fetchUser} token={this.props.token} />) }
+                {(this.state.updateActive ? (<UserEdit userToUpdate={this.state.userToUpdate} updateOff={this.updateOff} token={this.props.token} fetchUser={this.fetchUser}/>) :  <UserTable user={this.state.user} editUpdateUser={this.editUpdateUser} updateOn={this.updateOn} fetchUser={this.fetchUser} token={this.props.token} />) }
 
                
 

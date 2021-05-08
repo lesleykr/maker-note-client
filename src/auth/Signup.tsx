@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody } from 'reactstrap';
 
 interface IProps {
-    updateToken: string
+    updateToken: Function
 }
 
 interface IState {

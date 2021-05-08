@@ -3,7 +3,9 @@ import { Row, Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
 
 interface IProps {
-    fetchMaterials: () => object,
+    fetchMaterials: Function,
+    updateOff: () => void,
+    token: string,
     materialsToUpdate: {
         materialName: string,
         quantity: string,
@@ -13,11 +15,10 @@ interface IProps {
         source: string,
         storageLocation: string,
         description: string,
-        notes: string
-    }
-    updateOff: () => void
-    // token: (token: string) => void
-
+        notes: string,
+        id: number
+    }  
+  
 }
 
 interface IState {
@@ -50,7 +51,7 @@ export default class MaterialsEdit extends Component<IProps, IState>{
     }
 
 
-    handleSubmit = (event: any, materials: object) => {
+    handleSubmit = (event: any) => {
         event.preventDefault();
         fetch(`http://localhost:3000/materials/update/${this.props.materialsToUpdate.id}`, {
             method: 'PUT',
@@ -61,10 +62,10 @@ export default class MaterialsEdit extends Component<IProps, IState>{
                     costPerItem: this.state.editCostPerItem,
                     color: this.state.editColor,
                     size: this.state.editSize,
-                    source: this.state.source,
+                    source: this.state.editSource,
                     storageLocation: this.state.editStorageLocation,
-                    description: this.state.description,
-                    notes: this.state.notes
+                    description: this.state.editDescription,
+                    notes: this.state.editNotes
                 }
             }),
             headers: new Headers({
