@@ -3,7 +3,7 @@ import { Row, Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
 
 interface IProps {
-    fetchMaterials: (fetchMaterials: string) => string,
+    fetchMaterials: () => object,
     materialsToUpdate: {
         materialName: string,
         quantity: string,
@@ -15,7 +15,7 @@ interface IProps {
         description: string,
         notes: string
     }
-    updateOff: (updateOff: boolean) => boolean
+    updateOff: () => void
     // token: (token: string) => void
 
 }
@@ -50,7 +50,7 @@ export default class MaterialsEdit extends Component<IProps, IState>{
     }
 
 
-    handleSubmit = (event, materials) => {
+    handleSubmit = (event: any, materials: object) => {
         event.preventDefault();
         fetch(`http://localhost:3000/materials/update/${this.props.materialsToUpdate.id}`, {
             method: 'PUT',
@@ -150,7 +150,7 @@ export default class MaterialsEdit extends Component<IProps, IState>{
 
                     <Button type="submit">Save</Button>
                     {/* <Button onClick={this.props.toggleComponent}>Cancel</Button> */}
-                    <Button toggleComponent={this.props.toggleComponent}>Cancel</Button>
+                    <Button type="button" onClick={(e) => this.props.updateOff()}>Cancel</Button>
 
                 </Form>
             </>

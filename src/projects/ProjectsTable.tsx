@@ -2,8 +2,22 @@ import React, { Component } from 'react';
 import {Table, Button} from 'reactstrap';
 import {Link} from "react-router-dom";
 
+interface Project{
+    projectName: string,
+        dateStarted: string,
+        dateFinished: string,
+        medium: string,
+        totalMaterialCost: string,
+        forSale: boolean,
+        dateSold: string,
+        price: string,
+        storeSoldAt: string,
+        notes: string
+        
+}
+
 interface IProps {
-    projects: [],
+    projects: Project[],
     editUpdateProjects: any,
     updateOn: () => void,
     fetchProjects: () => void,
@@ -12,7 +26,7 @@ interface IProps {
 }
 
 interface IState {
-    sortType: string,
+    sortType: string
     
 }
 
@@ -20,13 +34,13 @@ export default class ProjectsTable extends Component <IProps, IState>{
     constructor(props: IProps) {
         super(props)
         this.state = {
-            sortType: "",
+            sortType: ""
             
         }
 
     }
 
-   deleteProject = (project: object) => {
+   deleteProject = (project: any) => {
         fetch(`http://localhost:3000/projects/delete/${project.id}`, {
             method: 'DELETE',
             headers: new Headers({

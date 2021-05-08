@@ -2,7 +2,7 @@ import React, {useState, Component} from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 interface IProps {
-    updateToken: (newToken: string) => void
+    updateToken: string
 }
 
 interface IState {

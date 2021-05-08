@@ -5,7 +5,7 @@ import UserEdit from './UserEdit';
 
 interface IProps {
     // token: (token: string) => string,
-    
+    token: string
 }
 
 interface IState {

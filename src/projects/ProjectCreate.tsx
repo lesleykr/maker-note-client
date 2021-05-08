@@ -6,9 +6,12 @@ import ProjectIndex from './ProjectIndex';
 import MaterialIndex from '../materials/MaterialIndex'
 
 interface IProps {
-    fetchProjects: (fetchProjects: object) => object,
-    token: string,
-    
+    token: string
+       
+}
+
+interface Material{
+    materialName: string 
 }
 
 interface IState {
@@ -23,8 +26,8 @@ interface IState {
    storeSoldAt: string,
    notes: string,
    isOpen: boolean,
-   materials: object,
-   redirectPI: boolean
+   materials: Material[], //an array of things of type material
+   redirectPI: boolean   
 }
 
 export default class ProjectCreate extends Component <IProps, IState>{
@@ -43,7 +46,7 @@ export default class ProjectCreate extends Component <IProps, IState>{
             notes: '',
             isOpen: true,
             redirectPI: false,
-            materials: [],
+            materials: []            
         };
     }
 
@@ -54,7 +57,7 @@ export default class ProjectCreate extends Component <IProps, IState>{
           } else {
         fetch('http://localhost:3000/projects/create', {
             method: 'POST',
-            body: JSON.stringify({projects: this.state}),
+            body: JSON.stringify({projects: {projectName: this.state.projectName, dateStarted: this.state.dateStarted, dateFinished: this.state.dateFinished, forSale: this.state.forSale, medium: this.state.medium, totalMaterialCost: this.state.totalMaterialCost, dateSold: this.state.dateSold, price: this.state.price, storeSoldAt: this.state.storeSoldAt, notes: this.state.notes}}),
             headers: new Headers({
                 'Content-Type': 'application/json',
                 'Authorization': this.props.token
@@ -73,14 +76,17 @@ export default class ProjectCreate extends Component <IProps, IState>{
             dateSold: "",
             price: "",
             storeSoldAt: '',
-            notes: '', 
+            notes: '',            
             redirectPI: true            
-            })
-            // this.props.toggleComponent()
+            })   
                     
         
         }) 
+        .catch(error => {
+            console.error("error: ", error)
+        })
     } 
+
     }
 
 
@@ -105,23 +111,6 @@ export default class ProjectCreate extends Component <IProps, IState>{
         this.fetchMaterials();
     }
 
-    // materialsMapper() {
-    //     return this.state.materials.map((material, index) => {
-    //         return(
-    //             <tr key={index}>
-    //                 <th scope="row">{material.id}</th>
-    //                 <td>{material.materialName}</td>
-    //                 <td>{material.color}</td>
-    //                 <td>{material.quantity}</td>
-    //                 <td>
-                        
-                       
-
-    //                 </td>
-    //             </tr>
-    //         )
-    //     })
-    // }
     render() {
 
         const { materials } = this.state;
@@ -211,7 +200,7 @@ export default class ProjectCreate extends Component <IProps, IState>{
             <Col md={1}>
       <FormGroup check>
         <Label check>
-          <Input type="checkbox" name="forSale" id="forSale" onChange={(e) => this.setState({forSale: e.target.value})}/> For Sale?
+          <Input type="checkbox" name="forSale" id="forSale" onChange={(e) => this.setState({forSale: e.target.checked})}/> For Sale?
         </Label>
       </FormGroup>
       </Col>

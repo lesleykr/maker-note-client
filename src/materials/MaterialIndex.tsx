@@ -7,7 +7,7 @@ import MaterialsEdit from './MaterialEdit';
 
 interface IProps {
     // token: (token: string) => string,
-    
+    token: string
 }
 
 interface IState {
@@ -74,7 +74,7 @@ updateOff = () => {
                 </Col>
                 {this.state.updateActive ? <MaterialsEdit materialsToUpdate={this.state.materialsToUpdate} updateOff={this.updateOff} token={this.props.token} fetchMaterials={this.fetchMaterials}/> : <></>} */}
                 
-                {(this.state.updateActive ? (<MaterialsEdit toggleComponent={this.toggleComponent} materialsToUpdate={this.state.materialsToUpdate} updateOff={this.updateOff} token={this.props.token} fetchMaterials={this.fetchMaterials}/>) : <MaterialsTable materials={this.state.materials} editUpdateMaterials={this.editUpdateMaterials} updateOn={this.updateOn} fetchMaterials={this.fetchMaterials} token={this.props.token} />) }
+                {(this.state.updateActive ? (<MaterialsEdit materialsToUpdate={this.state.materialsToUpdate} updateOff={this.updateOff} token={this.props.token} fetchMaterials={this.fetchMaterials}/>) : <MaterialsTable materials={this.state.materials} editUpdateMaterials={this.editUpdateMaterials} updateOn={this.updateOn} fetchMaterials={this.fetchMaterials} token={this.props.token} />) }
 
 
             </Row>

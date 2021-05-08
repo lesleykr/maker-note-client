@@ -17,7 +17,7 @@ interface IProps {
 interface IState{
   sessionToken: string,
   sessionAdmin: string,
-  sessionFirstName: string,  
+  sessionFirstName: string   
 }
 
 export default class App extends Component {  

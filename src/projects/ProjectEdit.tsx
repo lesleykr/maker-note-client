@@ -3,12 +3,22 @@ import {Row, Col, Form, FormGroup, Label, Input, Button} from 'reactstrap';
 import {Link} from "react-router-dom";
 
 interface IProps {
-    fetchProjects: any,
-    projectsToUpdate: (projectsToUpdate: {}) => {}
+    fetchProjects: Function,   
     updateOff: () => void,
     token: string,
-    toggleComponent: () => void
-      
+    projectsToUpdate: {
+        projectName: string,
+        dateStarted: string,
+        dateFinished: string,
+        medium: string,
+        totalMaterialCost: string,
+        forSale: boolean,
+        dateSold: string,
+        price: string,
+        storeSoldAt: string,
+        notes: string,
+        id: number       
+    }      
 }
 
 interface IState {
@@ -22,8 +32,7 @@ interface IState {
     editDateSold: string,
     editPrice: string,
     editStoreSoldAt: string,
-    editNotes: string
-    
+    editNotes: string    
 }
 
 export default class ProjectsEdit extends Component <IProps, IState>{
@@ -39,12 +48,12 @@ export default class ProjectsEdit extends Component <IProps, IState>{
             editDateSold: this.props.projectsToUpdate.dateSold,
             editPrice: this.props.projectsToUpdate.price,
             editStoreSoldAt: this.props.projectsToUpdate.storeSoldAt,
-            editNotes: this.props.projectsToUpdate.notes
+            editNotes: this.props.projectsToUpdate.notes          
         };
     }
 
 
-    handleSubmit = (event, projects) => {
+    handleSubmit = (event: any) => {
         event.preventDefault();
         fetch(`http://localhost:3000/projects/update/${this.props.projectsToUpdate.id}`, {
             method: 'PUT',
@@ -115,7 +124,7 @@ export default class ProjectsEdit extends Component <IProps, IState>{
             <Col md={1}>
       <FormGroup check>
         <Label check>
-          <Input type="checkbox" name="forSale" id="forSale" value={this.state.editForSale} onChange={(e) => this.setState({editForSale: e.target.value})}/> For Sale?
+          <Input type="checkbox" name="forSale" id="forSale" checked={this.state.editForSale} onChange={(e) => this.setState({editForSale: e.target.checked})}/> For Sale?
         </Label>
       </FormGroup>
       </Col>
@@ -149,7 +158,7 @@ export default class ProjectsEdit extends Component <IProps, IState>{
             </FormGroup>
 
             <Button type="submit" >Save</Button>
-            <Button toggleComponent={this.props.toggleComponent}>Cancel</Button>
+            <Button type="button" onClick={this.props.updateOff}>Cancel</Button>
         </Form>
        </>    
     )

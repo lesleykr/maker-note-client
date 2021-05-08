@@ -7,19 +7,43 @@ import ProjectView from './ProjectView';
 import { Link, Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 
 interface IProps {
-    token: string,
-    toggleComponent: () => void,
-    projectsToUpdate: () => void
+    token: string
+}
 
+interface Project{
+    projectName: string,
+        dateStarted: string,
+        dateFinished: string,
+        medium: string,
+        totalMaterialCost: string,
+        forSale: boolean,
+        dateSold: string,
+        price: string,
+        storeSoldAt: string,
+        notes: string,
+        id: number
 }
 
 interface IState {
     projects: [],
     updateActive: boolean,
-    projectsToUpdate: {},
     projectsToView: object,
     isComponentVisible: boolean,
     isActive: boolean
+    projectsToUpdate: {
+        projectName: string,
+        dateStarted: string,
+        dateFinished: string,
+        medium: string,
+        totalMaterialCost: string,
+        forSale: boolean,
+        dateSold: string,
+        price: string,
+        storeSoldAt: string,
+        notes: string,
+        id: number
+        
+    }
 
 
 }
@@ -30,7 +54,19 @@ export default class ProjectIndex extends Component<IProps, IState>{
         this.state = {
             projects: [],
             updateActive: false,
-            projectsToUpdate: "",
+            projectsToUpdate: {
+                projectName: "",
+                dateStarted: "",
+                dateFinished: "",
+                medium: "",
+                totalMaterialCost: "",
+                forSale: false,
+                dateSold: "",
+                price: "",
+                storeSoldAt: "",
+                notes: "",
+                id: Infinity
+            },
             isComponentVisible: false,
             projectsToView: {},
             isActive: false
@@ -53,8 +89,7 @@ export default class ProjectIndex extends Component<IProps, IState>{
            
     }
 
-
-    editUpdateProjects = (projects: string) => {
+    editUpdateProjects = (projects: Project) => {
         this.setState({ projectsToUpdate: projects });
         console.log(projects);
     }
@@ -94,7 +129,7 @@ export default class ProjectIndex extends Component<IProps, IState>{
 
                   
              
-            {this.state.projects == null ? (<Link to="/ProjectCreate"><Button>New Project</Button></Link>) : (this.state.updateActive ? <ProjectsEdit toggleComponent={this.toggleComponent} projectsToUpdate={this.state.projectsToUpdate} updateOff={this.updateOff} token={this.props.token} fetchProjects={this.fetchProjects}/> : <ProjectsTable projects={this.state.projects} editUpdateProjects={this.editUpdateProjects} updateOn={this.updateOn} fetchProjects={this.fetchProjects} token={this.props.token} />) }
+            {this.state.projects == null ? (<Link to="/ProjectCreate"><Button>New Project</Button></Link>) : (this.state.updateActive ? <ProjectsEdit projectsToUpdate={this.state.projectsToUpdate} updateOff={this.updateOff} token={this.props.token} fetchProjects={this.fetchProjects}/> : <ProjectsTable projects={this.state.projects} editUpdateProjects={this.editUpdateProjects} updateOn={this.updateOn} fetchProjects={this.fetchProjects} token={this.props.token} />) }
 
 </div>        
         )

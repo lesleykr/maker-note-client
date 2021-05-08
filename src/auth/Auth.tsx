@@ -11,7 +11,7 @@ import {
 import {Button} from 'reactstrap';
 
 interface IProps {
-    updateToken: string
+    updateToken: string,
 }
 
 

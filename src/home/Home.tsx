@@ -21,7 +21,6 @@ import ProjectView from "../projects/ProjectView";
 
 interface IProps {
   token: string,
-toggleComponent: () => void,
 fetchProjects: {},
 fetchMaterials: {}
   
@@ -61,7 +60,7 @@ return (
       
        <Route exact path="/ProjectIndex"><ProjectIndex token={this.props.token} /></Route>
        <Route exact path="/MaterialIndex"><MaterialIndex token={this.props.token} /></Route>
-       <Route exact path="/ProjectCreate"><ProjectCreate toggleComponent={this.props.toggleComponent} fetchProjects={this.props.fetchProjects} token={this.props.token}/></Route>
+       <Route exact path="/ProjectCreate"><ProjectCreate fetchProjects={this.props.fetchProjects} token={this.props.token}/></Route>
        <Route exact path="/MaterialCreate"><MaterialCreate toggleComponent={this.props.toggleComponent} fetchMaterials={this.props.fetchMaterials} token={this.props.token}/></Route>
        <Route exact path="/UserIndex"><UserIndex token={this.props.token} /></Route>
        <Route exact path="/ProjectView"><ProjectView token={this.props.token} /></Route>

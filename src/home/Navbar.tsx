@@ -36,11 +36,12 @@ import AdUserIndex from '../users/admin/AdUserIndex';
 
 interface IProps {
   // fetchProjects: (fetchProjects: string) => string,
-  updateToken: (newToken: string) => void,
+  updateToken: string,
   token: string,
   clickLogout: () => void,
   isAdmin: string | null,
-  firstName: string | null
+  firstName: string | null,
+  fetchMaterials: Function
   
 }
 
@@ -108,9 +109,9 @@ export default class Sitebar extends Component <IProps, IState>{
 
  <Route exact path="/ProjectIndex"><ProjectIndex token={this.props.token} /></Route>
  <Route exact path="/MaterialIndex"><MaterialIndex token={this.props.token} /></Route>
- <Route exact path="/ProjectCreate"><ProjectCreate toggleComponent={this.toggleComponent} fetchProjects={this.fetchProjects} token={this.props.token}/></Route>
+ <Route exact path="/ProjectCreate"><ProjectCreate token={this.props.token}/></Route>
  <Route exact path="/Home"><Home /></Route>
- <Route exact path="/MaterialCreate"><MaterialCreate toggleComponent={this.props.toggleComponent} fetchMaterials={this.props.fetchMaterials} token={this.props.token}/></Route>
+ <Route exact path="/MaterialCreate"><MaterialCreate fetchMaterials={this.props.fetchMaterials} token={this.props.token}/></Route>
        <Route exact path="/UserIndex"><UserIndex token={this.props.token} /></Route>
        <Route exact path="/AdUserIndex"><AdUserIndex token={this.props.token} /></Route>
  {/* <Route exact path="/Signup"><Signup isOpen={this.state.isOpen} onClick={this.toggle}updateToken={this.props.updateToken} /></Route> */}
