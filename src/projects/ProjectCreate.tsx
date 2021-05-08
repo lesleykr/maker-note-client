@@ -27,7 +27,8 @@ interface IState {
    notes: string,
    isOpen: boolean,
    materials: Material[], //an array of things of type material
-   redirectPI: boolean   
+   redirectPI: boolean,
+   saleOptions: boolean
 }
 
 export default class ProjectCreate extends Component <IProps, IState>{
@@ -46,7 +47,8 @@ export default class ProjectCreate extends Component <IProps, IState>{
             notes: '',
             isOpen: true,
             redirectPI: false,
-            materials: []           
+            materials: [],
+            saleOptions: false           
         };
     }
 
@@ -172,7 +174,7 @@ export default class ProjectCreate extends Component <IProps, IState>{
       </Row>
       <Row form>
       <Col md={6}>
-<FormGroup>
+{/* <FormGroup>
   <Label for="exampleSelectMulti">Select Materials</Label>
 
   <Input type="select" name="selectMulti" id="exampleSelectMulti" multiple>
@@ -182,7 +184,7 @@ export default class ProjectCreate extends Component <IProps, IState>{
   <div>
       <select>{materialsList}</select>
   </div>
-</FormGroup>
+</FormGroup> */}
 </Col>
 </Row>
 <Row form>
@@ -200,10 +202,13 @@ export default class ProjectCreate extends Component <IProps, IState>{
             <Col md={1}>
       <FormGroup check>
         <Label check>
-          <Input type="checkbox" name="forSale" id="forSale" onChange={(e) => this.setState({forSale: e.target.checked})}/> For Sale?
-        </Label>
-      </FormGroup>
-      </Col>
+          <Input type="checkbox" name="forSale" id="forSale" onChange={(e) => this.setState({forSale: e.target.checked, saleOptions: true})}/> For Sale?
+        </Label>        
+        </FormGroup>
+        </Col>
+
+      {this.state.saleOptions == true ? (<>
+      
       <Col md={2}>
       <FormGroup>
         <Label for="dateSold">Date Sold</Label>
@@ -225,8 +230,9 @@ export default class ProjectCreate extends Component <IProps, IState>{
             <FormGroup>
                 <Label htmlFor="storeSoldAt">Store Sold At</Label>
                 <Input id="storeSoldAt" type="text"name="storeSoldAt" value={this.state.storeSoldAt} placeholder="Store Sold At" onChange={(e) => this.setState({storeSoldAt: e.target.value})}/>
-            </FormGroup>
-            </Col>
+            </FormGroup> </Col></>) : null}
+
+           
             </Row>
             <FormGroup>
                 <Label htmlFor="notes">Notes</Label>
