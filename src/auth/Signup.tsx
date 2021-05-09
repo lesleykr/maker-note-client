@@ -5,6 +5,60 @@ import styled from 'styled-components';
 import 'antd/dist/antd.css';
 
 
+const SbuttonL = styled(Button)`
+margin-right: 1em;
+margin-left: -4em;
+background-color: #5e4ac7;
+border-radius: 10%;
+border: none;
+color: #f6a73f;
+`;
+
+const SbuttonR = styled(Button)`
+margin-right: 1em;
+margin-left: 1em;
+background-color: #5e4ac7;
+border-radius: 10%;
+border: none;
+color: #f6a73f;
+`;
+
+const Heading = styled.h5`
+text-align: center;
+margin-top: 0.5em;
+margin-bottom: 1em;
+color: #5e4ac7;
+`
+const formItemLayout = {
+    labelCol: {
+      xs: {
+        span: 24,
+      },
+      sm: {
+        span: 8,
+      },
+    },
+    wrapperCol: {
+      xs: {
+        span: 24,
+      },
+      sm: {
+        span: 16,
+      },
+    },
+  };
+  const tailFormItemLayout = {
+    wrapperCol: {
+      xs: {
+        span: 24,
+        offset: 0,
+      },
+      sm: {
+        span: 16,
+        offset: 8,
+      },
+    },
+  };
 
 interface IProps {
     updateToken: Function
@@ -19,41 +73,6 @@ interface IState {
     modalToggle: boolean   
 }
 
-// const ModalStyle = styled.Modal`
-// background-color: gray;
-// `;
-
-const formItemLayout = {
-  labelCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 8,
-    },
-  },
-  wrapperCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 16,
-    },
-  },
-};
-const tailFormItemLayout = {
-  wrapperCol: {
-    xs: {
-      span: 24,
-      offset: 0,
-    },
-    sm: {
-      span: 16,
-      offset: 8,
-    },
-  },
-};
-
 export default class RegistrationForm extends Component <IProps, IState>{
     constructor(props: IProps) {
         super(props)
@@ -62,8 +81,7 @@ export default class RegistrationForm extends Component <IProps, IState>{
             lastName: '',
             email: '',
             password: '',
-            errorMessage: '',
-            autoCompleteResult: [],
+            errorMessage: '',           
             modalToggle: true                 
         };
     }
@@ -91,11 +109,6 @@ export default class RegistrationForm extends Component <IProps, IState>{
        
     }
 
-
-//  onFinish = (values: any) => {
-//     console.log('Received values of form: ', values);
-//   };
-
     modalCancel = () => this.setState({modalToggle: false});
    
    render() {    
@@ -104,7 +117,7 @@ export default class RegistrationForm extends Component <IProps, IState>{
         <>
 <Modal isOpen={this.state.modalToggle}> 
 <ModalBody> 
-<h1>Sign Up</h1>
+<Heading>Welcome! Create Your Free Account!</Heading>
 <Form
       {...formItemLayout}
       
@@ -114,11 +127,11 @@ export default class RegistrationForm extends Component <IProps, IState>{
       >
 
 
-<Form.Item name={['user', 'firstName']} label="First Name" rules={[{ required: true }]}>
+<Form.Item label="First Name" rules={[{ required: true }]}>
         <Input id="firstName" type="text" name="firstName" placeholder="Enter First Name" onChange={(e) => this.setState({firstName: e.target.value})}/>
       </Form.Item>
 
-      <Form.Item name={['user', 'lastName']} label="Last Name" rules={[{ required: true }]}>
+      <Form.Item label="Last Name" rules={[{ required: true }]}>
         <Input id="lastName" type="text" name="lastName" placeholder="Enter Last Name" onChange={(e) => this.setState({lastName: e.target.value})}/>
       </Form.Item>
 
@@ -177,9 +190,11 @@ export default class RegistrationForm extends Component <IProps, IState>{
         <Input.Password id="su_password" type="password" name="password" placeholder="Enter Password" onChange={(e) => this.setState({password: e.target.value})} pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$" title="Must contain at least 6 characters, including one number, one uppercase, and one lowercase letter."/>
       </Form.Item>   
       <Form.Item {...tailFormItemLayout}>
-        <Button type="primary" htmlType="submit">
-          Sign Up
-        </Button>
+        <SbuttonL type="primary" htmlType="submit">        
+          Create Account!
+        </SbuttonL>        
+     
+      <SbuttonR type="primary" onClick={this.modalCancel}>Maybe Later</SbuttonR>
       </Form.Item>
     </Form>
     </ModalBody>
