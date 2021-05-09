@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import {  FormGroup, Label, ModalHeader, ModalBody, Modal } from 'reactstrap';
 import { Form, Input, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete } from 'antd';
 import styled from 'styled-components';
-import 'antd/dist/antd.css';
-
 
 
 interface IProps {
@@ -22,6 +20,9 @@ interface IState {
 // const ModalStyle = styled.Modal`
 // background-color: gray;
 // `;
+const [form] = Form.useForm();
+
+const { Option } = Select;
 
 const formItemLayout = {
   labelCol: {
@@ -67,10 +68,9 @@ export default class RegistrationForm extends Component <IProps, IState>{
             modalToggle: true                 
         };
     }
-    formRef = React.createRef();
 
        handleSubmit = (event: any) => {
-        // event.preventDefault()
+        event.preventDefault()
         if (!this.state.email || !this.state.password || !this.state.firstName || !this.state.lastName) {
             alert("Please enter first name, last name, email address, and password");
           } else {
@@ -90,16 +90,18 @@ export default class RegistrationForm extends Component <IProps, IState>{
     }
        
     }
+// componentDidMount(){
+//    const form = Form.useForm();
+// }
 
-
-//  onFinish = (values: any) => {
-//     console.log('Received values of form: ', values);
-//   };
+ onFinish = (values: any) => {
+    console.log('Received values of form: ', values);
+  };
 
     modalCancel = () => this.setState({modalToggle: false});
    
    render() {    
-           
+    // const form = Form.useForm();        
     return(
         <>
 <Modal isOpen={this.state.modalToggle}> 
@@ -107,21 +109,15 @@ export default class RegistrationForm extends Component <IProps, IState>{
 <h1>Sign Up</h1>
 <Form
       {...formItemLayout}
-      
+      form={form}
       name="register"
-      onFinish={this.handleSubmit}
+      onFinish={this.onFinish}
+      initialValues={{
+        residence: ['zhejiang', 'hangzhou', 'xihu'],
+        prefix: '86',
+      }}
       scrollToFirstError
-      >
-
-
-<Form.Item name={['user', 'firstName']} label="First Name" rules={[{ required: true }]}>
-        <Input id="firstName" type="text" name="firstName" placeholder="Enter First Name" onChange={(e) => this.setState({firstName: e.target.value})}/>
-      </Form.Item>
-
-      <Form.Item name={['user', 'lastName']} label="Last Name" rules={[{ required: true }]}>
-        <Input id="lastName" type="text" name="lastName" placeholder="Enter Last Name" onChange={(e) => this.setState({lastName: e.target.value})}/>
-      </Form.Item>
-
+    >
       <Form.Item
         name="email"
         label="E-mail"
@@ -136,7 +132,7 @@ export default class RegistrationForm extends Component <IProps, IState>{
           },
         ]}
       >
-        <Input id="email" type="text" name="email" placeholder="Enter Email" onChange={(e) => this.setState({email: e.target.value})}/>
+        <Input />
       </Form.Item>
 
       <Form.Item
@@ -150,7 +146,7 @@ export default class RegistrationForm extends Component <IProps, IState>{
         ]}
         hasFeedback
       >
-        <Input.Password id="su_password" type="password" name="password" placeholder="Enter Password" onChange={(e) => this.setState({password: e.target.value})} pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$" title="Must contain at least 6 characters, including one number, one uppercase, and one lowercase letter." />
+        <Input.Password />
       </Form.Item>
 
       <Form.Item
@@ -174,11 +170,11 @@ export default class RegistrationForm extends Component <IProps, IState>{
           }),
         ]}
       >
-        <Input.Password id="su_password" type="password" name="password" placeholder="Enter Password" onChange={(e) => this.setState({password: e.target.value})} pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$" title="Must contain at least 6 characters, including one number, one uppercase, and one lowercase letter."/>
+        <Input.Password />
       </Form.Item>   
       <Form.Item {...tailFormItemLayout}>
         <Button type="primary" htmlType="submit">
-          Sign Up
+          Register
         </Button>
       </Form.Item>
     </Form>

@@ -4,6 +4,7 @@ import ProjectsTable from './ProjectsTable';
 import {Link, Redirect} from 'react-router-dom';
 import ProjectIndex from './ProjectIndex';
 import MaterialIndex from '../materials/MaterialIndex'
+import Item from 'antd/lib/list/Item';
 
 interface IProps {
     token: string
@@ -25,6 +26,8 @@ interface IState {
    price: string,
    storeSoldAt: string,
    notes: string,
+   materialId: number,
+   materialName: string,
    isOpen: boolean,
    materials: Material[], //an array of things of type material
    redirectPI: boolean,
@@ -45,6 +48,8 @@ export default class ProjectCreate extends Component <IProps, IState>{
             price: "",
             storeSoldAt: '',
             notes: '',
+            materialId: Infinity,
+            materialName: "",
             isOpen: true,
             redirectPI: false,
             materials: [],
@@ -57,9 +62,9 @@ export default class ProjectCreate extends Component <IProps, IState>{
         if (!this.state.projectName) {
             alert("Please enter a name for your project.");
           } else {
-        fetch('http://localhost:3000/projects/create', {
+        fetch('http://localhost:3000/pm/createmat', {
             method: 'POST',
-            body: JSON.stringify({projects: {projectName: this.state.projectName, dateStarted: this.state.dateStarted, dateFinished: this.state.dateFinished, forSale: this.state.forSale, medium: this.state.medium, totalMaterialCost: this.state.totalMaterialCost, dateSold: this.state.dateSold, price: this.state.price, storeSoldAt: this.state.storeSoldAt, notes: this.state.notes}}),
+            body: JSON.stringify({projects: {projectName: this.state.projectName, dateStarted: this.state.dateStarted, dateFinished: this.state.dateFinished, forSale: this.state.forSale, medium: this.state.medium, totalMaterialCost: this.state.totalMaterialCost, dateSold: this.state.dateSold, price: this.state.price, storeSoldAt: this.state.storeSoldAt, notes: this.state.notes, }, materials: {id: this.state.materialId}}),
             headers: new Headers({
                 'Content-Type': 'application/json',
                 'Authorization': this.props.token
@@ -78,10 +83,11 @@ export default class ProjectCreate extends Component <IProps, IState>{
             dateSold: "",
             price: "",
             storeSoldAt: '',
-            notes: '',            
+            notes: '',  
+            materialId: Infinity,          
             redirectPI: true            
             })   
-                    
+             console.log(this.state.materialId)       
         
         }) 
         .catch(error => {
@@ -101,8 +107,12 @@ export default class ProjectCreate extends Component <IProps, IState>{
             })
         }) .then( (res) => res.json())
             .then((materialsData) => {
-                this.setState({materials: materialsData})
-                console.log(materialsData);
+                this.setState({materials: materialsData, 
+                    materialId: materialsData.id,
+                    materialName: materialsData.materialName
+                })
+                console.log(materialsData)
+            
             })
     }
 
@@ -115,14 +125,14 @@ export default class ProjectCreate extends Component <IProps, IState>{
 
     render() {
 
-        const { materials } = this.state;
+        // const { materials } = this.state;
 
-        let materialsList = materials.length > 0
-            && materials.map((item: any, i: number) => {
-          return (
-            <option key={i} value={item.id}>{item.materialName}</option>
-          )
-        }, this);
+        // let materialsList = materials.length > 0
+        //     && materials.map((item: any, i: number) => {
+        //   return (
+        //     <option key={i} value={item.id}>{item.materialName}</option>
+        //   )
+        // }, this);
 
         
              if (this.state.redirectPI) {
@@ -174,17 +184,27 @@ export default class ProjectCreate extends Component <IProps, IState>{
       </Row>
       <Row form>
       <Col md={6}>
-{/* <FormGroup>
-  <Label for="exampleSelectMulti">Select Materials</Label>
+<FormGroup>
+  {/* <Label for="exampleSelectMulti">Select Materials</Label>
 
   <Input type="select" name="selectMulti" id="exampleSelectMulti" multiple>
 
-  </Input>
+  </Input> */}
 
   <div>
-      <select>{materialsList}</select>
+      <select id="materialId" name="materialId" value={this.state.materialId} onChange={(e) => this.setState({materialId: +e.target.value})}>{this.state.materialName}</select>
   </div>
-</FormGroup> */}
+
+  
+</FormGroup>
+
+{/* <FormGroup>
+                <Label htmlFor="materialId">material ID</Label>   
+                <Input id="materialId" type="number" placeholder="materialId" name="materialId" value={this.state.materialId} onChange={(e) => this.setState({materialId: +e.target.value})}/>
+            </FormGroup> */}
+
+
+            
 </Col>
 </Row>
 <Row form>
