@@ -45,8 +45,7 @@ interface IProps {
 interface IState { 
   isActive: boolean,
   isOpen: boolean,
-  buttonsInvisible: boolean
-  
+  buttonsInvisible: boolean  
 }
 
 export default class Sitebar extends Component <IProps, IState>{
@@ -55,7 +54,7 @@ export default class Sitebar extends Component <IProps, IState>{
       this.state = {
           isOpen: false,  
           buttonsInvisible: false,
-          isActive: false
+          isActive: false     
       };
   }
 
@@ -92,7 +91,7 @@ export default class Sitebar extends Component <IProps, IState>{
             </NavItem>
             <NavItem><Button onClick={this.props.clickLogout}>Logout</Button>
             </NavItem>
-            <NavItem><p>Hello {this.props.firstName}!</p></NavItem>
+            <NavItem ><p>Hello {this.props.firstName}!</p></NavItem>
             {/* <NavItem>
               <Link to="/Signup" onClick={this.toggle}>Sign Up</Link>
             </NavItem> */}

@@ -21,15 +21,14 @@ export default class Signup extends Component <IProps, IState>{
             lastName: '',
             email: '',
             password: '',
-            errorMessage: ''                  
-           
+            errorMessage: ''          
         };
     }
 
       handleSubmit = (event: any) => {
         event.preventDefault()
-        if (!this.state.email || !this.state.password) {
-            alert("Please enter a valid email address and password");
+        if (!this.state.email || !this.state.password || !this.state.firstName || !this.state.lastName) {
+            alert("Please enter first name, last name, email address, and password");
           } else {
         fetch("http://localhost:3000/user/create", {
             method: 'POST',
@@ -42,7 +41,7 @@ export default class Signup extends Component <IProps, IState>{
         ).then((data) => {
             console.log(data);
             this.props.updateToken(data.sessionToken)
-            localStorage.setItem("firstName", data.user.firstName)           
+            localStorage.setItem("firstName", data.user.firstName)                     
         })
     }
        
