@@ -1,6 +1,34 @@
 import React, { Component } from 'react';
 import { Row, Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import styled from 'styled-components';
 
+const Heading = styled.h1`
+text-align: center;
+margin: 20px;
+font-family: 'Tempus Sans ITC';
+color: #b820d1;
+width: 100%;
+`
+
+const SForm = styled(Form)`
+margin-right: 50px;
+margin-left: 50px;
+padding: 70px;
+background-color: #f8f8f8;
+`
+
+const SButton = styled(Button)`
+margin-right: 10px;
+background-color: #5e4ac7;
+color: #f6a73f;
+
+`
+
+const CButton = styled(Button)`
+margin-right: 10px;
+background-color: #5e4ac7;
+color: #f6a73f;
+`
 
 interface IProps {
     fetchMaterials: Function,
@@ -82,24 +110,27 @@ export default class MaterialsEdit extends Component<IProps, IState>{
     render() {
         return (
             <>
-                <h3>Edit Material</h3>
-                <Form onSubmit={this.handleSubmit}>
+           
+                <Heading>Update Material</Heading>
+               
+                <SForm onSubmit={this.handleSubmit}>
+                <Col md={5}>
                     <FormGroup>
-                        <Label for="materialName" sm={2}>Material Name</Label>
-                        <Col md={5}>
+                        <Label for="materialName" >Material Name</Label>
+                        
 
                             <Input id="materialName" type="text" name="materialName" value={this.state.editMaterialName} placeholder="Material Name" onChange={(e) => this.setState({ editMaterialName: e.target.value })} />
-
-                        </Col>
-                    </FormGroup>
-                    <Row form>
-                        <Col md={3}>
-                            <FormGroup>
-                                <Label htmlFor="quantity">Quantity</Label>
-                                <Input id="quantity" type="text" name="quantity" value={this.state.editQuantity} placeholder="Quantity" onChange={(e) => this.setState({ editQuantity: e.target.value })} />
                             </FormGroup>
                         </Col>
+                
+                    <Row form>
                         <Col md={2}>
+                            <FormGroup>
+                                <Label htmlFor="quantity">Quantity</Label>
+                                <Input id="quantity" type="number" name="quantity" value={this.state.editQuantity} placeholder="Quantity" onChange={(e) => this.setState({ editQuantity: e.target.value })} />
+                            </FormGroup>
+                        </Col>
+                        <Col md={5}>
                             <FormGroup>
                                 <Label htmlFor="color">Color</Label>
                                 <Input id="color" type="text" name="color" value={this.state.editColor} placeholder="Color" onChange={(e) => this.setState({ editColor: e.target.value })} />
@@ -118,42 +149,42 @@ export default class MaterialsEdit extends Component<IProps, IState>{
                                 <Input id="size" type="text" name="size" value={this.state.editSize} placeholder="Size" onChange={(e) => this.setState({ editSize: e.target.value })} />
                             </FormGroup>
                         </Col>
-                    </Row>
-
-
-
+                  
+                    
+                        </Row>
                     <Row form>
-                        <Col md={1}>
+                        <Col md={3}>
                             <FormGroup>
                                 <Label htmlFor="source">Source</Label>
                                 <Input id="source" type="text" name="source" value={this.state.editSource} placeholder="Source" onChange={(e) => this.setState({ editSource: e.target.value })} />
                             </FormGroup>
                         </Col>
-                        <Col md={2}>
+                        <Col md={3}>
                             <FormGroup>
                                 <Label htmlFor="storageLocation">Storage Location</Label>
                                 <Input id="storageLocation" type="text" name="storageLocation" value={this.state.editStorageLocation} placeholder="Storage Location" onChange={(e) => this.setState({ editStorageLocation: e.target.value })} />
                             </FormGroup>
                         </Col>
-                        <Col md={2}>
+                        <Col md={5}>
                             <FormGroup>
                                 <Label htmlFor="description">Description</Label>
                                 <Input id="description" type="text" name="description" value={this.state.editDescription} placeholder="Description" onChange={(e) => this.setState({ editDescription: e.target.value })} />
                             </FormGroup>
                         </Col>
-                        <Col md={3}>
+                        <Col md={4}>
                             <FormGroup>
                                 <Label htmlFor="notes">Notes</Label>
-                                <Input id="notes" type="text" name="notes" value={this.state.editNotes} placeholder="Notes" onChange={(e) => this.setState({ editNotes: e.target.value })} />
+                                <Input id="notes" type="textarea" name="notes" value={this.state.editNotes} placeholder="Notes" onChange={(e) => this.setState({ editNotes: e.target.value })} />
                             </FormGroup>
                         </Col>
+                       
                     </Row>
 
-                    <Button type="submit">Save</Button>
-                    {/* <Button onClick={this.props.toggleComponent}>Cancel</Button> */}
-                    <Button type="button" onClick={(e) => this.props.updateOff()}>Cancel</Button>
+                    <SButton type="submit">Save</SButton>
+                    
+                    <CButton type="button" onClick={(e) => this.props.updateOff()}>Cancel</CButton>
 
-                </Form>
+                </SForm>
             </>
         )
     }
