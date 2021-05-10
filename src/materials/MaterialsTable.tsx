@@ -1,6 +1,39 @@
 import React, { Component } from 'react';
 import {Table, Button} from 'reactstrap';
 import {Material} from '../Types';
+import styled from 'styled-components';
+
+const Heading = styled.h1`
+text-align: center;
+margin: 20px;
+font-family: 'Tempus Sans ITC';
+color: #b820d1;
+
+
+`
+const Tdiv = styled.div`
+
+width: 100vw;
+`
+
+const UButton = styled(Button)`
+background-color: #5e4ac7;
+color: #f6a73f;
+margin-right: 2em;
+margin-left: 2em;
+
+`
+const DButton = styled(Button)`
+background-color: #5e4ac7;
+color: #f6a73f;
+`
+
+const TD = styled.td`
+color: #b820d1;
+`
+const TH = styled.th`
+color: #5e4ac7;
+`
 
 interface IProps {
     materials: Material[],
@@ -60,14 +93,14 @@ materialsMapper() {
                return(
                 <tr key={index}>
                     <th scope="row">{material.id}</th>
-                    <td>{material.materialName}</td>
-                    <td>{material.color}</td>
-                    <td>{material.quantity}</td>
+                    <TD>{material.materialName}</TD>
+                    <TD>{material.color}</TD>
+                    <TD>{material.quantity}</TD>
                     <td>
                         
-                        <Button color="warning" onClick={() => {this.props.editUpdateMaterials(material); this.props.updateOn()}}>Update</Button>
+                        <UButton onClick={() => {this.props.editUpdateMaterials(material); this.props.updateOn()}}>Update</UButton>
 
-                        <Button color="danger" onClick={() => {this.deleteMaterial(material)}}>Delete</Button>
+                        <DButton onClick={() => {this.deleteMaterial(material)}}>Delete</DButton>
 
                     </td>
                 </tr>
@@ -77,23 +110,17 @@ materialsMapper() {
     }
     render(){
         return(
-        <>
-        <h3>My Materials</h3>
-        <hr/>
+        <Tdiv>
+        <Heading>My Materials</Heading>
+        <hr style={{ backgroundColor: "#5e4ac7" }}/>
 
-        <select onChange={(e) => this.setState({sortType: e.target.value})}> 
-        <option value="materialName">Material Name</option>
-        <option value="color">color</option>
-        <option value="quantity">quantity</option>
-      </select>
-
-        <Table striped>
+         <Table striped >
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Material Name</th>
-                    <th>Color</th>
-                    <th>Quantity</th>
+                    <TH>#</TH>
+                    <TH>Material Name</TH>
+                    <TH>Color</TH>
+                    <TH>Quantity</TH>
                 </tr>
             </thead>
             <tbody>
@@ -101,7 +128,7 @@ materialsMapper() {
             </tbody>
         </Table>
 
-        </>
+        </Tdiv>
     )
 }
 }

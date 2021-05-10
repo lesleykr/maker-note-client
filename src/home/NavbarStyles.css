@@ -1,0 +1,53 @@
+#navbar {
+    background-color: #5e4ac7;
+    
+}
+
+#navbrand {
+    color: #f6a73f;
+    font-family: 'Tempus Sans ITC';
+    font-size: 25px;
+    margin-left:15px;
+    margin-right: 35px;
+}
+
+#navbrand:hover {
+    color: white;
+}
+
+.navlink {
+   
+    margin-top: 10px;
+}
+
+
+
+.link:hover{
+   
+    color: white;
+}
+
+.link {
+  color: #74d7ff;  
+  font-family: 'Calibri';
+  font-size: 18px;
+ }
+
+ #logoutbutton {
+  background: transparent; 
+  border: none;
+  font-family: 'Calibri';  
+  font-size: 18px;
+  margin-top: 0px; 
+ }
+
+ #logoutbutton:hover{
+     color: #f6a73f;
+ }
+
+ #logoutnav {
+     margin-left: -30px;
+ }
+
+
+ 

@@ -12,11 +12,6 @@ import { Button, Container, Row, Col } from 'reactstrap';
 import './../App.css'
 import styled from 'styled-components';
 
-// const SCol = styled(Col)`
-// margin-top: 200px;
-// // border: red 5px solid;
-// `
-
 const MDiv = styled.div`
 margin: 0;
 position: absolute;
@@ -26,23 +21,6 @@ left: 50%;
 transform: translate(-50%, -50%);
 // border: red 5px solid;
 `
-
-const SULink = styled(Link)`
-postion: relative;
-right: 500px;
-margin-right: 1em;
-border-radius: 10%;
-border: none;
-color: #5c4c76;
-font-size: 35px;
-`;
-
-const LoLink = styled(Link)`
-border-radius: 10%;
-border: none;
-color: #5c4c76;
-font-size: 35px;
-`;
 
 const SH = styled.h1`
 text-align: center;
@@ -60,7 +38,6 @@ font-family: 'Calibri';
 margin-bottom: 50px;
 `
 const MLink = styled(Link)`
-
 `
 
 const MButton = styled(Button)`
@@ -71,8 +48,8 @@ display: block;
 background-color: #5e4ac7;
 color: #f6a73f;
   font-size: 30px;
-  font-family: 'Tempus Sans ITC';  
-
+  font-family: 'Tempus Sans ITC'; 
+  margin-bottom: 30px; 
   }
   `
 
@@ -93,28 +70,11 @@ export default class Auth extends Component<IProps, {}>{
                 <div className="auth">
                     <Container className="container" >
                         <Router>
-{/*                            
-                            <Row>
-                                <SCol sm={{ size: "6", offset: 6 }} md={{ size: "3", offset: 12 }} xl={{ size: '4', offset: 11}}>
-
-                                    <SULink to="/Signup">Sign Up</SULink>
-
-                                    <LoLink to="/Login">Login</LoLink></SCol>
-
-                            </Row> */}
-
-
                             <MDiv>
-
-                            <SULink to="/Signup">Sign Up</SULink>
-
-<LoLink to="/Login">Login</LoLink>
-
                                 <SH>MakerNote</SH>
                                 <SP>Never forget what you've created! MakerNote is the place to store the details of all your projects!</SP>
-
                                 <MLink to="/Signup"><MButton>Create Your Free Journal!</MButton></MLink>
-
+                                <MLink to="/Login"><MButton>Welcome back, Login!</MButton></MLink>
                             </MDiv>
                             <div>
                                 <Switch>
@@ -129,5 +89,3 @@ export default class Auth extends Component<IProps, {}>{
         )
     }
 }
-
-

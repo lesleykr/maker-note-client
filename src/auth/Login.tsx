@@ -104,7 +104,7 @@ export default class Login extends Component <IProps, IState>{
     return(
         <Modal isOpen={this.state.modalToggle}> 
 <ModalBody> 
-<Heading>Welcome! Please Login.</Heading>
+<Heading>Please Login</Heading>
             <Form
       {...layout}
       name="basic"

@@ -8,6 +8,7 @@ import MaterialIndex from './materials/MaterialIndex'
 import {Redirect, Switch, BrowserRouter as Router, Route} from 'react-router-dom';
 import Home from './home/Home';
 import Admin from "./users/admin/Admin";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 interface IProps {
