@@ -24,7 +24,7 @@ interface IProps {
   // fetchProjects: (fetchProjects: string) => string,
   token: string,
   clickLogout: () => void,
-  isAdmin: string | null,
+  admin: string | null,
   firstName: string | null    
 }
 
@@ -53,7 +53,7 @@ export default class Sitebar extends Component <IProps, IState>{
       <Nav.Link className="navlink"><Link className="link" to="/MaterialIndex">My Materials</Link></Nav.Link>
       <Nav.Link className="navlink"><Link className="link" to="/MaterialCreate">New Material</Link></Nav.Link>
       <Nav.Link className="navlink" ><Link className="link" to="/UserIndex">My Account</Link></Nav.Link>
-      <Nav.Link className="navlink"> {this.props.isAdmin === "true" ? <Link to="/AdUserIndex">All Users</Link> : null}</Nav.Link> 
+      <Nav.Link className="navlink"> {this.props.admin === "true" ? <Link className="link" to="/AdUserIndex">Admin Dashboard</Link> : null}</Nav.Link> 
 
     </Nav>
        <Nav.Link id="logoutnav" className="ml-auto"><Button id="logoutbutton" onClick={this.props.clickLogout}>Logout</Button></Nav.Link> 

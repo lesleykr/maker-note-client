@@ -203,16 +203,12 @@ export default class ProjectCreate extends Component<IProps, IState>{
         }
         return (
             <>
-
                 <SForm onSubmit={this.handleSubmit} >
                     <Heading>Enter a New Project</Heading>
-
                     <Row form>
                         <Col md={6}>
                             <FormGroup>
                                 <Label for="projectName">Project Name</Label>
-
-
                                 <Input id="projectName" type="text" name="projectName" value={this.state.projectName} placeholder="Project Name" onChange={(e) => this.setState({ projectName: e.target.value })} />
                             </FormGroup>
                         </Col>
@@ -276,12 +272,12 @@ export default class ProjectCreate extends Component<IProps, IState>{
                             </FormGroup>
                         </Col>
 
-                        <Col md={3}>
+                        {/* <Col md={3}>
                             <FormGroup>
                                 <Label htmlFor="tags">Tags</Label>
                                 <Input id="tags" type="text" name="tags" value={this.state.tags} placeholder="Tags" onChange={(e) => this.setState({ tags: e.target.value })} />
                             </FormGroup>
-                        </Col>
+                        </Col> */}
 
                         <Col md={5}>
                             <FormGroup>
@@ -289,18 +285,24 @@ export default class ProjectCreate extends Component<IProps, IState>{
                                 <Input id="productUrl" type="text" name="productUrl" value={this.state.productUrl} placeholder="Product URL" onChange={(e) => this.setState({ productUrl: e.target.value })} />
                             </FormGroup>
                         </Col>
+                        <Col md={3}>
 
+<FormGroup>
+    <Label htmlFor="totalMaterialCost">Total Material Cost</Label>
+    {<span>$</span>}<Input id="totalMaterialCost" type="number" placeholder="Total Material Cost" name="totalMaterialCost" value={this.state.totalMaterialCost} onChange={(e) => this.setState({ totalMaterialCost: e.target.value })} />
+</FormGroup>
+</Col>
 
 
                     </Row>
-                    <Row form>
+                    {/* <Row form>
                         <Col md={6}>
                             <FormGroup>
-                                {/* <Label for="exampleSelectMulti">Select Materials</Label>
+                                <Label for="exampleSelectMulti">Select Materials</Label>
 
   <Input type="select" name="selectMulti" id="exampleSelectMulti" multiple>
 
-  </Input> */}
+  </Input>
 
                                 <div>
                                     <select id="materialId" name="materialId" value={this.state.materialId} onChange={(e) => this.setState({ materialId: +e.target.value })}>{this.state.materialName}</select>
@@ -309,43 +311,30 @@ export default class ProjectCreate extends Component<IProps, IState>{
 
                             </FormGroup>
 
-                            {/* <FormGroup>
+                            <FormGroup>
                 <Label htmlFor="materialId">material ID</Label>   
                 <Input id="materialId" type="number" placeholder="materialId" name="materialId" value={this.state.materialId} onChange={(e) => this.setState({materialId: +e.target.value})}/>
-            </FormGroup> */}
+            </FormGroup>
 
 
 
                         </Col>
-                    </Row>
+                    </Row> */}
                     <Row form>
-                        <Col md={3}>
-
-                            <FormGroup>
-                                <Label htmlFor="totalMaterialCost">Total Material Cost</Label>
-                                {<span>$</span>}<Input id="totalMaterialCost" type="number" placeholder="Total Material Cost" name="totalMaterialCost" value={this.state.totalMaterialCost} onChange={(e) => this.setState({ totalMaterialCost: e.target.value })} />
-                            </FormGroup>
-                        </Col>
-
-
-
-
-                        <Col md={1}>
+                        <Col md={2}>
                             <FormGroup check>
-                                <Label check>
-                                    <Input type="checkbox" name="forSale" id="forSale" onChange={(e) => this.setState({ forSale: e.target.checked, saleOptions: true })} /> For Sale?
-                                </Label>
+                                <Label check>  
+                                    <Input type="checkbox" name="forSale" id="forSale" onChange={(e) => this.setState({ forSale: e.target.checked, saleOptions: true })} />For Sale? </Label>
                             </FormGroup>
                         </Col>
 
 
                         {this.state.saleOptions == true ? (<>
 
-                            <Col md={1}>
+                            <Col md={2}>
                                 <FormGroup check>
                                     <Label check>
-                                        <Input type="checkbox" name="sold" id="sold" onChange={(e) => this.setState({ sold: e.target.checked })} /> Sold?
-                                    </Label>
+                                        <Input type="checkbox" name="sold" id="sold" onChange={(e) => this.setState({ sold: e.target.checked })} /> Sold? </Label>
                                 </FormGroup>
                             </Col>
 
@@ -381,7 +370,7 @@ export default class ProjectCreate extends Component<IProps, IState>{
                     </FormGroup>
                     <Bdiv>
                         <SButton type="submit">Save</SButton>
-                        {/* <Button onClick={this.props.toggleComponent}>Cancel</Button> */}
+                       
                         <Link to="/ProjectIndex"><CButton>Cancel</CButton></Link>
                     </Bdiv>
                 </SForm>
@@ -390,4 +379,3 @@ export default class ProjectCreate extends Component<IProps, IState>{
     }
 }
 
-// onClick={this.props.onClick}
