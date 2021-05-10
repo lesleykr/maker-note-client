@@ -25,6 +25,12 @@ interface IState {
    dateSold: string,
    price: string,
    storeSoldAt: string,
+   status: string,
+   technique: string,
+   dimensions: string,
+   tags: string,
+   sold: boolean,
+   productUrl: string,
    notes: string,
    materialId: number,
    materialName: string,
@@ -47,6 +53,12 @@ export default class ProjectCreate extends Component <IProps, IState>{
             dateSold: "",
             price: "",
             storeSoldAt: '',
+            status: "",
+            technique: "",
+            dimensions: "",
+            tags: "",
+            sold: false,
+            productUrl: "",
             notes: '',
             materialId: Infinity,
             materialName: "",
@@ -64,7 +76,7 @@ export default class ProjectCreate extends Component <IProps, IState>{
           } else {
         fetch('http://localhost:3000/pm/createmat', {
             method: 'POST',
-            body: JSON.stringify({projects: {projectName: this.state.projectName, dateStarted: this.state.dateStarted, dateFinished: this.state.dateFinished, forSale: this.state.forSale, medium: this.state.medium, totalMaterialCost: this.state.totalMaterialCost, dateSold: this.state.dateSold, price: this.state.price, storeSoldAt: this.state.storeSoldAt, notes: this.state.notes, }, materials: {id: this.state.materialId}}),
+            body: JSON.stringify({projects: {projectName: this.state.projectName, dateStarted: this.state.dateStarted, dateFinished: this.state.dateFinished, forSale: this.state.forSale, medium: this.state.medium, totalMaterialCost: this.state.totalMaterialCost, dateSold: this.state.dateSold, price: this.state.price, storeSoldAt: this.state.storeSoldAt, status: this.state.status, technique: this.state.technique, dimensions: this.state.dimensions, tags: this.state.tags, sold: this.state.sold, productUrl: this.state.productUrl, notes: this.state.notes, }, materials: {id: this.state.materialId}}),
             headers: new Headers({
                 'Content-Type': 'application/json',
                 'Authorization': this.props.token
@@ -83,6 +95,12 @@ export default class ProjectCreate extends Component <IProps, IState>{
             dateSold: "",
             price: "",
             storeSoldAt: '',
+            status: "",
+            technique: "",
+            dimensions: "",
+            tags: "",
+            sold: false,
+            productUrl: "",
             notes: '',  
             materialId: Infinity,          
             redirectPI: true            
@@ -159,6 +177,50 @@ export default class ProjectCreate extends Component <IProps, IState>{
                 <Input id="medium" type="text"name="medium" value={this.state.medium} placeholder="Medium" onChange={(e) => this.setState({medium: e.target.value})}/>
             </FormGroup>
             </Col>
+
+
+
+
+
+
+
+            <Col md={3}>
+            <FormGroup>
+                <Label htmlFor="technique">Technique</Label>
+                <Input id="technique" type="text"name="technique" value={this.state.technique} placeholder="Technique" onChange={(e) => this.setState({technique: e.target.value})}/>
+            </FormGroup>
+            </Col>
+
+            <Col md={3}>
+            <FormGroup>
+                <Label htmlFor="status">Status</Label>
+                <Input id="status" type="text"name="status" value={this.state.status} placeholder="Status" onChange={(e) => this.setState({status: e.target.value})}/>
+            </FormGroup>
+            </Col>
+
+            <Col md={3}>
+            <FormGroup>
+                <Label htmlFor="dimensions">Dimensions</Label>
+                <Input id="dimensions" type="text"name="dimensions" value={this.state.dimensions} placeholder="Dimensions" onChange={(e) => this.setState({dimensions: e.target.value})}/>
+            </FormGroup>
+            </Col>
+
+            <Col md={3}>
+            <FormGroup>
+                <Label htmlFor="tags">Tags</Label>
+                <Input id="tags" type="text"name="tags" value={this.state.tags} placeholder="Tags" onChange={(e) => this.setState({tags: e.target.value})}/>
+            </FormGroup>
+            </Col>
+
+            <Col md={3}>
+            <FormGroup>
+                <Label htmlFor="productUrl">Product URL</Label>
+                <Input id="productUrl" type="text"name="productUrl" value={this.state.productUrl} placeholder="Product URL" onChange={(e) => this.setState({productUrl: e.target.value})}/>
+            </FormGroup>
+            </Col>
+
+            
+
             <Col md={2}> 
             <FormGroup>
         <Label for="dateStarted">Date Started</Label>
@@ -227,8 +289,18 @@ export default class ProjectCreate extends Component <IProps, IState>{
         </FormGroup>
         </Col>
 
-      {this.state.saleOptions == true ? (<>
+
+       {this.state.saleOptions == true ? (<>
       
+        <Col md={1}>
+      <FormGroup check>
+        <Label check>
+          <Input type="checkbox" name="sold" id="sold" onChange={(e) => this.setState({sold: e.target.checked})}/> Sold?
+        </Label>        
+        </FormGroup>
+        </Col>
+
+
       <Col md={2}>
       <FormGroup>
         <Label for="dateSold">Date Sold</Label>

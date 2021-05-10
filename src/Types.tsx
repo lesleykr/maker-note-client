@@ -8,6 +8,12 @@ export interface Project{
     dateSold: string,
     price: string,
     storeSoldAt: string,
+    status: string,
+    technique: string,
+    dimensions: string,
+    tags: string,
+    sold: boolean,
+    productUrl: string,
     notes: string,
     id: number
 }

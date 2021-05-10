@@ -16,6 +16,12 @@ interface IProps {
         dateSold: string,
         price: string,
         storeSoldAt: string,
+        status: string,
+        technique: string,
+        dimensions: string,
+        tags: string,
+        sold: boolean,
+        productUrl: string,
         notes: string,
         id: number       
     }      
@@ -32,6 +38,12 @@ interface IState {
     editDateSold: string,
     editPrice: string,
     editStoreSoldAt: string,
+    editStatus: string,
+    editTechnique: string,
+    editDimensions: string,
+    editTags: string,
+    editSold: boolean,
+    editProductUrl: string,
     editNotes: string    
 }
 
@@ -48,6 +60,12 @@ export default class ProjectsEdit extends Component <IProps, IState>{
             editDateSold: this.props.projectsToUpdate.dateSold,
             editPrice: this.props.projectsToUpdate.price,
             editStoreSoldAt: this.props.projectsToUpdate.storeSoldAt,
+            editStatus: this.props.projectsToUpdate.status,
+            editTechnique: this.props.projectsToUpdate.technique,
+            editDimensions: this.props.projectsToUpdate.dimensions,
+            editTags: this.props.projectsToUpdate.tags,
+            editSold: this.props.projectsToUpdate.sold,
+            editProductUrl: this.props.projectsToUpdate.productUrl,
             editNotes: this.props.projectsToUpdate.notes          
         };
     }
@@ -57,7 +75,8 @@ export default class ProjectsEdit extends Component <IProps, IState>{
         event.preventDefault();
         fetch(`http://localhost:3000/projects/update/${this.props.projectsToUpdate.id}`, {
             method: 'PUT',
-            body: JSON.stringify({projects: {projectName: this.state.editProjectName, dateStarted: this.state.editDateStarted, dateFinished: this.state.editDateFinished, medium: this.state.editMedium, editTotalMaterialCost: this.state.editTotalMaterialCost, forSale: this.state.editForSale, dateSold: this.state.editDateSold, price: this.state.editPrice, storeSoldAt: this.state.editStoreSoldAt, notes: this.state.editNotes}}),
+            body: JSON.stringify({projects: {projectName: this.state.editProjectName, dateStarted: this.state.editDateStarted, dateFinished: this.state.editDateFinished, medium: this.state.editMedium, editTotalMaterialCost: this.state.editTotalMaterialCost, forSale: this.state.editForSale, dateSold: this.state.editDateSold, price: this.state.editPrice, storeSoldAt: this.state.editStoreSoldAt, status: this.state.editStatus,
+            technique: this.state.editTechnique, dimensions: this.state.editDimensions,            tags: this.state.editTags, sold: this.state.editSold, productUrl: this.state.editProductUrl, notes: this.state.editNotes}}),
             headers: new Headers({
                 'Content-Type': 'application/json',
                 'Authorization': this.props.token
@@ -90,6 +109,43 @@ export default class ProjectsEdit extends Component <IProps, IState>{
                 <Input id="medium" type="text"name="medium" value={this.state.editMedium} placeholder="Medium" onChange={(e) => this.setState({editMedium: e.target.value})}/>
             </FormGroup>
             </Col>
+
+            <Col md={3}>
+            <FormGroup>
+                <Label htmlFor="technique">Technique</Label>
+                <Input id="technique" type="text"name="technique" value={this.state.editTechnique} placeholder="Technique" onChange={(e) => this.setState({editTechnique: e.target.value})}/>
+            </FormGroup>
+            </Col>
+
+            <Col md={3}>
+            <FormGroup>
+                <Label htmlFor="status">Status</Label>
+                <Input id="status" type="text"name="status" value={this.state.editStatus} placeholder="Status" onChange={(e) => this.setState({editStatus: e.target.value})}/>
+            </FormGroup>
+            </Col>
+
+            <Col md={3}>
+            <FormGroup>
+                <Label htmlFor="dimensions">Dimensions</Label>
+                <Input id="dimensions" type="text"name="dimensions" value={this.state.editDimensions} placeholder="Dimensions" onChange={(e) => this.setState({editDimensions: e.target.value})}/>
+            </FormGroup>
+            </Col>
+
+            <Col md={3}>
+            <FormGroup>
+                <Label htmlFor="tags">Tags</Label>
+                <Input id="tags" type="text"name="tags" value={this.state.editTags} placeholder="Tags" onChange={(e) => this.setState({editTags: e.target.value})}/>
+            </FormGroup>
+            </Col>
+
+            <Col md={3}>
+            <FormGroup>
+                <Label htmlFor="productUrl">Product URL</Label>
+                <Input id="productUrl" type="text"name="productUrl" value={this.state.editProductUrl} placeholder="Product URL" onChange={(e) => this.setState({editProductUrl: e.target.value})}/>
+            </FormGroup>
+            </Col>
+
+
             <Col md={2}> 
             <FormGroup>
         <Label for="dateStarted">Date Started</Label>
@@ -128,6 +184,15 @@ export default class ProjectsEdit extends Component <IProps, IState>{
         </Label>
       </FormGroup>
       </Col>
+
+      <Col md={1}>
+      <FormGroup check>
+        <Label check>
+          <Input type="checkbox" name="sold" id="sold" checked={this.state.editSold} onChange={(e) => this.setState({editSold: e.target.checked})}/> Sold?
+        </Label>        
+        </FormGroup>
+        </Col>
+
       <Col md={2}>
       <FormGroup>
         <Label for="dateSold">Date Sold</Label>
