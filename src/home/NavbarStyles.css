@@ -16,8 +16,8 @@
 }
 
 .navlink {
-   
-    margin-top: 10px;
+    margin-right: 20px;
+    margin-top: 1px;
 }
 
 
@@ -30,15 +30,16 @@
 .link {
   color: #74d7ff;  
   font-family: 'Calibri';
-  font-size: 18px;
+  font-size: 20px;
+  
  }
 
  #logoutbutton {
   background: transparent; 
   border: none;
   font-family: 'Calibri';  
-  font-size: 18px;
-  margin-top: 0px; 
+  font-size: 20px;
+ 
  }
 
  #logoutbutton:hover{
@@ -46,7 +47,7 @@
  }
 
  #logoutnav {
-     margin-left: -30px;
+     margin-right: 40px;
  }
 
 

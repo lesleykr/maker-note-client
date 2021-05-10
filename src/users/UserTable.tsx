@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
-import {Table, Button} from 'reactstrap';
-import {User} from '../Types'
+import { Table, Button, Card } from 'react-bootstrap';
+import { User } from '../Types'
 import styled from 'styled-components';
 
-const Heading = styled.h1`
+const Heading = styled(Card.Header)`
 text-align: center;
 margin: 20px;
 font-family: 'Tempus Sans ITC';
 color: #b820d1;
-
+font-size: 40px;
 
 `
+const Row = styled(Card.Text)`
+font-size: 25px;
+`
+
 const Tdiv = styled.div`
 
 width: 100vw;
@@ -40,15 +44,15 @@ interface IProps {
     editUpdateUser: any,
     updateOn: () => void,
     fetchUser: () => void,
-    token: string      
+    token: string
 }
 
-export default class UserTable extends Component <IProps, {}>{
+export default class UserTable extends Component<IProps, {}>{
     constructor(props: IProps) {
         super(props)
     }
 
-   deleteUser = (user: User) => {
+    deleteUser = (user: User) => {
         fetch(`http://localhost:3000/user/delete/${user.id}`, {
             method: 'DELETE',
             headers: new Headers({
@@ -56,49 +60,52 @@ export default class UserTable extends Component <IProps, {}>{
                 'Authorization': this.props.token
             })
         })
-        
+
     }
 
     userMapper() {
         return this.props.user.map((user: User, index: number) => {
-            return(
-                <tr key={index}>
-                    <TD>{user.email}</TD>
-                    <TD>{user.firstName}</TD>
-                    <TD>{user.lastName}</TD>
-                    <TD>{user.aboutMe}</TD>
-                    <td>
-                        
-                        <UButton onClick={() => {this.props.editUpdateUser(user); this.props.updateOn()}}>Update</UButton>
+            return (
 
-                        <DButton  onClick={() => {this.deleteUser(user)}}>Delete</DButton>
+                <>
+                    <Card key={index}>
+                        <Heading>My Account</Heading>
+                        <Card.Body>
+                            <Row>First Name: {user.firstName}
+                            </Row>
+                            <Row>Last Name: {user.lastName}
+                            </Row>
+                            <Row>E-mail: {user.email}
+                            </Row>
+                            <Row>About Me: {user.aboutMe}
+                            </Row>
 
-                    </td>
-                </tr>
+                            <UButton onClick={() => { this.props.editUpdateUser(user); this.props.updateOn(); }}>Update</UButton>
+
+                            <DButton onClick={() => { this.deleteUser(user); }}>Delete</DButton>
+
+                        </Card.Body>
+                    </Card>
+
+
+                </>
             )
         })
-        
-    }
-    render(){
-        return(
-        <Tdiv>
-        <Heading>My Info</Heading>
-        <hr style={{ backgroundColor: "#5e4ac7" }}/>
-        <Table striped>
-            <thead>
-                <tr>
-                    <TH>Email</TH>
-                    <TH>First Name</TH>
-                    <TH>Last Name</TH>
-                    <TH>About Me</TH>
-                </tr>
-            </thead>
-            <tbody>
-            {this.userMapper()}
-            </tbody>
-        </Table>
 
-        </Tdiv>
-    )
-}
+    }
+    render() {
+        return (
+
+
+
+            <Tdiv>
+
+
+               
+                  
+                        {this.userMapper()}
+                 
+            </Tdiv>
+        )
+    }
 }
