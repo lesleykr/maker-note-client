@@ -116,8 +116,7 @@ export default class MaterialsEdit extends Component<IProps, IState>{
                 <SForm onSubmit={this.handleSubmit}>
                 <Col md={5}>
                     <FormGroup>
-                        <Label for="materialName" >Material Name</Label>
-                        
+                        <Label for="materialName" >Material Name</Label>           
 
                             <Input id="materialName" type="text" name="materialName" value={this.state.editMaterialName} placeholder="Material Name" onChange={(e) => this.setState({ editMaterialName: e.target.value })} />
                             </FormGroup>

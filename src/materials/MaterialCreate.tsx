@@ -3,9 +3,12 @@ import { Button, Form, FormGroup, Label, Input, Col, Row, } from 'reactstrap';
 import { Link, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
+
+
 const Heading = styled.h1`
 text-align: center;
-margin: 20px;
+width: 50%;
+margin: auto;
 font-family: 'Tempus Sans ITC';
 color: #b820d1;
 
@@ -14,10 +17,17 @@ color: #b820d1;
 const SForm = styled(Form)`
 margin-right: 50px;
 margin-left: 50px;
-padding: 70px;
+margin-top: 50px;
+padding-left: 70px;
+padding-top: 70px;
+padding-bottom: 70px;
 background-color: #f8f8f8;
 `
-
+const Bdiv = styled.div`
+margin: auto;
+width: 50%;
+text-align: center;
+`
 const SButton = styled(Button)`
 margin-right: 10px;
 background-color: #5e4ac7;
@@ -103,10 +113,10 @@ export default class MaterialCreate extends Component<IProps, IState>{
             return <Redirect to="/MaterialIndex" />
         }
         return (
-            <>
-                <Heading>Enter a New Material</Heading>
+           
+               
                 <SForm onSubmit={this.handleSubmit}>
-                    
+                <Heading>Enter a New Material</Heading>
                 <Col md={3}>
                     <FormGroup>
                         <Label for="materialName">Material Name</Label>
@@ -142,7 +152,7 @@ export default class MaterialCreate extends Component<IProps, IState>{
                                 <Input id="size" type="text" name="size" value={this.state.size} placeholder="Size" onChange={(e) => this.setState({ size: e.target.value })} />
                             </FormGroup>
                         </Col>
-                        <Col md={4}>
+                        <Col md={5}>
                             <FormGroup>
                                 <Label htmlFor="notes">Notes</Label>
                                 <Input id="notes" type="textarea" name="notes" value={this.state.notes} placeholder="Notes" onChange={(e) => this.setState({ notes: e.target.value })} />
@@ -170,14 +180,15 @@ export default class MaterialCreate extends Component<IProps, IState>{
                         </Col>
                        
                     </Row>
-
+<Bdiv>
                     <SButton type="submit">Save</SButton>
                    
                     <Link to="/MaterialIndex"><CButton>Cancel</CButton></Link>
+                    </Bdiv>
                 </SForm>
 
 
-            </>
+            
         )
     }
 }

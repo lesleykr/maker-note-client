@@ -2,6 +2,16 @@ import React, { Component } from 'react';
 import { Row, Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import styled from 'styled-components';
 
+const Tdiv = styled.div`
+width: 100%;
+background-color: #f8f8f8;
+margin-top: 50px;
+padding-bottom: 90px;
+`
+const Fdiv = styled.div`
+width: 50%;
+margin: auto;
+`
 const Heading = styled.h1`
 text-align: center;
 margin: 20px;
@@ -17,16 +27,20 @@ const SForm = styled(Form)`
 margin-top: 100px;
 
 `
-
+const Bdiv = styled.div`
+margin: auto;
+width: 50%;
+text-align: center;
+`
 const SButton = styled(Button)`
-margin-right: 10px;
+margin-right: 20px;
 background-color: #5e4ac7;
 color: #f6a73f;
-margin-left: 300px;
+
 `
 
 const CButton = styled(Button)`
-margin-right: 10px;
+
 background-color: #5e4ac7;
 color: #f6a73f;
 `
@@ -88,10 +102,11 @@ export default class UserEdit extends Component<IProps, IState>{
 
     render() {
         return (
-            <div>
+            <Tdiv>
 
                 <SForm onSubmit={this.handleSubmit}>
                     <Heading>Edit Account Information</Heading>
+                    <Fdiv>
                     <FormGroup>
                         <Slabel for="email" >Email</Slabel>
                         <Col >
@@ -125,13 +140,16 @@ export default class UserEdit extends Component<IProps, IState>{
                         </Col>
                     </FormGroup>
 
-
+                      <Bdiv>
                     <SButton type="submit">Save</SButton>
 
                     <CButton onClick={(e) => this.props.updateOff()}>Cancel</CButton>
-
+                    </Bdiv>
+                    
+                    
+                    </Fdiv>
                 </SForm>
-            </div>
+            </Tdiv>
         )
     }
 }
