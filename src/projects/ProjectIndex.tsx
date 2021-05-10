@@ -27,6 +27,12 @@ interface IState {
         dateSold: string,
         price: string,
         storeSoldAt: string,
+        status: string,
+        technique: string,
+        dimensions: string,
+        tags: string,
+        sold: boolean,
+        productUrl: string,
         notes: string,
         id: number        
     }
@@ -48,6 +54,12 @@ export default class ProjectIndex extends Component<IProps, IState>{
                 dateSold: "",
                 price: "",
                 storeSoldAt: "",
+                status: "",
+                technique: "",
+                dimensions: "",
+                tags: "",
+                sold: false,
+                productUrl: "",
                 notes: "",
                 id: Infinity
             },

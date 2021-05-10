@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const Heading = styled.h1`
 text-align: center;
-margin: 20px;
+margin-bottom: 50px;
 font-family: 'Tempus Sans ITC';
 color: #b820d1;
 width: 100%;
@@ -13,8 +13,15 @@ width: 100%;
 const SForm = styled(Form)`
 margin-right: 50px;
 margin-left: 50px;
-padding: 70px;
+padding: 50px;
 background-color: #f8f8f8;
+border: #5e4ac7 1px solid;
+margin-top: 50px;
+`
+const Bdiv = styled.div`
+margin: auto;
+width: 50%;
+text-align: center;
 `
 
 const SButton = styled(Button)`
@@ -111,9 +118,9 @@ export default class MaterialsEdit extends Component<IProps, IState>{
         return (
             <>
            
-                <Heading>Update Material</Heading>
-               
+                             
                 <SForm onSubmit={this.handleSubmit}>
+                <Heading>Update Material</Heading>
                 <Col md={5}>
                     <FormGroup>
                         <Label for="materialName" >Material Name</Label>           
@@ -170,7 +177,7 @@ export default class MaterialsEdit extends Component<IProps, IState>{
                                 <Input id="description" type="text" name="description" value={this.state.editDescription} placeholder="Description" onChange={(e) => this.setState({ editDescription: e.target.value })} />
                             </FormGroup>
                         </Col>
-                        <Col md={4}>
+                        <Col md={6}>
                             <FormGroup>
                                 <Label htmlFor="notes">Notes</Label>
                                 <Input id="notes" type="textarea" name="notes" value={this.state.editNotes} placeholder="Notes" onChange={(e) => this.setState({ editNotes: e.target.value })} />
@@ -179,10 +186,12 @@ export default class MaterialsEdit extends Component<IProps, IState>{
                        
                     </Row>
 
+                    <Bdiv>
+
                     <SButton type="submit">Save</SButton>
                     
                     <CButton type="button" onClick={(e) => this.props.updateOff()}>Cancel</CButton>
-
+                    </Bdiv>
                 </SForm>
             </>
         )

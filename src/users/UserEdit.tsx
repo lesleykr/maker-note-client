@@ -7,6 +7,7 @@ width: 100%;
 background-color: #f8f8f8;
 margin-top: 50px;
 padding-bottom: 90px;
+border: #5e4ac7 1px solid;
 `
 const Fdiv = styled.div`
 width: 50%;
@@ -14,12 +15,10 @@ margin: auto;
 `
 const Heading = styled.h1`
 text-align: center;
-margin: 20px;
+margin: 40px;
 font-family: 'Tempus Sans ITC';
 color: #b820d1;
 `
-
-
 const Slabel = styled(Label)`
 margin-left: 18px;
 `
@@ -38,9 +37,7 @@ background-color: #5e4ac7;
 color: #f6a73f;
 
 `
-
 const CButton = styled(Button)`
-
 background-color: #5e4ac7;
 color: #f6a73f;
 `
