@@ -36,5 +36,6 @@ export interface User {
     firstName: string,
     lastName: string,
     aboutMe: string,
+    photo: string,
     id: number
 }

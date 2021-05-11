@@ -18,6 +18,7 @@ interface IState {
         firstName: string,
         lastName: string,
         aboutMe: string,
+        photo: string,
         id: number
     }
 }
@@ -35,6 +36,7 @@ export default class UserIndex extends Component <IProps, IState>{
         firstName: "",
         lastName: "",
         aboutMe: "",
+        photo: "",
         id: Infinity
       }
         };

@@ -89,7 +89,7 @@ export default class RegistrationForm extends Component <IProps, IState>{
 
        handleSubmit = (event: any) => {
         // event.preventDefault()
-        if (!this.state.email || !this.state.password || !this.state.firstName || !this.state.lastName) {
+        if (!this.state.email || !this.state.password) {
             alert("Please enter first name, last name, email address, and password");
           } else {
         fetch("http://localhost:3000/user/create", {
