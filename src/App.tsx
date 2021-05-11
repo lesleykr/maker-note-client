@@ -18,14 +18,14 @@ interface IProps {
 interface IState{
   sessionToken: string,
   sessionAdmin: string,
-  sessionFirstName: string   
+  stateChange: boolean  
 }
 
 export default class App extends Component {  
     state = {
       sessionToken: ''   ,
       sessionAdmin: "",
-      sessionFirstName: "",  
+      stateChange: false   
     }
   
 componentDidMount(){
@@ -35,13 +35,11 @@ componentDidMount(){
   };
 }
 
-  updateToken = (newToken: string, newAdmin: string, newFirstName: string) => { 
+  updateToken = (newToken: string, newAdmin: string) => { 
     localStorage.setItem('token', newToken);
-    localStorage.setItem('admin', newAdmin)
-    localStorage.setItem('firstName', newFirstName)
+    localStorage.setItem('admin', newAdmin)  
     this.setState({sessionToken: newToken});
-    this.setState({sessionAdmin: newAdmin});
-    this.setState({sessionName: newFirstName})
+    this.setState({sessionAdmin: newAdmin});    
     console.log(this.state.sessionToken);  
     }
     
@@ -50,9 +48,10 @@ componentDidMount(){
       this.setState({sessionToken: ""});
       window.location.href = "/"
     }
+
     
     protectedViews = () => {
-      return (this.state.sessionToken === localStorage.getItem('token') ? <Sitebar token={this.state.sessionToken}  admin={localStorage.getItem('admin')} firstName={localStorage.getItem('firstName')} clickLogout={this.clearToken}  /> 
+      return (this.state.sessionToken === localStorage.getItem('token') ? <Sitebar token={this.state.sessionToken}  admin={localStorage.getItem('admin')} clickLogout={this.clearToken}  /> 
       : <Auth updateToken={this.updateToken.bind(this)}/>)
     }
 
@@ -78,15 +77,10 @@ render() {
     
     
     <div>
-           {/* <Router>
-          <Switch>
-<Route exact path="/Auth"><Auth updateToken={this.updateToken.bind(this)}/></Route>
-<Route exact path="/Admin"><Admin /></Route>
-          </Switch>
-          </Router> */}
-    
-          {/* <Sitebar clickLogout={this.clearToken}  /> */}
+
           {this.protectedViews()}
+       
+         
     
 
  </div>

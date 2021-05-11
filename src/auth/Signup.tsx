@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import 'antd/dist/antd.css';
 
 
+
 const SbuttonL = styled(Button)`
 margin-right: 1em;
 margin-left: -4em;
@@ -102,8 +103,10 @@ export default class RegistrationForm extends Component <IProps, IState>{
             (response) => response.json()
         ).then((data) => {
             console.log(data);
-            this.props.updateToken(data.sessionToken)
-            localStorage.setItem("firstName", data.user.firstName)                     
+            console.log(data.error)
+            {data.error ? (data.error.errors[0].message === "email must be unique") &&
+            alert("An account with this email address already exists, please login or sign up with a different email address"):
+            this.props.updateToken(data.sessionToken) }                     
         })
     }
        

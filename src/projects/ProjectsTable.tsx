@@ -15,7 +15,6 @@ border: #b820d1 1px solid;
 const UButton = styled(Button)`
 background-color: #5e4ac7;
 color: #f6a73f;
-
 margin-left: 2em;
 
 `
@@ -68,7 +67,7 @@ export default class ProjectsTable extends Component<IProps, IState>{
 
                 <SCard
                     className="p-3 col-2" key={index}>
-                    <Card.Img variant="top" src={project.pictureUrl1}/>
+                    <Card.Img variant="top" height="250" src={project.pictureUrl1}/>
                     <Card.Body>
                         <Card.Title>{project.projectName}</Card.Title>
                     </Card.Body>

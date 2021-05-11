@@ -14,6 +14,7 @@ export interface Project{
     tags: string,
     sold: boolean,
     productUrl: string,
+    pictureUrl1: string,
     notes: string,
     id: number
 }

@@ -17,21 +17,28 @@ import Sitebar from './Navbar';
 import MaterialCreate from '../materials/MaterialCreate';
 import UserIndex from "../users/UserIndex";
 import ProjectView from "../projects/ProjectView";
+import styled from 'styled-components'
 
 
-interface IProps {
-  token: string,
-fetchProjects: {},
-fetchMaterials: {}
-  
-}
+const Mdiv = styled.div`
+// position: fixed;
+// top: 50%;
+// left: 50%;
+// margin-top: -50px;
+// margin-left: -100px
+`
 
-interface IState {
-  isActive: boolean
-}
+const Sh1 = styled.h1`
+font-family: 'Tempus Sans ITC';
+text-align: center;
+color: #b820d1;
+margin-top: 35vh;
+`
 
-export default class Home extends Component <IProps,IState>{
-  constructor(props: IProps) {
+
+
+export default class Home extends Component <{},{}>{
+  constructor(props) {
     super(props)
   
 }
@@ -40,35 +47,13 @@ export default class Home extends Component <IProps,IState>{
 render() {
 return (
   <div>
-      <Router>
-    {/* <Button onClick={() => {this.props.buttonVisMM()}}>My Materials T</Button>
-    <Button onClick={() => {this.props.buttonVisMP()}}>MyProjects T</Button>
-    <Button onClick={() => {this.props.buttonVisNM()}}>New Material T</Button>
-    <Link to="/ProjectCreate"><Button onClick={() => {this.props.buttonVisNP()}}>New Project T</Button></Link> */}
+<Mdiv>
+  <Sh1>Welcome!<br/>
+  Click Above to Add A New Project or Material!</Sh1>
   
-    
-<Link to="/ProjectIndex"><Button>My Projects</Button></Link>
-<Link to="/ProjectCreate"><Button>New Project</Button></Link>
-<Link to="/MaterialIndex"><Button>My Materials</Button></Link>
-<Link to="/MaterialCreate"><Button>New Material</Button></Link>
-<Link to="/UserIndex"><Button>User Info</Button></Link>
-<Link to="/ProjectView"><Button>Project View</Button></Link>
+  </Mdiv> 
 
-   
-    <div>
-      <Switch>
-      
-       <Route exact path="/ProjectIndex"><ProjectIndex token={this.props.token} /></Route>
-       <Route exact path="/MaterialIndex"><MaterialIndex token={this.props.token} /></Route>
-       <Route exact path="/ProjectCreate"><ProjectCreate fetchProjects={this.props.fetchProjects} token={this.props.token}/></Route>
-       <Route exact path="/MaterialCreate"><MaterialCreate toggleComponent={this.props.toggleComponent} fetchMaterials={this.props.fetchMaterials} token={this.props.token}/></Route>
-       <Route exact path="/UserIndex"><UserIndex token={this.props.token} /></Route>
-       <Route exact path="/ProjectView"><ProjectView token={this.props.token} /></Route>
-            
-      </Switch>
-    </div>
-    </Router>
-  
+
   </div>
 );
 }

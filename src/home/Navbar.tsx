@@ -18,9 +18,13 @@ import UserIndex from '../users/UserIndex';
 import AdUserIndex from '../users/admin/AdUserIndex';
 import styled from 'styled-components';
 import './NavbarStyles.css';
-import { Button, Navbar, Nav } from 'react-bootstrap';
+import { Button, Navbar, Nav} from 'react-bootstrap';
 
-
+const Sfooter = styled.footer`
+background-color: #5e4ac7;
+font-family: 'Tempus Sans ITC';
+text-align: center;
+`
 interface IProps {
   // fetchProjects: (fetchProjects: string) => string,
   token: string,
@@ -30,21 +34,29 @@ interface IProps {
 }
 
 interface IState { 
-  isActive: boolean,
-  isOpen: boolean,
-  buttonsInvisible: boolean  
+  // isActive: boolean,
+  // isOpen: boolean,
+  // buttonsInvisible: boolean,
+  homeChange: boolean 
 }
 
 export default class Sitebar extends Component <IProps, IState>{
   constructor(props: IProps) {
       super(props)
+      this.state = {
+        homeChange: false
+      }
+   }
+
+   homeChange = () => {
+     this.setState({homeChange: true})
    }
 
  render() {
   return (
    
        <Router>
-       <Navbar id="navbar" expand="lg">
+       <Navbar sticky="top" id="navbar" expand="lg">
   <Navbar.Brand id="navbrand" href="/">MakerNote</Navbar.Brand>
   <Navbar.Toggle aria-controls="basic-navbar-nav" />
   <Navbar.Collapse id="basic-navbar-nav">
@@ -63,7 +75,8 @@ export default class Sitebar extends Component <IProps, IState>{
   </Navbar.Collapse>
 </Navbar>      
         
-      <div>
+
+ <div>
 <Switch>
 
  <Route exact path="/ProjectIndex"><ProjectIndex token={this.props.token} /></Route>
@@ -82,7 +95,7 @@ export default class Sitebar extends Component <IProps, IState>{
 
 
       </Router>
-   
+
   );
 }
 }

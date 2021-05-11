@@ -376,8 +376,8 @@ export default class ProjectsEdit extends Component<IProps, IState>{
                         <Input id="notes" type="textarea" name="notes" value={this.state.editNotes} placeholder="Notes" onChange={(e) => this.setState({ editNotes: e.target.value })} />
                     </FormGroup>
                     <Bdiv>
-                        <Button type="submit" >Save</Button>
-                        <Button type="button" onClick={this.props.updateOff}>Cancel</Button>
+                        <SButton type="submit" >Save</SButton>
+                        <CButton type="button" onClick={this.props.updateOff}>Cancel</CButton>
                     </Bdiv>
                 </SForm>
             </>

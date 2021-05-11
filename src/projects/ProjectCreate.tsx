@@ -15,7 +15,7 @@ margin: auto;
 font-family: 'Tempus Sans ITC';
 color: #b820d1;
 margin-bottom: 30px;
-margin-top: 30px;
+
 
 `
 
@@ -74,9 +74,6 @@ interface IProps {
 
 }
 
-interface Material {
-    materialName: string
-}
 
 interface IState {
     projectName: string,
@@ -94,11 +91,8 @@ interface IState {
     tags: string,
     sold: boolean,
     productUrl: string,
-    notes: string,
-    materialId: number,
-    materialName: string,
-    isOpen: boolean,
-    materials: Material[], //an array of things of type material
+    notes: string, 
+    isOpen: boolean,   
     redirectPI: boolean,
     saleOptions: boolean,
     avUrl: string
@@ -125,12 +119,9 @@ export default class ProjectCreate extends Component<IProps, IState>{
             tags: "",
             sold: false,
             productUrl: "",
-            notes: '',
-            materialId: Infinity,
-            materialName: "",
+            notes: '',         
             isOpen: true,
-            redirectPI: false,
-            materials: [],
+            redirectPI: false,           
             saleOptions: false,
             avUrl: '#'  
         };
@@ -179,9 +170,9 @@ export default class ProjectCreate extends Component<IProps, IState>{
         if (!this.state.projectName) {
             alert("Please enter a name for your project.");
         } else {
-            fetch('http://localhost:3000/pm/createmat', {
+            fetch('http://localhost:3000/projects/create', {
                 method: 'POST',
-                body: JSON.stringify({ projects: { projectName: this.state.projectName, dateStarted: this.state.dateStarted, dateFinished: this.state.dateFinished, forSale: this.state.forSale, medium: this.state.medium, totalMaterialCost: this.state.totalMaterialCost, dateSold: this.state.dateSold, price: this.state.price, storeSoldAt: this.state.storeSoldAt, status: this.state.status, technique: this.state.technique, dimensions: this.state.dimensions, tags: this.state.tags, sold: this.state.sold, productUrl: this.state.productUrl, pictureUrl1: this.state.avUrl, notes: this.state.notes, }, materials: { id: this.state.materialId } }),
+                body: JSON.stringify({ projects: { projectName: this.state.projectName, dateStarted: this.state.dateStarted, dateFinished: this.state.dateFinished, forSale: this.state.forSale, medium: this.state.medium, totalMaterialCost: this.state.totalMaterialCost, dateSold: this.state.dateSold, price: this.state.price, storeSoldAt: this.state.storeSoldAt, status: this.state.status, technique: this.state.technique, dimensions: this.state.dimensions, tags: this.state.tags, sold: this.state.sold, productUrl: this.state.productUrl, pictureUrl1: this.state.avUrl, notes: this.state.notes, }}),
                 headers: new Headers({
                     'Content-Type': 'application/json',
                     'Authorization': this.props.token
@@ -207,79 +198,34 @@ export default class ProjectCreate extends Component<IProps, IState>{
                         sold: false,
                         productUrl: "",
                         notes: '',
-                        materialId: Infinity,
                         redirectPI: true
                     })
-                    console.log(this.state.materialId)
-
+                   
                 })
                 .catch(error => {
                     console.error("error: ", error)
                 })
         }
 
-    }
-
-
-    fetchMaterials = () => {
-        fetch('http://localhost:3000/materials/mine', {
-            method: 'GET',
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                'Authorization': this.props.token
-            })
-        }).then((res) => res.json())
-            .then((materialsData) => {
-                this.setState({
-                    materials: materialsData,
-                    materialId: materialsData.id,
-                    materialName: materialsData.materialName
-                })
-                console.log(materialsData)
-
-            })
-    }
+    }   
 
    close = () => this.setState({ isOpen: !this.state.isOpen });
 
     componentDidMount() {
-        console.log('mounted');
-        this.fetchMaterials();
+        console.log('mounted');       
     }
 
     render() {
 
-        // const { materials } = this.state;
-
-        // let materialsList = materials.length > 0
-        //     && materials.map((item: any, i: number) => {
-        //   return (
-        //     <option key={i} value={item.id}>{item.materialName}</option>
-        //   )
-        // }, this);
-
-
-        if (this.state.redirectPI) {
+      if (this.state.redirectPI) {
             return <Redirect to="/ProjectIndex" />
         }
         return (
             <>
 
-                    <Heading>Enter a New Project</Heading>
+                   
         <SForm onSubmit={this.handleSubmit} >
-        {/* <Row form>
-                   
-                   <form encType="multipart/form-data" onSubmit={this.imgSubmit}>
-                       <input id="file-input" type="file"/>
-                       <button onClick={this.imgSubmit} type="button">Upload Image</button>
-                   </form>
-                   <img src={this.state.avUrl} alt="photo" width="150"
-                                                       height="150" />
-                   
-                   </Row> */}
-                            
-                   {/* <Row form>
-<Col xs={6} md={4}> */}
+        <Heading>Enter a New Project</Heading>
     <div>
     <SImage src={this.state.avUrl} alt="Add A Photo" width="150"
         height="150" rounded />
@@ -363,14 +309,7 @@ export default class ProjectCreate extends Component<IProps, IState>{
                             </FormGroup>
                         </Col>
 
-                        {/* <Col md={3}>
-                            <FormGroup>
-                                <Label htmlFor="tags">Tags</Label>
-                                <Input id="tags" type="text" name="tags" value={this.state.tags} placeholder="Tags" onChange={(e) => this.setState({ tags: e.target.value })} />
-                            </FormGroup>
-                        </Col> */}
-
-                        <Col md={5}>
+                         <Col md={5}>
                             <FormGroup>
                                 <Label htmlFor="productUrl">Product URL</Label>
                                 <Input id="productUrl" type="text" name="productUrl" value={this.state.productUrl} placeholder="Product URL" onChange={(e) => this.setState({ productUrl: e.target.value })} />
@@ -386,31 +325,7 @@ export default class ProjectCreate extends Component<IProps, IState>{
 
 
                     </Row>
-                    {/* <Row form>
-                        <Col md={6}>
-                            <FormGroup>
-                                <Label for="exampleSelectMulti">Select Materials</Label>
-
-  <Input type="select" name="selectMulti" id="exampleSelectMulti" multiple>
-
-  </Input>
-
-                                <div>
-                                    <select id="materialId" name="materialId" value={this.state.materialId} onChange={(e) => this.setState({ materialId: +e.target.value })}>{this.state.materialName}</select>
-                                </div>
-
-
-                            </FormGroup>
-
-                            <FormGroup>
-                <Label htmlFor="materialId">material ID</Label>   
-                <Input id="materialId" type="number" placeholder="materialId" name="materialId" value={this.state.materialId} onChange={(e) => this.setState({materialId: +e.target.value})}/>
-            </FormGroup>
-
-
-
-                        </Col>
-                    </Row> */}
+                 
                     <Row form>
                         <Col md={2}>
                             <FormGroup check>
