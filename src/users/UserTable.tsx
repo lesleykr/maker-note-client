@@ -10,21 +10,16 @@ margin: 20px;
 font-family: 'Tempus Sans ITC';
 color: #b820d1;
 font-size: 40px;
-
 `
 const SImage = styled(Image)`
 margin-left: 25px;
 `
-
 const SRow = styled(Card.Text)`
 font-size: 25px;
 `
-
 const Tdiv = styled.div`
-
 width: 100vw;
 `
-
 const UButton = styled(Button)`
 background-color: #5e4ac7;
 color: #f6a73f;
@@ -39,7 +34,6 @@ color: #f6a73f;
 const Pform = styled.form`
 margin-left: 15px;
 `
-
 const Pbutton = styled.button`
 margin-top: 15px;
 margin-left: 10px;
@@ -51,15 +45,11 @@ padding-right: 15px;
 padding-left: 15px;
 border-radius: 7%;
 `
-
-
-
 interface IProps {
     user: User[],
     editUpdateUser: any,
     updateOn: () => void,
     fetchUser: () => void,
-    handleSubmit: Function,
     token: string
 }
 
@@ -76,7 +66,6 @@ export default class UserTable extends Component<IProps, IState>{
             avUrl: '#'
         }
     }
-
 
     handleSubmit = async (e: any) => {
         e.preventDefault()
@@ -116,7 +105,6 @@ export default class UserTable extends Component<IProps, IState>{
         })).json()
     }
 
-
     deleteUser = (user: User) => {
         fetch(`http://localhost:3000/user/delete/${user.id}`, {
             method: 'DELETE',
@@ -125,31 +113,24 @@ export default class UserTable extends Component<IProps, IState>{
                 'Authorization': this.props.token
             })
         })
-
     }
 
     userMapper() {
         return this.props.user.map((user: User, index: number) => {
             return (
-
                 <>
                     <Card key={index}>
                         <Heading>My Account</Heading>
-
                         <Row>
                             <Col xs={6} md={4}>
-                                
                                 <SImage src={user.photo} alt="user photo" width="150"
                                     height="150" rounded />
-
                                 <Pform encType="multipart/form-data" onSubmit={this.handleSubmit}>
                                     <input id="file-input" type="file" />
                                     <Pbutton>Upload Image</Pbutton>
                                 </Pform>
-                                
                             </Col>
                         </Row>
-
                         <Card.Body>
                             <SRow>First Name: {user.firstName}
                             </SRow>
@@ -159,36 +140,18 @@ export default class UserTable extends Component<IProps, IState>{
                             </SRow>
                             <SRow>About Me: {user.aboutMe}
                             </SRow>
-
                             <UButton onClick={() => { this.props.editUpdateUser(user); this.props.updateOn(); }}>Update</UButton>
-
                             <DButton onClick={() => { this.deleteUser(user); }}>Delete</DButton>
-
                         </Card.Body>
                     </Card>
-
-
                 </>
             )
         })
-
     }
     render() {
         return (
-
-
-
             <Tdiv>
-
-
-                {/* <form encType="multipart/form-data" onSubmit={this.handleSubmit}>
-    <input id="file-input" type="file"/>
-    <button>Upload Image</button>
-</form>
-<img src={this.state.avUrl} alt="photo" /> */}
-
                 {this.userMapper()}
-
             </Tdiv>
         )
     }

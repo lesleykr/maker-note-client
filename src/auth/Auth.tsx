@@ -6,9 +6,8 @@ import {
     Switch,
     Route,
     Link,
-    Redirect
 } from 'react-router-dom';
-import { Button, Container, Row, Col } from 'reactstrap';
+import { Button, Container } from 'reactstrap';
 import './../App.css'
 import styled from 'styled-components';
 

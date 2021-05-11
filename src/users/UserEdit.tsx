@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import { Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import styled from 'styled-components';
 
 const Tdiv = styled.div`
@@ -24,7 +24,6 @@ margin-left: 18px;
 `
 const SForm = styled(Form)`
 margin-top: 100px;
-
 `
 const Bdiv = styled.div`
 margin: auto;
@@ -35,13 +34,11 @@ const SButton = styled(Button)`
 margin-right: 20px;
 background-color: #5e4ac7;
 color: #f6a73f;
-
 `
 const CButton = styled(Button)`
 background-color: #5e4ac7;
 color: #f6a73f;
 `
-
 interface IProps {
     fetchUser: Function,
     updateOff: () => void,
@@ -73,7 +70,6 @@ export default class UserEdit extends Component<IProps, IState>{
         };
     }
 
-
     handleSubmit = (event: any) => {
         event.preventDefault();
         fetch(`http://localhost:3000/user/update/${this.props.userToUpdate.id}`, {
@@ -100,50 +96,37 @@ export default class UserEdit extends Component<IProps, IState>{
     render() {
         return (
             <Tdiv>
-
                 <SForm onSubmit={this.handleSubmit}>
                     <Heading>Edit Account Information</Heading>
                     <Fdiv>
-                    <FormGroup>
-                        <Slabel for="email" >Email</Slabel>
-                        <Col >
-
-                            <Input id="email" type="text" name="email" value={this.state.editEmail} placeholder="Email" onChange={(e) => this.setState({ editEmail: e.target.value })} />
-
-                        </Col>
-                    </FormGroup>
-                    <FormGroup>
-                        <Slabel for="firstName" >First Name</Slabel>
-                        <Col >
-
-                            <Input id="firstName" type="text" name="firstName" value={this.state.editFirstName} placeholder="First Name" onChange={(e) => this.setState({ editFirstName: e.target.value })} />
-
-                        </Col>
-                    </FormGroup>
-                    <FormGroup>
-                        <Slabel for="lastName" >Last Name</Slabel>
-                        <Col >
-
-                            <Input id="lastName" type="text" name="lastName" value={this.state.editLastName} placeholder="Last Name" onChange={(e) => this.setState({ editLastName: e.target.value })} />
-
-                        </Col>
-                    </FormGroup>
-                    <FormGroup>
-                        <Slabel for="aboutMe" >About Me</Slabel>
-                        <Col >
-
-                            <Input id="aboutMe" type="textarea"  name="aboutMe" value={this.state.editAboutMe} placeholder="About Me" onChange={(e) => this.setState({ editAboutMe: e.target.value })} />
-
-                        </Col>
-                    </FormGroup>
-
-                      <Bdiv>
-                    <SButton type="submit">Save</SButton>
-
-                    <CButton onClick={(e) => this.props.updateOff()}>Cancel</CButton>
-                    </Bdiv>
-                    
-                    
+                        <FormGroup>
+                            <Slabel for="email" >Email</Slabel>
+                            <Col >
+                                <Input id="email" type="text" name="email" value={this.state.editEmail} placeholder="Email" onChange={(e) => this.setState({ editEmail: e.target.value })} />
+                            </Col>
+                        </FormGroup>
+                        <FormGroup>
+                            <Slabel for="firstName" >First Name</Slabel>
+                            <Col >
+                                <Input id="firstName" type="text" name="firstName" value={this.state.editFirstName} placeholder="First Name" onChange={(e) => this.setState({ editFirstName: e.target.value })} />
+                            </Col>
+                        </FormGroup>
+                        <FormGroup>
+                            <Slabel for="lastName" >Last Name</Slabel>
+                            <Col >
+                                <Input id="lastName" type="text" name="lastName" value={this.state.editLastName} placeholder="Last Name" onChange={(e) => this.setState({ editLastName: e.target.value })} />
+                            </Col>
+                        </FormGroup>
+                        <FormGroup>
+                            <Slabel for="aboutMe" >About Me</Slabel>
+                            <Col >
+                                <Input id="aboutMe" type="textarea" name="aboutMe" value={this.state.editAboutMe} placeholder="About Me" onChange={(e) => this.setState({ editAboutMe: e.target.value })} />
+                            </Col>
+                        </FormGroup>
+                        <Bdiv>
+                            <SButton type="submit">Save</SButton>
+                            <CButton onClick={() => this.props.updateOff()}>Cancel</CButton>
+                        </Bdiv>
                     </Fdiv>
                 </SForm>
             </Tdiv>

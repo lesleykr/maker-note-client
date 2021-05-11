@@ -23,14 +23,12 @@ margin: auto;
 width: 50%;
 text-align: center;
 `
-
 const SButton = styled(Button)`
 margin-right: 10px;
 background-color: #5e4ac7;
 color: #f6a73f;
 
 `
-
 const CButton = styled(Button)`
 margin-right: 10px;
 background-color: #5e4ac7;
@@ -116,19 +114,17 @@ export default class MaterialsEdit extends Component<IProps, IState>{
 
     render() {
         return (
-            <>
-           
+            <>        
                              
                 <SForm onSubmit={this.handleSubmit}>
                 <Heading>Update Material</Heading>
                 <Col md={5}>
                     <FormGroup>
-                        <Label for="materialName" >Material Name</Label>           
+                        <Label for="materialName" >Material Name</Label> 
 
                             <Input id="materialName" type="text" name="materialName" value={this.state.editMaterialName} placeholder="Material Name" onChange={(e) => this.setState({ editMaterialName: e.target.value })} />
                             </FormGroup>
-                        </Col>
-                
+                        </Col>                
                     <Row form>
                         <Col md={2}>
                             <FormGroup>
@@ -149,13 +145,11 @@ export default class MaterialsEdit extends Component<IProps, IState>{
                             </FormGroup>
                         </Col>
                         <Col md={2}>
-
                             <FormGroup>
                                 <Label htmlFor="size">Size</Label>
                                 <Input id="size" type="text" name="size" value={this.state.editSize} placeholder="Size" onChange={(e) => this.setState({ editSize: e.target.value })} />
                             </FormGroup>
-                        </Col>
-                  
+                        </Col>      
                     
                         </Row>
                     <Row form>
@@ -182,15 +176,11 @@ export default class MaterialsEdit extends Component<IProps, IState>{
                                 <Label htmlFor="notes">Notes</Label>
                                 <Input id="notes" type="textarea" name="notes" value={this.state.editNotes} placeholder="Notes" onChange={(e) => this.setState({ editNotes: e.target.value })} />
                             </FormGroup>
-                        </Col>
-                       
+                        </Col>                       
                     </Row>
-
                     <Bdiv>
-
-                    <SButton type="submit">Save</SButton>
-                    
-                    <CButton type="button" onClick={(e) => this.props.updateOff()}>Cancel</CButton>
+                    <SButton type="submit">Save</SButton>                    
+                    <CButton type="button" onClick={() => this.props.updateOff()}>Cancel</CButton>
                     </Bdiv>
                 </SForm>
             </>

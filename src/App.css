@@ -1,4 +1,3 @@
-
 .App {
   text-align: center;
 }
@@ -46,27 +45,17 @@ button {
   margin-right: 8px;
 }
 
-.auth {
-  /* The image used */
+.auth { 
   background-image: url('./../../../Images/makernote-splashphoto.jpg');
-  /* background-color: blue; */
-
-  /* Full height */
   height: 100vh; 
-
-  /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-/* .full{
-  height: 100vh; 
-} */
 .container { 
   height: 100vh;
   position: relative;
-  
 
 }
 

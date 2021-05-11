@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Form, FormGroup, Label, Input, Col, Row, Dropdown, DropdownToggle, DropdownItem, DropdownMenu } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Col, Row } from 'reactstrap';
 import { Image } from 'react-bootstrap';
-import ProjectsTable from './ProjectsTable';
 import { Link, Redirect } from 'react-router-dom';
-import ProjectIndex from './ProjectIndex';
-import MaterialIndex from '../materials/MaterialIndex'
-import Item from 'antd/lib/list/Item';
 import styled from 'styled-components';
 
 const Heading = styled.h1`
@@ -15,10 +11,7 @@ margin: auto;
 font-family: 'Tempus Sans ITC';
 color: #b820d1;
 margin-bottom: 30px;
-
-
 `
-
 const SForm = styled(Form)`
 margin: auto;
 width: 50%;
@@ -40,21 +33,16 @@ const SButton = styled(Button)`
 margin-right: 10px;
 background-color: #5e4ac7;
 color: #f6a73f;
-
 `
-
 const CButton = styled(Button)`
 margin-right: 10px;
 background-color: #5e4ac7;
 color: #f6a73f;
 `
-
 const Pform = styled.form`
 
 `
-
 const Pbutton = styled.button`
-
 margin-bottom: 30px;
 background-color: #5e4ac7;
 color: #f6a73f;
@@ -67,13 +55,9 @@ border-radius: 7%;
 const SImage = styled(Image)`
 margin-left: 15px;
 `
-
-
 interface IProps {
     token: string
-
 }
-
 
 interface IState {
     projectName: string,
@@ -91,8 +75,8 @@ interface IState {
     tags: string,
     sold: boolean,
     productUrl: string,
-    notes: string, 
-    isOpen: boolean,   
+    notes: string,
+    isOpen: boolean,
     redirectPI: boolean,
     saleOptions: boolean,
     avUrl: string
@@ -119,11 +103,11 @@ export default class ProjectCreate extends Component<IProps, IState>{
             tags: "",
             sold: false,
             productUrl: "",
-            notes: '',         
+            notes: '',
             isOpen: true,
-            redirectPI: false,           
+            redirectPI: false,
             saleOptions: false,
-            avUrl: '#'  
+            avUrl: '#'
         };
     }
 
@@ -154,15 +138,6 @@ export default class ProjectCreate extends Component<IProps, IState>{
         })).json()
         this.setState({ avUrl: results.secure_url })
         console.log(results)
-
-        // const final = await (await fetch(`http://localhost:3000/projects/imageset/${this.props.projectsToUpdate.id}`, {
-        //     method: 'PUT',
-        //     headers: {
-        //         'Authorization': this.props.token,
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify({ url: results.secure_url })
-        // })).json()
     }
 
     handleSubmit = (event: any) => {
@@ -172,7 +147,7 @@ export default class ProjectCreate extends Component<IProps, IState>{
         } else {
             fetch('http://localhost:3000/projects/create', {
                 method: 'POST',
-                body: JSON.stringify({ projects: { projectName: this.state.projectName, dateStarted: this.state.dateStarted, dateFinished: this.state.dateFinished, forSale: this.state.forSale, medium: this.state.medium, totalMaterialCost: this.state.totalMaterialCost, dateSold: this.state.dateSold, price: this.state.price, storeSoldAt: this.state.storeSoldAt, status: this.state.status, technique: this.state.technique, dimensions: this.state.dimensions, tags: this.state.tags, sold: this.state.sold, productUrl: this.state.productUrl, pictureUrl1: this.state.avUrl, notes: this.state.notes, }}),
+                body: JSON.stringify({ projects: { projectName: this.state.projectName, dateStarted: this.state.dateStarted, dateFinished: this.state.dateFinished, forSale: this.state.forSale, medium: this.state.medium, totalMaterialCost: this.state.totalMaterialCost, dateSold: this.state.dateSold, price: this.state.price, storeSoldAt: this.state.storeSoldAt, status: this.state.status, technique: this.state.technique, dimensions: this.state.dimensions, tags: this.state.tags, sold: this.state.sold, productUrl: this.state.productUrl, pictureUrl1: this.state.avUrl, notes: this.state.notes, } }),
                 headers: new Headers({
                     'Content-Type': 'application/json',
                     'Authorization': this.props.token
@@ -180,7 +155,6 @@ export default class ProjectCreate extends Component<IProps, IState>{
             }).then((res) => res.json())
                 .then((projectsData) => {
                     console.log(projectsData);
-                    // this.props.fetchProjects();
                     this.setState({
                         projectName: '',
                         dateStarted: "",
@@ -200,48 +174,38 @@ export default class ProjectCreate extends Component<IProps, IState>{
                         notes: '',
                         redirectPI: true
                     })
-                   
                 })
                 .catch(error => {
                     console.error("error: ", error)
                 })
         }
+    }
 
-    }   
-
-   close = () => this.setState({ isOpen: !this.state.isOpen });
+    close = () => this.setState({ isOpen: !this.state.isOpen });
 
     componentDidMount() {
-        console.log('mounted');       
+        console.log('mounted');
     }
 
     render() {
 
-      if (this.state.redirectPI) {
+        if (this.state.redirectPI) {
             return <Redirect to="/ProjectIndex" />
         }
         return (
             <>
+                <SForm onSubmit={this.handleSubmit} >
+                    <Heading>Enter a New Project</Heading>
+                    <div>
+                        <SImage src={this.state.avUrl} alt="Add A Photo" width="150"
+                            height="150" rounded />
 
-                   
-        <SForm onSubmit={this.handleSubmit} >
-        <Heading>Enter a New Project</Heading>
-    <div>
-    <SImage src={this.state.avUrl} alt="Add A Photo" width="150"
-        height="150" rounded />
+                        <Pform encType="multipart/form-data">
+                            <input id="file-input" type="file" />
+                            <Pbutton onClick={this.imgSubmit} type="button">Upload Image</Pbutton>
+                        </Pform>
+                    </div> 
 
-    <Pform encType="multipart/form-data">
-        <input id="file-input" type="file" />
-        <Pbutton onClick={this.imgSubmit} type="button">Upload Image</Pbutton>
-    </Pform>
-    </div>
-{/* </Col>
-</Row> */}
-
-
-
-
-                  
                     <Row form>
                         <Col md={6}>
                             <FormGroup>
@@ -254,12 +218,11 @@ export default class ProjectCreate extends Component<IProps, IState>{
                             <FormGroup>
                                 <div><Label htmlFor="status">Status</Label></div>
                                 <select id="status" name="status" placeholder="Status" value={this.state.status} onChange={(e) => this.setState({ status: e.target.value })}>
-                                        <option value=""></option>
-                                        <option value="inProgress">In Progress</option>
-                                        <option value="finished">Finished</option>
-                                        <option selected value="hibernating">Hibernating</option>
-                                    </select>
-                              
+                                    <option value=""></option>
+                                    <option value="inProgress">In Progress</option>
+                                    <option value="finished">Finished</option>
+                                    <option selected value="hibernating">Hibernating</option>
+                                </select>
                             </FormGroup>
                         </Col>
                     </Row>
@@ -270,7 +233,6 @@ export default class ProjectCreate extends Component<IProps, IState>{
                                 <Input id="medium" type="text" name="medium" value={this.state.medium} placeholder="Medium" onChange={(e) => this.setState({ medium: e.target.value })} />
                             </FormGroup>
                         </Col>
-
                         <Col md={3}>
                             <FormGroup>
                                 <Label htmlFor="technique">Technique</Label>
@@ -309,7 +271,7 @@ export default class ProjectCreate extends Component<IProps, IState>{
                             </FormGroup>
                         </Col>
 
-                         <Col md={5}>
+                        <Col md={5}>
                             <FormGroup>
                                 <Label htmlFor="productUrl">Product URL</Label>
                                 <Input id="productUrl" type="text" name="productUrl" value={this.state.productUrl} placeholder="Product URL" onChange={(e) => this.setState({ productUrl: e.target.value })} />
@@ -317,24 +279,19 @@ export default class ProjectCreate extends Component<IProps, IState>{
                         </Col>
                         <Col md={3}>
 
-<FormGroup>
-    <Label htmlFor="totalMaterialCost">Total Material Cost</Label>
-    {<span>$</span>}<Input id="totalMaterialCost" type="number" placeholder="Total Material Cost" name="totalMaterialCost" value={this.state.totalMaterialCost} onChange={(e) => this.setState({ totalMaterialCost: e.target.value })} />
-</FormGroup>
-</Col>
-
-
+                            <FormGroup>
+                                <Label htmlFor="totalMaterialCost">Total Material Cost</Label>
+                                {<span>$</span>}<Input id="totalMaterialCost" type="number" placeholder="Total Material Cost" name="totalMaterialCost" value={this.state.totalMaterialCost} onChange={(e) => this.setState({ totalMaterialCost: e.target.value })} />
+                            </FormGroup>
+                        </Col>
                     </Row>
-                 
                     <Row form>
                         <Col md={2}>
                             <FormGroup check>
-                                <Label check>  
+                                <Label check>
                                     <Input type="checkbox" name="forSale" id="forSale" onChange={(e) => this.setState({ forSale: e.target.checked, saleOptions: true })} />For Sale? </Label>
                             </FormGroup>
                         </Col>
-
-
                         {this.state.saleOptions == true ? (<>
 
                             <Col md={2}>
@@ -376,7 +333,6 @@ export default class ProjectCreate extends Component<IProps, IState>{
                     </FormGroup>
                     <Bdiv>
                         <SButton type="submit">Save</SButton>
-                       
                         <Link to="/ProjectIndex"><CButton>Cancel</CButton></Link>
                     </Bdiv>
                 </SForm>

@@ -9,14 +9,11 @@ const SCard = styled(Card)`
 width: 18rem; 
 margin: 20px; 
 border: #b820d1 1px solid;
-
 `
-
 const UButton = styled(Button)`
 background-color: #5e4ac7;
 color: #f6a73f;
 margin-left: 2em;
-
 `
 const DButton = styled(Button)`
 background-color: #5e4ac7;
@@ -27,7 +24,6 @@ text-align: center;
 margin: 20px;
 font-family: 'Tempus Sans ITC';
 color: #b820d1;
-
 `
 interface IProps {
     projects: Project[],
@@ -37,17 +33,9 @@ interface IProps {
     token: string
 }
 
-interface IState {
-    sortType: string
-
-}
-
-export default class ProjectsTable extends Component<IProps, IState>{
+export default class ProjectsTable extends Component<IProps, {}>{
     constructor(props: IProps) {
         super(props)
-        this.state = {
-            sortType: ""
-        }
     }
 
     deleteProject = (project: Project) => {
@@ -67,7 +55,7 @@ export default class ProjectsTable extends Component<IProps, IState>{
 
                 <SCard
                     className="p-3 col-2" key={index}>
-                    <Card.Img variant="top" height="250" src={project.pictureUrl1}/>
+                    <Card.Img variant="top" height="250" src={project.pictureUrl1} />
                     <Card.Body>
                         <Card.Title>{project.projectName}</Card.Title>
                     </Card.Body>
@@ -81,10 +69,6 @@ export default class ProjectsTable extends Component<IProps, IState>{
                         <Card.Link> <DButton onClick={() => { this.deleteProject(project) }}>Delete</DButton></Card.Link>
                     </Card.Body>
                 </SCard>
-
-
-
-
             )
         })
 
@@ -92,19 +76,13 @@ export default class ProjectsTable extends Component<IProps, IState>{
     render() {
         return (
             <>
-
                 <Heading>My Projects</Heading>
                 <hr style={{ backgroundColor: "#5e4ac7" }} />
-
                 <CardColumns
                     className="col d-flex align-content-start flex-wrap"
-                    style={{ marginTop: "2rem", marginRight: "20px", marginLeft: "20px" }}
-                >
-
+                    style={{ marginTop: "2rem", marginRight: "20px", marginLeft: "20px" }}>
                     {this.projectsMapper()}
-
                 </CardColumns>
-
             </>
         )
     }
