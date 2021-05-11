@@ -80,7 +80,7 @@ export default class UserTable extends Component <IProps, {}>{
     render(){
         return(
         <Tdiv>
-        <Heading>My Info</Heading>
+        <Heading>Admin Dashboard</Heading>
         <hr style={{ backgroundColor: "#5e4ac7" }}/>
         <Table striped>
             <thead>
