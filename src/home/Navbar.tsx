@@ -19,6 +19,7 @@ import AdUserIndex from '../users/admin/AdUserIndex';
 import styled from 'styled-components';
 import './NavbarStyles.css';
 import { Button, Navbar, Nav } from 'react-bootstrap';
+import ImageUpload from './../imageUpload/ImageUpload'
 
 interface IProps {
   // fetchProjects: (fetchProjects: string) => string,
@@ -53,6 +54,9 @@ export default class Sitebar extends Component <IProps, IState>{
       <Nav.Link className="navlink"><Link className="link" to="/MaterialIndex">My Materials</Link></Nav.Link>
       <Nav.Link className="navlink"><Link className="link" to="/MaterialCreate">New Material</Link></Nav.Link>
       <Nav.Link className="navlink" ><Link className="link" to="/UserIndex">My Account</Link></Nav.Link>
+
+      <Nav.Link className="imageupload" ><Link className="link" to="/ImageUpload">Image Upload</Link></Nav.Link>
+
       <Nav.Link className="navlink"> {this.props.admin === "true" ? <Link className="link" to="/AdUserIndex">Admin Dashboard</Link> : null}</Nav.Link> 
 
     </Nav>
@@ -67,6 +71,8 @@ export default class Sitebar extends Component <IProps, IState>{
  <Route exact path="/ProjectIndex"><ProjectIndex token={this.props.token} /></Route>
  <Route exact path="/MaterialIndex"><MaterialIndex token={this.props.token} /></Route>
  <Route exact path="/ProjectCreate"><ProjectCreate token={this.props.token}/></Route>
+ <Route exact path="/ImageUpload"><ImageUpload token={this.props.token}/></Route>
+
  {/* <Route exact path="/Home"><Home /></Route> */}
  <Route exact path="/MaterialCreate"><MaterialCreate token={this.props.token}/></Route>
        <Route exact path="/UserIndex"><UserIndex token={this.props.token} /></Route>
