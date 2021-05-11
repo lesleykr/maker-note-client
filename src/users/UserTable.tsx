@@ -117,11 +117,6 @@ export default class UserTable extends Component<IProps, IState>{
     }
 
 
-
-
-
-
-
     deleteUser = (user: User) => {
         fetch(`http://localhost:3000/user/delete/${user.id}`, {
             method: 'DELETE',
@@ -143,6 +138,7 @@ export default class UserTable extends Component<IProps, IState>{
 
                         <Row>
                             <Col xs={6} md={4}>
+                                
                                 <SImage src={user.photo} alt="user photo" width="150"
                                     height="150" rounded />
 

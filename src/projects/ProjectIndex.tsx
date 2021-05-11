@@ -33,6 +33,7 @@ interface IState {
         tags: string,
         sold: boolean,
         productUrl: string,
+        pictureUrl1: string,
         notes: string,
         id: number        
     }
@@ -60,6 +61,7 @@ export default class ProjectIndex extends Component<IProps, IState>{
                 tags: "",
                 sold: false,
                 productUrl: "",
+                pictureUrl1: "",
                 notes: "",
                 id: Infinity
             },

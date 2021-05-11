@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input, Col, Row, Dropdown, DropdownToggle, DropdownItem, DropdownMenu } from 'reactstrap';
+import { Image } from 'react-bootstrap';
 import ProjectsTable from './ProjectsTable';
 import { Link, Redirect } from 'react-router-dom';
 import ProjectIndex from './ProjectIndex';
@@ -13,7 +14,8 @@ width: 50%;
 margin: auto;
 font-family: 'Tempus Sans ITC';
 color: #b820d1;
-margin-bottom: 40px;
+margin-bottom: 30px;
+margin-top: 30px;
 
 `
 
@@ -47,6 +49,26 @@ background-color: #5e4ac7;
 color: #f6a73f;
 `
 
+const Pform = styled.form`
+
+`
+
+const Pbutton = styled.button`
+
+margin-bottom: 30px;
+background-color: #5e4ac7;
+color: #f6a73f;
+padding-top: 7px;
+padding-bottom: 7px;
+padding-right: 15px;
+padding-left: 15px;
+border-radius: 7%;
+`
+const SImage = styled(Image)`
+margin-left: 15px;
+`
+
+
 interface IProps {
     token: string
 
@@ -78,9 +100,11 @@ interface IState {
     isOpen: boolean,
     materials: Material[], //an array of things of type material
     redirectPI: boolean,
-    saleOptions: boolean
-
+    saleOptions: boolean,
+    avUrl: string
 }
+
+const CLOUD_URL = 'https://api.cloudinary.com/v1_1/dx06fkupm/image/upload'
 
 export default class ProjectCreate extends Component<IProps, IState>{
     constructor(props: IProps) {
@@ -107,8 +131,47 @@ export default class ProjectCreate extends Component<IProps, IState>{
             isOpen: true,
             redirectPI: false,
             materials: [],
-            saleOptions: false
+            saleOptions: false,
+            avUrl: '#'  
         };
+    }
+
+    imgSubmit = async (e: any) => {
+        e.preventDefault()
+
+        const response = await fetch('http://localhost:3000/user/cloudsign', {
+            method: 'GET',
+            headers: {
+                'Authorization': this.props.token
+            }
+        })
+
+        const { sig, ts } = await response.json()
+
+        const file = (document.getElementById('file-input') as HTMLFormElement).files[0]
+        const formData = new FormData()
+
+        formData.append('file', file)
+        formData.append('upload_preset', 'yawnhulb')
+        formData.append('api_key', '776498227515992')
+        formData.append('signature', sig)
+        formData.append('timestamp', ts)
+
+        const results = await (await fetch(CLOUD_URL, {
+            method: 'POST',
+            body: formData
+        })).json()
+        this.setState({ avUrl: results.secure_url })
+        console.log(results)
+
+        // const final = await (await fetch(`http://localhost:3000/projects/imageset/${this.props.projectsToUpdate.id}`, {
+        //     method: 'PUT',
+        //     headers: {
+        //         'Authorization': this.props.token,
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify({ url: results.secure_url })
+        // })).json()
     }
 
     handleSubmit = (event: any) => {
@@ -118,7 +181,7 @@ export default class ProjectCreate extends Component<IProps, IState>{
         } else {
             fetch('http://localhost:3000/pm/createmat', {
                 method: 'POST',
-                body: JSON.stringify({ projects: { projectName: this.state.projectName, dateStarted: this.state.dateStarted, dateFinished: this.state.dateFinished, forSale: this.state.forSale, medium: this.state.medium, totalMaterialCost: this.state.totalMaterialCost, dateSold: this.state.dateSold, price: this.state.price, storeSoldAt: this.state.storeSoldAt, status: this.state.status, technique: this.state.technique, dimensions: this.state.dimensions, tags: this.state.tags, sold: this.state.sold, productUrl: this.state.productUrl, notes: this.state.notes, }, materials: { id: this.state.materialId } }),
+                body: JSON.stringify({ projects: { projectName: this.state.projectName, dateStarted: this.state.dateStarted, dateFinished: this.state.dateFinished, forSale: this.state.forSale, medium: this.state.medium, totalMaterialCost: this.state.totalMaterialCost, dateSold: this.state.dateSold, price: this.state.price, storeSoldAt: this.state.storeSoldAt, status: this.state.status, technique: this.state.technique, dimensions: this.state.dimensions, tags: this.state.tags, sold: this.state.sold, productUrl: this.state.productUrl, pictureUrl1: this.state.avUrl, notes: this.state.notes, }, materials: { id: this.state.materialId } }),
                 headers: new Headers({
                     'Content-Type': 'application/json',
                     'Authorization': this.props.token
@@ -177,9 +240,7 @@ export default class ProjectCreate extends Component<IProps, IState>{
             })
     }
 
-    close = () => this.setState({ isOpen: !this.state.isOpen });
-
-    toggle = () => this.setState({ dropdownOpen: prevState => !prevState });
+   close = () => this.setState({ isOpen: !this.state.isOpen });
 
     componentDidMount() {
         console.log('mounted');
@@ -203,8 +264,38 @@ export default class ProjectCreate extends Component<IProps, IState>{
         }
         return (
             <>
-                <SForm onSubmit={this.handleSubmit} >
+
                     <Heading>Enter a New Project</Heading>
+        <SForm onSubmit={this.handleSubmit} >
+        {/* <Row form>
+                   
+                   <form encType="multipart/form-data" onSubmit={this.imgSubmit}>
+                       <input id="file-input" type="file"/>
+                       <button onClick={this.imgSubmit} type="button">Upload Image</button>
+                   </form>
+                   <img src={this.state.avUrl} alt="photo" width="150"
+                                                       height="150" />
+                   
+                   </Row> */}
+                            
+                   {/* <Row form>
+<Col xs={6} md={4}> */}
+    <div>
+    <SImage src={this.state.avUrl} alt="Add A Photo" width="150"
+        height="150" rounded />
+
+    <Pform encType="multipart/form-data">
+        <input id="file-input" type="file" />
+        <Pbutton onClick={this.imgSubmit} type="button">Upload Image</Pbutton>
+    </Pform>
+    </div>
+{/* </Col>
+</Row> */}
+
+
+
+
+                  
                     <Row form>
                         <Col md={6}>
                             <FormGroup>

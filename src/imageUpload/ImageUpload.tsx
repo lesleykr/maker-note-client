@@ -48,12 +48,12 @@ const ImageUpload = (props: any) => {
 
     return (
         <>
-{/* <form encType="multipart/form-data" onSubmit={handleSubmit}>
+<form encType="multipart/form-data" onSubmit={handleSubmit}>
     <input id="file-input" type="file"/>
     <button>Upload Image</button>
 </form>
-<img src={avUrl} alt="photo" /> */}
-<UserTable handleSubmit={handleSubmit}/>
+<img src={avUrl} alt="photo" />
+
         </>
 
     )

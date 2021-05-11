@@ -68,7 +68,7 @@ export default class ProjectsTable extends Component<IProps, IState>{
 
                 <SCard
                     className="p-3 col-2" key={index}>
-                    <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
+                    <Card.Img variant="top" src={project.pictureUrl1}/>
                     <Card.Body>
                         <Card.Title>{project.projectName}</Card.Title>
                     </Card.Body>
