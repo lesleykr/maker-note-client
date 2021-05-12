@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { FormGroup, Label, ModalHeader, ModalBody, Modal } from 'reactstrap';
-import { Form, Input, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete } from 'antd';
+import { ModalBody, Modal } from 'reactstrap';
+import { Form, Input, Button } from 'antd';
 import styled from 'styled-components';
 import 'antd/dist/antd.css';
 
