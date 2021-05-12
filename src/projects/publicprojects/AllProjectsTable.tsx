@@ -48,9 +48,9 @@ export default class AllProjectsTable extends Component<IProps, {}>{
             
             (project: Project, index: number) => {
                 return(
-                    <div>
+                    <>
                {!project.public &&
-               (<div>
+               (<>
                 <SCard
                     className="p-3 col-2" key={index}>
                     <Card.Img variant="top" height="250" src={project.pictureUrl1} />
@@ -68,9 +68,9 @@ export default class AllProjectsTable extends Component<IProps, {}>{
                         
                     </Card.Body>
                 </SCard> 
-                </div>)
+                </>)
             }
-            </div>
+            </>
             )
         })
 

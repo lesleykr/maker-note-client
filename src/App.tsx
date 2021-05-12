@@ -3,6 +3,8 @@ import './App.css'
 import Auth from './auth/Auth';
 import Sitebar from './home/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Redirect } from 'react-router-dom';
+import AllProjectsIndex from './projects/publicprojects/AllProjectsIndex'
 
 interface IState {
   sessionToken: string,
@@ -22,7 +24,9 @@ export default class App extends Component<IState, {}> {
     if (localStorage.getItem('token')) {
       this.setState({ sessionToken: localStorage.getItem('token') });
     };
+    
   }
+
   updateToken = (newToken: string, newAdmin: string) => {
     localStorage.setItem('token', newToken);
     localStorage.setItem('admin', newAdmin)
@@ -46,6 +50,7 @@ export default class App extends Component<IState, {}> {
     return (
       <div>
         {this.protectedViews()}
+        
       </div>
 
     );

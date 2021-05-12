@@ -21,10 +21,21 @@ interface IProps {
   admin: string | null  
 }
 
-export default class Sitebar extends Component<IProps, {}>{
+interface IState{
+  viewToggle: boolean
+}
+
+export default class Sitebar extends Component<IProps, IState>{
   constructor(props: IProps) {
     super(props)
+    this.state = {
+      viewToggle: false
+    }
 
+  }
+
+  setViewToggle = () => {
+    this.setState({viewToggle: true})
   }
 
   render() {
@@ -36,24 +47,25 @@ export default class Sitebar extends Component<IProps, {}>{
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav>
-              <Nav.Link className="navlink"><Link className="link" to="/ProjectIndex">My Projects</Link></Nav.Link>
-              <Nav.Link className="navlink"><Link className="link" to="/ProjectCreate">New Project</Link></Nav.Link>
-              <Nav.Link className="navlink"><Link className="link" to="/MaterialIndex">My Materials</Link></Nav.Link>
-              <Nav.Link className="navlink"><Link className="link" to="/MaterialCreate">New Material</Link></Nav.Link>
-              <Nav.Link className="navlink"><Link className="link" to="/UserIndex">My Account</Link></Nav.Link>
+              <Nav.Link onClick={this.setViewToggle} className="navlink"><Link className="link" to="/ProjectIndex">My Projects</Link></Nav.Link>
+              <Nav.Link onClick={this.setViewToggle} className="navlink"><Link className="link" to="/ProjectCreate">New Project</Link></Nav.Link>
+              <Nav.Link onClick={this.setViewToggle} className="navlink"><Link className="link" to="/MaterialIndex">My Materials</Link></Nav.Link>
+              <Nav.Link onClick={this.setViewToggle} className="navlink"><Link className="link" to="/MaterialCreate">New Material</Link></Nav.Link>
+              <Nav.Link onClick={this.setViewToggle} className="navlink"><Link className="link" to="/UserIndex">My Account</Link></Nav.Link>
 
-              <Nav.Link className="navlink"> {this.props.admin === "true" ? <Link className="link" to="/AdUserIndex">Admin Dashboard</Link> : null}</Nav.Link>
+              <Nav.Link onClick={this.setViewToggle} className="navlink"> {this.props.admin === "true" ? <Link className="link" to="/AdUserIndex">Admin Dashboard</Link> : null}</Nav.Link>
 
             </Nav>
             <Nav.Link id="logoutnav" className="ml-auto"><Button id="logoutbutton" onClick={this.props.clickLogout}>Logout</Button></Nav.Link>
 
           </Navbar.Collapse>
         </Navbar>
+        {this.state.viewToggle ? null : <AllProjectsIndex token={this.props.token} />}
         
         <div>
           <Switch>
 
-            <Route exact path="/ProjectIndex"><AllProjectsIndex token={this.props.token} /></Route>
+            <Route exact path="/ProjectIndex"><ProjectIndex token={this.props.token} /></Route>
             <Route exact path="/MaterialIndex"><MaterialIndex token={this.props.token} /></Route>
             <Route exact path="/ProjectCreate"><ProjectCreate token={this.props.token} /></Route>
             <Route exact path="/MaterialCreate"><MaterialCreate token={this.props.token} /></Route>
