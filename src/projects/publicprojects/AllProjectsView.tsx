@@ -228,10 +228,6 @@ export default class ProjectsView extends Component<IProps, IState>{
 
                     <Descriptions.Item label="Total Material Cost">{this.state.viewTotalMaterialCost}</Descriptions.Item>
 
-                    {/* <Label check>
-                                    <Descriptions.Item type="checkbox" name="forSale" id="forSale" checked={this.state.viewForSale} />For Sale? </Label> */}
-
-
                     <Descriptions.Item label="Notes">{this.state.viewNotes}</Descriptions.Item>
                     
                 </Descriptions>

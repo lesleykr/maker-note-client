@@ -31,6 +31,7 @@ interface IState {
         productUrl: string,
         pictureUrl1: string,
         notes: string,
+        public: boolean,
         id: number
     }
 }
@@ -59,6 +60,7 @@ export default class ProjectIndex extends Component<IProps, IState>{
                 productUrl: "",
                 pictureUrl1: "",
                 notes: "",
+                public: false,
                 id: Infinity
             },
             isComponentVisible: false,
@@ -76,7 +78,7 @@ export default class ProjectIndex extends Component<IProps, IState>{
             })
         }).then((res) => res.json())
             .then((projectsData) => {
-                this.setState({ projects: projectsData })
+               this.setState({ projects: projectsData })
                 console.log(projectsData);
             })
     }

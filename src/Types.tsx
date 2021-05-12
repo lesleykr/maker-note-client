@@ -16,6 +16,7 @@ export interface Project{
     productUrl: string,
     pictureUrl1: string,
     notes: string,
+    public: boolean,
     id: number
 }
 

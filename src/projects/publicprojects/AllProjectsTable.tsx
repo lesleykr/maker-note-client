@@ -44,9 +44,13 @@ export default class AllProjectsTable extends Component<IProps, {}>{
   
 
    projectsMapper() {
-        return this.props.projects.sort((a, b) => a.projectName.localeCompare(b.projectName)).map((project: Project, index: number) => {
-            return (
-
+        return this.props.projects.sort((a, b) => a.projectName.localeCompare(b.projectName)).map(            
+            
+            (project: Project, index: number) => {
+                return(
+                    <div>
+               {!project.public &&
+               (<div>
                 <SCard
                     className="p-3 col-2" key={index}>
                     <Card.Img variant="top" height="250" src={project.pictureUrl1} />
@@ -60,32 +64,13 @@ export default class AllProjectsTable extends Component<IProps, {}>{
                     </ListGroup>
                     <Card.Body>
                         <Card.Link> <UButton onClick={() => { this.props.viewProjects(project); this.props.updateOn() }}>View Project</UButton></Card.Link>
-
-
-{/* 
-                        <div>
-                        
-    <Descriptions
-      title="Responsive Descriptions"
-      bordered
-      column={{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }}>
-        <Card.Img variant="top" height="250" src={project.pictureUrl1} />
-      <Descriptions.Item label="Product">{project.projectName}</Descriptions.Item>
-      <Descriptions.Item label="Product">{project.status}</Descriptions.Item>
-      <Descriptions.Item label="Product">{project.medium}</Descriptions.Item>
-      <Descriptions.Item label="Product">{project.technique}</Descriptions.Item>
-      <Descriptions.Item label="Product">{project.dateStarted}</Descriptions.Item>
-      <Descriptions.Item label="Product">{project.dateFinished}</Descriptions.Item>
-      <Descriptions.Item label="Product">{project.dimensions}</Descriptions.Item>
-      <Descriptions.Item label="Product">{project.productUrl}</Descriptions.Item>     
-      <Descriptions.Item label="Product">{project.notes}</Descriptions.Item>
-    </Descriptions>
-    
-  </div> */}
                         
                         
                     </Card.Body>
-                </SCard>
+                </SCard> 
+                </div>)
+            }
+            </div>
             )
         })
 
