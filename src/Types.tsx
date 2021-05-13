@@ -18,6 +18,8 @@ export interface Project{
     notes: string,
     public: boolean,
     createdAt: string,
+    user: [],
+    firstName: string,
     id: number
 }
 

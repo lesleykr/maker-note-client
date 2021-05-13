@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import { Form, Button } from 'reactstrap';
 import { Image } from 'react-bootstrap';
 import styled from 'styled-components';
 import { Descriptions } from 'antd';
@@ -8,26 +8,6 @@ const Mdiv = styled.div`
 margin-top: 30px;
 `
 
-const Heading = styled.h1`
-text-align: center;
-width: 50%;
-margin: auto;
-font-family: 'Tempus Sans ITC';
-color: #b820d1;
-margin-bottom: 40px;
-
-`
-const SForm = styled(Form)`
-margin: auto;
-width: 50%;
-margin-top: 50px;
-padding-left: 70px;
-padding-right: 70px;
-padding-top: 70px;
-padding-bottom: 70px;
-background-color: #f8f8f8;
-border: #5e4ac7 1px solid;
-`
 const Bdiv = styled.div`
 margin: auto;
 width: 50%;
@@ -205,36 +185,36 @@ export default class ProjectsView extends Component<IProps, IState>{
                     </Imagediv>
                 </div>
 
-<div>
+                <div>
 
-                <Descriptions
-                    title="View Project"
-                    bordered
-                    column={{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }}>
+                    <Descriptions
+                        title="View Project"
+                        bordered
+                        column={{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }}>
 
 
-                    <Descriptions.Item label="Project Name">{this.state.viewProjectName}</Descriptions.Item>
+                        <Descriptions.Item label="Project Name">{this.state.viewProjectName}</Descriptions.Item>
 
-                    <Descriptions.Item label="Status">{this.state.viewStatus}</Descriptions.Item>
+                        <Descriptions.Item label="Status">{this.state.viewStatus}</Descriptions.Item>
 
-                    <Descriptions.Item label="Medium">{this.state.viewMedium}</Descriptions.Item>
+                        <Descriptions.Item label="Medium">{this.state.viewMedium}</Descriptions.Item>
 
-                    <Descriptions.Item label="Technique">{this.state.viewTechnique}</Descriptions.Item>
+                        <Descriptions.Item label="Technique">{this.state.viewTechnique}</Descriptions.Item>
 
-                    <Descriptions.Item label="Date Started">{this.state.viewDateStarted}</Descriptions.Item>
+                        <Descriptions.Item label="Date Started">{this.state.viewDateStarted}</Descriptions.Item>
 
-                    <Descriptions.Item label="Date Finished">{this.state.viewDateFinished}</Descriptions.Item>
+                        <Descriptions.Item label="Date Finished">{this.state.viewDateFinished}</Descriptions.Item>
 
-                    <Descriptions.Item label="Dimensions">{this.state.viewDimensions}</Descriptions.Item>
+                        <Descriptions.Item label="Dimensions">{this.state.viewDimensions}</Descriptions.Item>
 
-                    <Descriptions.Item label="Product URL">{this.state.viewProductUrl}</Descriptions.Item>
+                        <Descriptions.Item label="Product URL">{this.state.viewProductUrl}</Descriptions.Item>
 
-                    <Descriptions.Item label="Total Material Cost">{this.state.viewTotalMaterialCost}</Descriptions.Item>
+                        <Descriptions.Item label="Total Material Cost">{this.state.viewTotalMaterialCost}</Descriptions.Item>
 
-                    <Descriptions.Item label="Notes">{this.state.viewNotes}</Descriptions.Item>
-                    
-                </Descriptions>
-                <Bdiv>
+                        <Descriptions.Item label="Notes">{this.state.viewNotes}</Descriptions.Item>
+
+                    </Descriptions>
+                    <Bdiv>
 
                         <CButton type="button" onClick={this.props.updateOff}>Cancel</CButton>
                     </Bdiv>

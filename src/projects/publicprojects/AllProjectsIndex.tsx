@@ -7,10 +7,13 @@ interface IProps {
     token: string
 }
 
+interface User {
+    firstName: string
+}
+
 interface IState {
     projects: [],
     updateActive: boolean,
-    // projectsToView: object,
     isComponentVisible: boolean,
     isActive: boolean
     projectsToView: {
@@ -32,7 +35,9 @@ interface IState {
         pictureUrl1: string,
         notes: string,
         public: boolean,
-        id: number
+        id: number,
+        user: User[],
+        firstName: string
     }
 }
 
@@ -61,6 +66,8 @@ export default class ProjectIndex extends Component<IProps, IState>{
                 pictureUrl1: "",
                 notes: "",
                 public: false,
+                user: [],
+                firstName: "",
                 id: Infinity
             },
             isComponentVisible: false,
@@ -78,12 +85,12 @@ export default class ProjectIndex extends Component<IProps, IState>{
             })
         }).then((res) => res.json())
             .then((projectsData) => {
-               this.setState({ projects: projectsData })
+                this.setState({ projects: projectsData })
                 console.log(projectsData);
             })
     }
 
-    viewProjects = (projects:Project) => {
+    viewProjects = (projects: Project) => {
         this.setState({ projectsToView: projects });
         console.log(projects);
     }
