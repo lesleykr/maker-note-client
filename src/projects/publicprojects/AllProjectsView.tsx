@@ -55,7 +55,10 @@ margin-bottom: 50px;
 display: block;
 margin-left: auto;
 margin-right: auto;
-width: 50%;
+flex: 1;
+width: 350px;
+height: 350px;
+resizeMode: 'contain';
 `
 interface IProps {
     fetchProjects: Function,

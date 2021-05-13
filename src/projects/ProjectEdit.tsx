@@ -50,7 +50,10 @@ margin-bottom: 50px;
 display: block;
 margin-left: auto;
 margin-right: auto;
-width: 50%;
+flex: 1;
+width: 350px;
+height: 350px;
+resizeMode: 'contain';
 `
 interface IProps {
     fetchProjects: Function,
@@ -194,8 +197,7 @@ export default class ProjectsEdit extends Component<IProps, IState>{
                 <SForm onSubmit={this.handleSubmit} >
                     <Heading>Edit Project</Heading>
                     <Imagediv>
-                        <IImage src={this.state.editPictureUrl1} rounded width="150"
-                            height="150" />
+                        <IImage src={this.state.editPictureUrl1} />
                     </Imagediv>
                     <Row form>
                         <Col md={6}>
