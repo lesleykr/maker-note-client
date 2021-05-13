@@ -5,7 +5,7 @@ import { Project } from "../Types";
 
 interface IProps {
     token: string,
-    setViewToggle: Function
+    
 }
 
 interface IState {
