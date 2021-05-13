@@ -3,7 +3,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link 
+  Link,
+  withRouter
 } from 'react-router-dom';
 import ProjectIndex from '../projects/ProjectIndex';
 import MaterialIndex from '../materials/MaterialIndex';
@@ -21,22 +22,13 @@ interface IProps {
   admin: string | null  
 }
 
-interface IState{
-  viewToggle: boolean
-}
 
-export default class Sitebar extends Component<IProps, IState>{
+export default class Sitebar extends Component<IProps, {}>{
   constructor(props: IProps) {
-    super(props)
-    this.state = {
-      viewToggle: false
-    }
+    super(props)  
 
   }
 
-  setViewToggle = () => {
-    this.setState({viewToggle: true})
-  }
 
   render() {
     return (
@@ -47,11 +39,11 @@ export default class Sitebar extends Component<IProps, IState>{
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav>
-              <Nav.Link onClick={this.setViewToggle} className="navlink"><Link className="link" to="/ProjectIndex">My Projects</Link></Nav.Link>
-              <Nav.Link onClick={this.setViewToggle} className="navlink"><Link className="link" to="/ProjectCreate">New Project</Link></Nav.Link>
-              <Nav.Link onClick={this.setViewToggle} className="navlink"><Link className="link" to="/MaterialIndex">My Materials</Link></Nav.Link>
-              <Nav.Link onClick={this.setViewToggle} className="navlink"><Link className="link" to="/MaterialCreate">New Material</Link></Nav.Link>
-              <Nav.Link onClick={this.setViewToggle} className="navlink"><Link className="link" to="/UserIndex">My Account</Link></Nav.Link>
+              <Nav.Link className="navlink"><Link className="link" to="/ProjectIndex">My Projects</Link></Nav.Link>
+              <Nav.Link className="navlink"><Link className="link" to="/ProjectCreate">New Project</Link></Nav.Link>
+              <Nav.Link className="navlink"><Link className="link" to="/MaterialIndex">My Materials</Link></Nav.Link>
+              <Nav.Link className="navlink"><Link className="link" to="/MaterialCreate">New Material</Link></Nav.Link>
+              <Nav.Link className="navlink"><Link className="link" to="/UserIndex">My Account</Link></Nav.Link>
 
               <Nav.Link onClick={this.setViewToggle} className="navlink"> {this.props.admin === "true" ? <Link className="link" to="/AdUserIndex">Admin Dashboard</Link> : null}</Nav.Link>
 
@@ -60,12 +52,13 @@ export default class Sitebar extends Component<IProps, IState>{
 
           </Navbar.Collapse>
         </Navbar>
-        {this.state.viewToggle ? null : <AllProjectsIndex token={this.props.token} />}
         
+        {window.location.pathname === "/" ? <AllProjectsIndex token={this.props.token} /> : null}
+
         <div>
           <Switch>
 
-            <Route exact path="/ProjectIndex"><ProjectIndex token={this.props.token} /></Route>
+            <Route exact path="/ProjectIndex"><ProjectIndex token={this.props.token} setViewToggle={this.setViewToggle}/></Route>
             <Route exact path="/MaterialIndex"><MaterialIndex token={this.props.token} /></Route>
             <Route exact path="/ProjectCreate"><ProjectCreate token={this.props.token} /></Route>
             <Route exact path="/MaterialCreate"><MaterialCreate token={this.props.token} /></Route>

@@ -4,7 +4,8 @@ import ProjectsEdit from './ProjectEdit';
 import { Project } from "../Types";
 
 interface IProps {
-    token: string
+    token: string,
+    setViewToggle: Function
 }
 
 interface IState {
@@ -105,12 +106,13 @@ export default class ProjectIndex extends Component<IProps, IState>{
         this.setState({ isActive: true })
     }
 
-    componentDidMount() {
-        console.log('mounted');
-        this.fetchProjects();
+    componentDidMount() {      
+        console.log('mounted');       
+        this.fetchProjects();        
     }
 
-    render() {
+  render() {
+
         return (
             <div>
                 {(this.state.updateActive ? <ProjectsEdit projectsToUpdate={this.state.projectsToUpdate} updateOff={this.updateOff} token={this.props.token} fetchProjects={this.fetchProjects} /> : <ProjectsTable projects={this.state.projects} editUpdateProjects={this.editUpdateProjects} updateOn={this.updateOn} fetchProjects={this.fetchProjects} token={this.props.token} />)}
