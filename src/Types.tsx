@@ -17,6 +17,7 @@ export interface Project{
     pictureUrl1: string,
     notes: string,
     public: boolean,
+    createdAt: string,
     id: number
 }
 

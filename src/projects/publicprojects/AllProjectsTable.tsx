@@ -44,12 +44,12 @@ export default class AllProjectsTable extends Component<IProps, {}>{
   
 
    projectsMapper() {
-        return this.props.projects.sort((a, b) => a.projectName.localeCompare(b.projectName)).map(            
+        return this.props.projects.sort((a, b) => b.createdAt.localeCompare(a.createdAt)).map(            
             
             (project: Project, index: number) => {
                 return(
                     <>
-               {!project.public &&
+               {project.public &&
                (<>
                 <SCard
                     className="p-3 col-2" key={index}>
@@ -78,7 +78,7 @@ export default class AllProjectsTable extends Component<IProps, {}>{
     render() {
         return (
             <>
-                <Heading>My Projects</Heading>
+                <Heading>Latest Projects</Heading>
                 <hr style={{ backgroundColor: "#5e4ac7" }} />
                 <CardColumns
                     className="col d-flex align-content-start flex-wrap"

@@ -70,7 +70,7 @@ export default class ProjectIndex extends Component<IProps, IState>{
     }
 
     fetchProjects = () => {
-        fetch('http://localhost:3000/projects/mine', {
+        fetch('http://localhost:3000/projects/', {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',

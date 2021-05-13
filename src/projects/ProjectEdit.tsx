@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Form, FormGroup, Label, Input, Button} from 'reactstrap';
+import { Row, Col, Form, FormGroup, Label, Input, Button, CustomInput} from 'reactstrap';
 import { Image } from 'react-bootstrap';
 import styled from 'styled-components';
 
@@ -73,6 +73,7 @@ interface IProps {
         sold: boolean,
         productUrl: string,
         pictureUrl1: string,
+        public: boolean,
         notes: string,
         id: number
     }
@@ -95,6 +96,7 @@ interface IState {
     editSold: boolean,
     editProductUrl: string,
     editNotes: string,
+    editPublic: boolean,
     editPictureUrl1: string,
     avUrl: string
 }
@@ -122,6 +124,7 @@ export default class ProjectsEdit extends Component<IProps, IState>{
             editProductUrl: this.props.projectsToUpdate.productUrl,
             editNotes: this.props.projectsToUpdate.notes,
             editPictureUrl1: this.props.projectsToUpdate.pictureUrl1,
+            editPublic: this.props.projectsToUpdate.public,
             avUrl: '#'
         };
     }
@@ -134,7 +137,7 @@ export default class ProjectsEdit extends Component<IProps, IState>{
             body: JSON.stringify({
                 projects: {
                     projectName: this.state.editProjectName, dateStarted: this.state.editDateStarted, dateFinished: this.state.editDateFinished, medium: this.state.editMedium, editTotalMaterialCost: this.state.editTotalMaterialCost, forSale: this.state.editForSale, dateSold: this.state.editDateSold, price: this.state.editPrice, storeSoldAt: this.state.editStoreSoldAt, status: this.state.editStatus,
-                    technique: this.state.editTechnique, dimensions: this.state.editDimensions, tags: this.state.editTags, sold: this.state.editSold, productUrl: this.state.editProductUrl, notes: this.state.editNotes
+                    technique: this.state.editTechnique, dimensions: this.state.editDimensions, tags: this.state.editTags, sold: this.state.editSold, productUrl: this.state.editProductUrl, public: this.state.editPublic, notes: this.state.editNotes
                 }
             }),
             headers: new Headers({
@@ -272,14 +275,14 @@ export default class ProjectsEdit extends Component<IProps, IState>{
                     <Row form>
                         <Col md={2}>
                             <FormGroup check>
-                                <Label check>
-                                    <Input type="checkbox" name="forSale" id="forSale" checked={this.state.editForSale} onChange={(e) => this.setState({ editForSale: e.target.checked })} />For Sale? </Label>
+                                
+                                <CustomInput type="switch" label="For Sale?" name="forSale" id="forSale" checked={this.state.editForSale} onChange={(e) => this.setState({ editForSale: e.target.checked })} />
                             </FormGroup>
                         </Col>
                         <Col md={2}>
                             <FormGroup check>
-                                <Label check>
-                                    <Input type="checkbox" name="sold" id="sold" checked={this.state.editSold} onChange={(e) => this.setState({ editSold: e.target.checked })} /> Sold? </Label>
+                              
+                                <CustomInput type="switch" name="sold" id="sold" label="Sold?" checked={this.state.editSold} onChange={(e) => this.setState({ editSold: e.target.checked })} />
                             </FormGroup>
                         </Col>
                         <Col md={3}>
@@ -306,6 +309,10 @@ export default class ProjectsEdit extends Component<IProps, IState>{
                             </FormGroup>
                         </Col>
                     </Row>
+                    <FormGroup check>
+                                
+                                <CustomInput type="switch" name="public" id="public" label="Public?" checked={this.state.editPublic} onChange={(e) => this.setState({ editPublic: e.target.checked })} /> 
+                            </FormGroup>
                     <FormGroup>
                         <Label htmlFor="notes">Notes</Label>
                         <Input id="notes" type="textarea" name="notes" value={this.state.editNotes} placeholder="Notes" onChange={(e) => this.setState({ editNotes: e.target.value })} />

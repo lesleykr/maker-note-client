@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, FormGroup, Label, Input, Col, Row } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Col, Row, CustomInput } from 'reactstrap';
 import { Image } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
@@ -79,6 +79,7 @@ interface IState {
     isOpen: boolean,
     redirectPI: boolean,
     saleOptions: boolean,
+    public: boolean,
     avUrl: string
 }
 
@@ -107,6 +108,7 @@ export default class ProjectCreate extends Component<IProps, IState>{
             isOpen: true,
             redirectPI: false,
             saleOptions: false,
+            public: false,
             avUrl: '#'
         };
     }
@@ -147,7 +149,7 @@ export default class ProjectCreate extends Component<IProps, IState>{
         } else {
             fetch('http://localhost:3000/projects/create', {
                 method: 'POST',
-                body: JSON.stringify({ projects: { projectName: this.state.projectName, dateStarted: this.state.dateStarted, dateFinished: this.state.dateFinished, forSale: this.state.forSale, medium: this.state.medium, totalMaterialCost: this.state.totalMaterialCost, dateSold: this.state.dateSold, price: this.state.price, storeSoldAt: this.state.storeSoldAt, status: this.state.status, technique: this.state.technique, dimensions: this.state.dimensions, tags: this.state.tags, sold: this.state.sold, productUrl: this.state.productUrl, pictureUrl1: this.state.avUrl, notes: this.state.notes, } }),
+                body: JSON.stringify({ projects: { projectName: this.state.projectName, dateStarted: this.state.dateStarted, dateFinished: this.state.dateFinished, forSale: this.state.forSale, medium: this.state.medium, totalMaterialCost: this.state.totalMaterialCost, dateSold: this.state.dateSold, price: this.state.price, storeSoldAt: this.state.storeSoldAt, status: this.state.status, technique: this.state.technique, dimensions: this.state.dimensions, tags: this.state.tags, sold: this.state.sold, productUrl: this.state.productUrl, public: this.state.public, pictureUrl1: this.state.avUrl, notes: this.state.notes, } }),
                 headers: new Headers({
                     'Content-Type': 'application/json',
                     'Authorization': this.props.token
@@ -171,6 +173,7 @@ export default class ProjectCreate extends Component<IProps, IState>{
                         tags: "",
                         sold: false,
                         productUrl: "",
+                        public: false,
                         notes: '',
                         redirectPI: true
                     })
@@ -193,8 +196,8 @@ export default class ProjectCreate extends Component<IProps, IState>{
             return <Redirect to="/ProjectIndex" />
         }
         return (
-            <>
-                <SForm onSubmit={this.handleSubmit} >
+            
+               <SForm onSubmit={this.handleSubmit}>
                     <Heading>Enter a New Project</Heading>
                     <div>
                         <SImage src={this.state.avUrl} alt="Add A Photo" width="150"
@@ -288,16 +291,16 @@ export default class ProjectCreate extends Component<IProps, IState>{
                     <Row form>
                         <Col md={2}>
                             <FormGroup check>
-                                <Label check>
-                                    <Input type="checkbox" name="forSale" id="forSale" onChange={(e) => this.setState({ forSale: e.target.checked, saleOptions: true })} />For Sale? </Label>
+                                
+                                    <CustomInput type="switch" label="For Sale?" name="forSale" id="forSale" onChange={(e) => this.setState({ forSale: e.target.checked, saleOptions: true })} />
                             </FormGroup>
                         </Col>
                         {this.state.saleOptions == true ? (<>
 
                             <Col md={2}>
                                 <FormGroup check>
-                                    <Label check>
-                                        <Input type="checkbox" name="sold" id="sold" onChange={(e) => this.setState({ sold: e.target.checked })} /> Sold? </Label>
+                                   
+                                        <CustomInput type="switch" name="sold" id="sold" label="Sold?" onChange={(e) => this.setState({ sold: e.target.checked })} /> 
                                 </FormGroup>
                             </Col>
 
@@ -325,8 +328,17 @@ export default class ProjectCreate extends Component<IProps, IState>{
                                     <Input id="storeSoldAt" type="text" name="storeSoldAt" value={this.state.storeSoldAt} placeholder="Store Sold At" onChange={(e) => this.setState({ storeSoldAt: e.target.value })} />
                                 </FormGroup> </Col></>) : null}
 
-
+                               
                     </Row>
+
+                    <Row form>
+                        <Col md={2}>
+                            <FormGroup check>  
+                                                         
+                                   <CustomInput type="switch" name="public" id="public" label="Public?" onChange={(e) => this.setState({ public: e.target.checked })} /> 
+                            </FormGroup>
+                        </Col>
+</Row>
                     <FormGroup>
                         <Label htmlFor="notes">Notes</Label>
                         <Input id="notes" type="textarea" name="notes" value={this.state.notes} placeholder="Notes" onChange={(e) => this.setState({ notes: e.target.value })} />
@@ -335,8 +347,8 @@ export default class ProjectCreate extends Component<IProps, IState>{
                         <SButton type="submit">Save</SButton>
                         <Link to="/ProjectIndex"><CButton>Cancel</CButton></Link>
                     </Bdiv>
-                </SForm>
-            </>
+                    </SForm>
+           
         )
     }
 }
