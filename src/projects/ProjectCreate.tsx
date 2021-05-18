@@ -204,7 +204,7 @@ export default class ProjectCreate extends Component<IProps, IState>{
                             height="150" rounded />
 
                         <Pform encType="multipart/form-data">
-                            <input id="file-input" type="file" />
+                            <input id="file-input" type="file"/>
                             <Pbutton onClick={this.imgSubmit} type="button">Upload Image</Pbutton>
                         </Pform>
                     </div> 

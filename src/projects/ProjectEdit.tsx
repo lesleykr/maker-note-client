@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col, Form, FormGroup, Label, Input, Button, CustomInput} from 'reactstrap';
-import { Image } from 'react-bootstrap';
+import { Image } from 'antd';
 import styled from 'styled-components';
 
 const Heading = styled.h1`
@@ -51,8 +51,8 @@ display: block;
 margin-left: auto;
 margin-right: auto;
 flex: 1;
-width: 350px;
-height: 350px;
+width: 50%;
+// height: 350px;
 resizeMode: 'contain';
 `
 interface IProps {

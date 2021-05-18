@@ -1,8 +1,19 @@
 import React, { Component } from 'react';
 import { Form, Button } from 'reactstrap';
-import { Image } from 'react-bootstrap';
+import { Image } from 'antd';
 import styled from 'styled-components';
 import { Descriptions } from 'antd';
+
+
+const Heading = styled.h1`
+text-align: center;
+width: 50%;
+margin: auto;
+font-family: 'Tempus Sans ITC';
+color: #b820d1;
+margin-bottom: 40px;
+
+`
 
 const Mdiv = styled.div`
 margin-top: 30px;
@@ -36,8 +47,8 @@ display: block;
 margin-left: auto;
 margin-right: auto;
 flex: 1;
-width: 350px;
-height: 350px;
+width: 25%;
+// height: 350px;
 resizeMode: 'contain';
 `
 interface IProps {
@@ -176,19 +187,17 @@ export default class ProjectsView extends Component<IProps, IState>{
     render() {
         return (
             <Mdiv>
-
+<Heading>View Project</Heading>
                 <div>
 
                     <Imagediv>
-                        <IImage src={this.state.viewPictureUrl1} rounded width="150"
-                            height="150" />
+                        <IImage src={this.state.viewPictureUrl1} />
                     </Imagediv>
                 </div>
 
                 <div>
 
-                    <Descriptions
-                        title="View Project"
+                    <Descriptions                 
                         bordered
                         column={{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }}>
 
