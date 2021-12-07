@@ -3,6 +3,7 @@ import { ModalBody, Modal } from 'reactstrap';
 import { Form, Input, Button } from 'antd';
 import styled from 'styled-components';
 import 'antd/dist/antd.css';
+import APIURL from '../helpers/environment'
 
 const SbuttonL = styled(Button)`
 margin-right: 1em;
@@ -91,7 +92,7 @@ export default class RegistrationForm extends Component<IProps, IState>{
     if (!this.state.email || !this.state.password) {
       alert("Please enter first name, last name, email address, and password");
     } else {
-      fetch("http://localhost:3000/user/create", {
+      fetch(`${APIURL}/user/create`, {
         method: 'POST',
         body: JSON.stringify({ user: this.state }),
         headers: new Headers({
@@ -105,7 +106,7 @@ export default class RegistrationForm extends Component<IProps, IState>{
         {
           data.error ? (data.error.errors[0].message === "email must be unique") &&
             alert("An account with this email address already exists, please login or sign up with a different email address") :
-          this.props.updateToken(data.sessionToken)
+            this.props.updateToken(data.sessionToken)
         }
       })
     }

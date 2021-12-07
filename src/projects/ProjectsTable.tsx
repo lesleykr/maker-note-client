@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Project } from "../Types";
 import { Card, ListGroupItem, ListGroup, CardColumns } from 'react-bootstrap';
 import styled from 'styled-components';
+import APIURL from '../helpers/environment'
 
 const SCard = styled(Card)`
 width: 18rem; 
@@ -39,7 +40,7 @@ export default class ProjectsTable extends Component<IProps, {}>{
     }
 
     deleteProject = (project: Project) => {
-        fetch(`http://localhost:3000/projects/delete/${project.id}`, {
+        fetch(`${APIURL}/projects/delete/${project.id}`, {
             method: 'DELETE',
             headers: new Headers({
                 'Content-Type': 'application/json',

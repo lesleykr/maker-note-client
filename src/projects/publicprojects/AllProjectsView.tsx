@@ -3,6 +3,7 @@ import { Form, Button } from 'reactstrap';
 import { Image } from 'antd';
 import styled from 'styled-components';
 import { Descriptions } from 'antd';
+import APIURL from '../../helpers/environment'
 
 
 const Heading = styled.h1`
@@ -128,7 +129,7 @@ export default class ProjectsView extends Component<IProps, IState>{
 
     handleSubmit = (event: any) => {
         event.preventDefault();
-        fetch(`http://localhost:3000/projects/update/${this.props.projectsToView.id}`, {
+        fetch(`${APIURL}/projects/update/${this.props.projectsToView.id}`, {
             method: 'PUT',
             body: JSON.stringify({
                 projects: {
@@ -150,7 +151,7 @@ export default class ProjectsView extends Component<IProps, IState>{
     imgSubmit = async (e: any) => {
         e.preventDefault()
 
-        const response = await fetch('http://localhost:3000/user/cloudsign', {
+        const response = await fetch(`${APIURL}/user/cloudsign`, {
             method: 'GET',
             headers: {
                 'Authorization': this.props.token
@@ -175,7 +176,7 @@ export default class ProjectsView extends Component<IProps, IState>{
         this.setState({ avUrl: results.secure_url })
         console.log(results)
 
-        const final = await (await fetch(`http://localhost:3000/projects/imageset/${this.props.projectsToView.id}`, {
+        const final = await (await fetch(`${APIURL}/projects/imageset/${this.props.projectsToView.id}`, {
             method: 'PUT',
             headers: {
                 'Authorization': this.props.token,
@@ -187,7 +188,7 @@ export default class ProjectsView extends Component<IProps, IState>{
     render() {
         return (
             <Mdiv>
-<Heading>View Project</Heading>
+                <Heading>View Project</Heading>
                 <div>
 
                     <Imagediv>
@@ -197,7 +198,7 @@ export default class ProjectsView extends Component<IProps, IState>{
 
                 <div>
 
-                    <Descriptions                 
+                    <Descriptions
                         bordered
                         column={{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }}>
 

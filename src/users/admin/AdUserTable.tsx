@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Table, Button } from 'reactstrap';
 import { User } from '../../Types'
 import styled from 'styled-components';
+import APIURL from '../../helpers/environment'
 
 const Heading = styled.h1`
 text-align: center;
@@ -32,7 +33,7 @@ export default class UserTable extends Component<IProps, {}>{
     }
 
     deleteUser = (user: User) => {
-        fetch(`http://localhost:3000/user/delete/${user.id}`, {
+        fetch(`${APIURL}/user/delete/${user.id}`, {
             method: 'DELETE',
             headers: new Headers({
                 'Content-Type': 'application/json',

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import styled from 'styled-components';
+import APIURL from '../helpers/environment'
 
 const Heading = styled.h1`
 text-align: center;
@@ -50,8 +51,8 @@ interface IProps {
         description: string,
         notes: string,
         id: number
-    }  
-  
+    }
+
 }
 
 interface IState {
@@ -86,7 +87,7 @@ export default class MaterialsEdit extends Component<IProps, IState>{
 
     handleSubmit = (event: any) => {
         event.preventDefault();
-        fetch(`http://localhost:3000/materials/update/${this.props.materialsToUpdate.id}`, {
+        fetch(`${APIURL}/materials/update/${this.props.materialsToUpdate.id}`, {
             method: 'PUT',
             body: JSON.stringify({
                 materials: {
@@ -114,17 +115,17 @@ export default class MaterialsEdit extends Component<IProps, IState>{
 
     render() {
         return (
-            <>        
-                             
+            <>
+
                 <SForm onSubmit={this.handleSubmit}>
-                <Heading>Update Material</Heading>
-                <Col md={5}>
-                    <FormGroup>
-                        <Label for="materialName" >Material Name</Label> 
+                    <Heading>Update Material</Heading>
+                    <Col md={5}>
+                        <FormGroup>
+                            <Label for="materialName" >Material Name</Label>
 
                             <Input id="materialName" type="text" name="materialName" value={this.state.editMaterialName} placeholder="Material Name" onChange={(e) => this.setState({ editMaterialName: e.target.value })} />
-                            </FormGroup>
-                        </Col>                
+                        </FormGroup>
+                    </Col>
                     <Row form>
                         <Col md={2}>
                             <FormGroup>
@@ -149,9 +150,9 @@ export default class MaterialsEdit extends Component<IProps, IState>{
                                 <Label htmlFor="size">Size</Label>
                                 <Input id="size" type="text" name="size" value={this.state.editSize} placeholder="Size" onChange={(e) => this.setState({ editSize: e.target.value })} />
                             </FormGroup>
-                        </Col>      
-                    
-                        </Row>
+                        </Col>
+
+                    </Row>
                     <Row form>
                         <Col md={3}>
                             <FormGroup>
@@ -176,11 +177,11 @@ export default class MaterialsEdit extends Component<IProps, IState>{
                                 <Label htmlFor="notes">Notes</Label>
                                 <Input id="notes" type="textarea" name="notes" value={this.state.editNotes} placeholder="Notes" onChange={(e) => this.setState({ editNotes: e.target.value })} />
                             </FormGroup>
-                        </Col>                       
+                        </Col>
                     </Row>
                     <Bdiv>
-                    <SButton type="submit">Save</SButton>                    
-                    <CButton type="button" onClick={() => this.props.updateOff()}>Cancel</CButton>
+                        <SButton type="submit">Save</SButton>
+                        <CButton type="button" onClick={() => this.props.updateOff()}>Cancel</CButton>
                     </Bdiv>
                 </SForm>
             </>

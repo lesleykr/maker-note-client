@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import AllProjectsTable from './AllProjectsTable';
 import AllProjectsView from './AllProjectsView';
 import { Project } from "../../Types";
+import APIURL from '../../helpers/environment'
 
 interface IProps {
-    token: string  
+    token: string
 }
 
 interface User {
@@ -77,7 +78,7 @@ export default class ProjectIndex extends Component<IProps, IState>{
     }
 
     fetchProjects = () => {
-        fetch('http://localhost:3000/projects/', {
+        fetch(`${APIURL}/projects/`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -107,11 +108,11 @@ export default class ProjectIndex extends Component<IProps, IState>{
         this.setState({ isActive: true })
     }
 
-    componentDidMount() {    
+    componentDidMount() {
         this.fetchProjects();
     }
 
-      render() {
+    render() {
         return (
             <div>
                 {(this.state.updateActive ? <AllProjectsView projectsToView={this.state.projectsToView} updateOff={this.updateOff} token={this.props.token} fetchProjects={this.fetchProjects} /> : <AllProjectsTable projects={this.state.projects} viewProjects={this.viewProjects} updateOn={this.updateOn} fetchProjects={this.fetchProjects} token={this.props.token} />)}

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Row } from 'reactstrap';
 import AdUserTable from './AdUserTable';
 import { User } from '../../Types'
+import APIURL from '../../helpers/environment'
 
 interface IProps {
     token: string
@@ -40,7 +41,7 @@ export default class UserIndex extends Component<IProps, IState>{
     }
 
     fetchUser = () => {
-        fetch('http://localhost:3000/user/all', {
+        fetch(`${APIURL}/user/all`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Row, Col, Form, FormGroup, Label, Input, Button, CustomInput} from 'reactstrap';
+import { Row, Col, Form, FormGroup, Label, Input, Button, CustomInput } from 'reactstrap';
 import { Image } from 'antd';
 import styled from 'styled-components';
+import APIURL from '../helpers/environment'
 
 const Heading = styled.h1`
 text-align: center;
@@ -135,7 +136,7 @@ export default class ProjectsEdit extends Component<IProps, IState>{
 
     handleSubmit = (event: any) => {
         event.preventDefault();
-        fetch(`http://localhost:3000/projects/update/${this.props.projectsToUpdate.id}`, {
+        fetch(`${APIURL}/projects/update/${this.props.projectsToUpdate.id}`, {
             method: 'PUT',
             body: JSON.stringify({
                 projects: {
@@ -157,7 +158,7 @@ export default class ProjectsEdit extends Component<IProps, IState>{
     imgSubmit = async (e: any) => {
         e.preventDefault()
 
-        const response = await fetch('http://localhost:3000/user/cloudsign', {
+        const response = await fetch(`${APIURL}/user/cloudsign`, {
             method: 'GET',
             headers: {
                 'Authorization': this.props.token
@@ -182,7 +183,7 @@ export default class ProjectsEdit extends Component<IProps, IState>{
         this.setState({ avUrl: results.secure_url })
         console.log(results)
 
-        const final = await (await fetch(`http://localhost:3000/projects/imageset/${this.props.projectsToUpdate.id}`, {
+        const final = await (await fetch(`${APIURL}/projects/imageset/${this.props.projectsToUpdate.id}`, {
             method: 'PUT',
             headers: {
                 'Authorization': this.props.token,
@@ -277,13 +278,13 @@ export default class ProjectsEdit extends Component<IProps, IState>{
                     <Row form>
                         <Col md={2}>
                             <FormGroup check>
-                                
+
                                 <CustomInput type="switch" label="For Sale?" name="forSale" id="forSale" checked={this.state.editForSale} onChange={(e) => this.setState({ editForSale: e.target.checked })} />
                             </FormGroup>
                         </Col>
                         <Col md={2}>
                             <FormGroup check>
-                              
+
                                 <CustomInput type="switch" name="sold" id="sold" label="Sold?" checked={this.state.editSold} onChange={(e) => this.setState({ editSold: e.target.checked })} />
                             </FormGroup>
                         </Col>
@@ -312,9 +313,9 @@ export default class ProjectsEdit extends Component<IProps, IState>{
                         </Col>
                     </Row>
                     <FormGroup check>
-                                
-                                <CustomInput type="switch" name="public" id="public" label="Public?" checked={this.state.editPublic} onChange={(e) => this.setState({ editPublic: e.target.checked })} /> 
-                            </FormGroup>
+
+                        <CustomInput type="switch" name="public" id="public" label="Public?" checked={this.state.editPublic} onChange={(e) => this.setState({ editPublic: e.target.checked })} />
+                    </FormGroup>
                     <FormGroup>
                         <Label htmlFor="notes">Notes</Label>
                         <Input id="notes" type="textarea" name="notes" value={this.state.editNotes} placeholder="Notes" onChange={(e) => this.setState({ editNotes: e.target.value })} />

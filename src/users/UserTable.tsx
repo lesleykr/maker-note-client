@@ -3,6 +3,7 @@ import { Button, Card, Container, Row, Image, Col, Form } from 'react-bootstrap'
 import { User } from '../Types'
 import styled from 'styled-components';
 import './UserTable.css'
+import APIURL from '../helpers/environment'
 
 const Heading = styled(Card.Header)`
 text-align: center;
@@ -70,7 +71,7 @@ export default class UserTable extends Component<IProps, IState>{
     handleSubmit = async (e: any) => {
         e.preventDefault()
 
-        const response = await fetch('http://localhost:3000/user/cloudsign', {
+        const response = await fetch(`${APIURL}/user/cloudsign`, {
             method: 'GET',
             headers: {
                 'Authorization': this.props.token
@@ -95,7 +96,7 @@ export default class UserTable extends Component<IProps, IState>{
         this.setState({ avUrl: results.secure_url })
         console.log(results)
 
-        const final = await (await fetch('http://localhost:3000/user/imageset', {
+        const final = await (await fetch(`${APIURL}/user/imageset`, {
             method: 'PUT',
             headers: {
                 'Authorization': this.props.token,
@@ -106,7 +107,7 @@ export default class UserTable extends Component<IProps, IState>{
     }
 
     deleteUser = (user: User) => {
-        fetch(`http://localhost:3000/user/delete/${user.id}`, {
+        fetch(`${APIURL}/user/delete/${user.id}`, {
             method: 'DELETE',
             headers: new Headers({
                 'Content-Type': 'application/json',

@@ -3,6 +3,7 @@ import { Container, Row, Col } from 'reactstrap';
 import MaterialsTable from './MaterialsTable';
 import MaterialsEdit from './MaterialEdit';
 import { Material } from '../Types';
+import APIURL from '../helpers/environment'
 
 interface IProps {
     token: string
@@ -56,7 +57,7 @@ export default class MaterialIndex extends Component<IProps, IState>{
     }
 
     fetchMaterials = () => {
-        fetch('http://localhost:3000/materials/mine', {
+        fetch(`${APIURL}/materials/mine`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -88,7 +89,7 @@ export default class MaterialIndex extends Component<IProps, IState>{
     render() {
         return (
             <Container>
-                <Row>                 
+                <Row>
 
                     {(this.state.updateActive ? (<MaterialsEdit materialsToUpdate={this.state.materialsToUpdate} updateOff={this.updateOff} token={this.props.token} fetchMaterials={this.fetchMaterials} />) : <MaterialsTable materials={this.state.materials} editUpdateMaterials={this.editUpdateMaterials} updateOn={this.updateOn} fetchMaterials={this.fetchMaterials} token={this.props.token} />)}
 

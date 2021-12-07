@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import ProjectsTable from './ProjectsTable';
 import ProjectsEdit from './ProjectEdit';
 import { Project } from "../Types";
+import APIURL from '../helpers/environment'
 
 interface IProps {
     token: string,
-    
+
 }
 
 interface IState {
@@ -71,7 +72,7 @@ export default class ProjectIndex extends Component<IProps, IState>{
     }
 
     fetchProjects = () => {
-        fetch('http://localhost:3000/projects/mine', {
+        fetch(`${APIURL}/projects/mine`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -106,12 +107,12 @@ export default class ProjectIndex extends Component<IProps, IState>{
         this.setState({ isActive: true })
     }
 
-    componentDidMount() {      
-        console.log('mounted');       
-        this.fetchProjects();        
+    componentDidMount() {
+        console.log('mounted');
+        this.fetchProjects();
     }
 
-  render() {
+    render() {
 
         return (
             <div>

@@ -4,7 +4,6 @@ import { Project } from "../../Types";
 import { Card, ListGroupItem, ListGroup, CardColumns } from 'react-bootstrap';
 import styled from 'styled-components';
 
-
 const SCard = styled(Card)`
 width: 18rem; 
 margin: 20px; 

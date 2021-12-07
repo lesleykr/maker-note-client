@@ -3,6 +3,7 @@ import { ModalBody, Modal } from 'reactstrap';
 import { Form, Input, Button } from 'antd';
 import styled from 'styled-components';
 import 'antd/dist/antd.css';
+import APIURL from '../helpers/environment'
 
 const SbuttonL = styled(Button)`
 margin-right: 1em;
@@ -71,7 +72,7 @@ export default class Login extends Component<IProps, IState>{
       if (!this.state.email || !this.state.password) {
         alert("Please enter a valid email address and password");
       } else {
-        fetch("http://localhost:3000/user/login", {
+        fetch(`${APIURL}/user/login`, {
           method: 'POST',
           body: JSON.stringify({ user: this.state }),
           headers: new Headers({

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input, Col, Row, } from 'reactstrap';
 import { Link, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
+import APIURL from '../helpers/environment'
 
 const Heading = styled.h1`
 text-align: center;
@@ -78,7 +79,7 @@ export default class MaterialCreate extends Component<IProps, IState>{
         if (!this.state.materialName) {
             alert("Please enter the name of your material.");
         } else {
-            fetch('http://localhost:3000/materials/create', {
+            fetch(`${APIURL}/materials/create`, {
                 method: 'POST',
                 body: JSON.stringify({ materials: this.state }),
                 headers: new Headers({

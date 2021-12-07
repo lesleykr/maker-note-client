@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import styled from 'styled-components';
+import APIURL from '../helpers/environment'
 
 const Tdiv = styled.div`
 width: 100%;
@@ -72,7 +73,7 @@ export default class UserEdit extends Component<IProps, IState>{
 
     handleSubmit = (event: any) => {
         event.preventDefault();
-        fetch(`http://localhost:3000/user/update/${this.props.userToUpdate.id}`, {
+        fetch(`${APIURL}/user/update/${this.props.userToUpdate.id}`, {
             method: 'PUT',
             body: JSON.stringify({
                 user: {

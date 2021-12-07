@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Table, Button } from 'reactstrap';
 import { Material } from '../Types';
 import styled from 'styled-components';
+import APIURL from '../helpers/environment'
 
 const Heading = styled.h1`
 text-align: center;
@@ -42,11 +43,11 @@ interface IProps {
 
 export default class MaterialsTable extends Component<IProps, {}>{
     constructor(props: IProps) {
-        super(props)       
+        super(props)
     }
 
     deleteMaterial = (material: Material) => {
-        fetch(`http://localhost:3000/materials/delete/${material.id}`, {
+        fetch(`${APIURL}/materials/delete/${material.id}`, {
             method: 'DELETE',
             headers: new Headers({
                 'Content-Type': 'application/json',
