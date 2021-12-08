@@ -5,7 +5,7 @@ switch (window.location.hostname) {
   case "127.0.0.1":
     APIURL = "http://localhost:3000";
     break;
-  case "lr-makernote-react.herokuapp.com":
+  case "lr-makernote-client.herokuapp.com":
     APIURL = "https://lr-makernote-server.herokuapp.com";
 }
 
