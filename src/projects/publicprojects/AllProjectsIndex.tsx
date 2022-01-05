@@ -17,29 +17,30 @@ interface IState {
     updateActive: boolean,
     isComponentVisible: boolean,
     isActive: boolean
-    projectsToView: {
-        projectName: string,
-        dateStarted: string,
-        dateFinished: string,
-        medium: string,
-        totalMaterialCost: string,
-        forSale: boolean,
-        dateSold: string,
-        price: string,
-        storeSoldAt: string,
-        status: string,
-        technique: string,
-        dimensions: string,
-        tags: string,
-        sold: boolean,
-        productUrl: string,
-        pictureUrl1: string,
-        notes: string,
-        public: boolean,
-        id: number,
-        user: User[],
-        firstName: string
-    }
+    // projectsToView: {
+    //     projectName: string,
+    //     dateStarted: string,
+    //     dateFinished: string,
+    //     medium: string,
+    //     totalMaterialCost: string,
+    //     forSale: boolean,
+    //     dateSold: string,
+    //     price: string,
+    //     storeSoldAt: string,
+    //     status: string,
+    //     technique: string,
+    //     dimensions: string,
+    //     tags: string,
+    //     sold: boolean,
+    //     productUrl: string,
+    //     pictureUrl1: string,
+    //     notes: string,
+    //     public: boolean,
+    //     id: number,
+    //     user: User[],
+    //     firstName: string
+    // }
+    projectsToView: Project[]
 }
 
 export default class ProjectIndex extends Component<IProps, IState>{
@@ -48,29 +49,30 @@ export default class ProjectIndex extends Component<IProps, IState>{
         this.state = {
             projects: [],
             updateActive: false,
-            projectsToView: {
-                projectName: "",
-                dateStarted: "",
-                dateFinished: "",
-                medium: "",
-                totalMaterialCost: "",
-                forSale: false,
-                dateSold: "",
-                price: "",
-                storeSoldAt: "",
-                status: "",
-                technique: "",
-                dimensions: "",
-                tags: "",
-                sold: false,
-                productUrl: "",
-                pictureUrl1: "",
-                notes: "",
-                public: false,
-                user: [],
-                firstName: "",
-                id: Infinity
-            },
+            projectsToView: [],
+            // projectsToView: {
+            //     projectName: "",
+            //     dateStarted: "",
+            //     dateFinished: "",
+            //     medium: "",
+            //     totalMaterialCost: "",
+            //     forSale: false,
+            //     dateSold: "",
+            //     price: "",
+            //     storeSoldAt: "",
+            //     status: "",
+            //     technique: "",
+            //     dimensions: "",
+            //     tags: "",
+            //     sold: false,
+            //     productUrl: "",
+            //     pictureUrl1: "",
+            //     notes: "",
+            //     public: false,
+            //     user: [],
+            //     firstName: "",
+            //     id: Infinity
+            // },
             isComponentVisible: false,
             // projectsToView: {},
             isActive: false
@@ -91,7 +93,7 @@ export default class ProjectIndex extends Component<IProps, IState>{
             })
     }
 
-    viewProjects = (projects: Project) => {
+    viewProjects = (projects: Project[]) => {
         this.setState({ projectsToView: projects });
         console.log(projects);
     }

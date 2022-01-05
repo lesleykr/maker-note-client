@@ -1,4 +1,4 @@
-export interface Project{
+export interface Project {
     projectName: string,
     dateStarted: string,
     dateFinished: string,
@@ -18,12 +18,12 @@ export interface Project{
     notes: string,
     public: boolean,
     createdAt: string,
-    user: [],
+    user: User,
     firstName: string,
     id: number
 }
 
-export interface Material{
+export interface Material {
     materialName: string,
     quantity: string,
     costPerItem: string,
@@ -33,7 +33,7 @@ export interface Material{
     storageLocation: string,
     description: string,
     notes: string,
-    id: number    
+    id: number
 }
 
 export interface User {

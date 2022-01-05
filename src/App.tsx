@@ -7,12 +7,12 @@ import { Redirect } from 'react-router-dom';
 import AllProjectsIndex from './projects/publicprojects/AllProjectsIndex'
 
 interface IState {
-  sessionToken: string,
+  sessionToken: string | null,
   sessionAdmin: string,
   stateChange: boolean
 }
 
-export default class App extends Component<IState, {}> {
+export default class App extends Component<{}, IState> {
   state = {
     sessionToken: '',
     sessionAdmin: "",
@@ -24,7 +24,7 @@ export default class App extends Component<IState, {}> {
     if (localStorage.getItem('token')) {
       this.setState({ sessionToken: localStorage.getItem('token') });
     };
-    
+
   }
 
   updateToken = (newToken: string, newAdmin: string) => {
@@ -50,7 +50,7 @@ export default class App extends Component<IState, {}> {
     return (
       <div>
         {this.protectedViews()}
-        
+
       </div>
 
     );
